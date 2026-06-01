@@ -475,14 +475,53 @@ export default function LandingPage() {
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
             style={{
-              background: '#111',
+              background: 'linear-gradient(180deg, #050505 0%, #0d0807 35%, #0e0909 70%, #050505 100%)',
               padding: 'clamp(40px, 6vw, 80px) clamp(16px, 5vw, 80px)',
               position: 'relative',
               overflow: 'hidden',
             }}
           >
+            {/* Ambient red glow — upper right */}
+            <div style={{
+              position: 'absolute',
+              top: '-10%',
+              right: '-5%',
+              width: '45%',
+              height: '60%',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(217,10,20,0.2) 0%, rgba(120,8,8,0.08) 40%, transparent 70%)',
+              filter: 'blur(60px)',
+              pointerEvents: 'none',
+              zIndex: 0,
+            }} />
+            {/* Ambient orange glow — left */}
+            <div style={{
+              position: 'absolute',
+              top: '20%',
+              left: '-8%',
+              width: '35%',
+              height: '50%',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(205,78,23,0.12) 0%, rgba(160,40,10,0.06) 45%, transparent 70%)',
+              filter: 'blur(50px)',
+              pointerEvents: 'none',
+              zIndex: 0,
+            }} />
+            {/* Ambient brown-red glow — bottom right */}
+            <div style={{
+              position: 'absolute',
+              bottom: '-10%',
+              right: '10%',
+              width: '40%',
+              height: '50%',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(150,20,10,0.15) 0%, rgba(100,15,5,0.06) 45%, transparent 70%)',
+              filter: 'blur(55px)',
+              pointerEvents: 'none',
+              zIndex: 0,
+            }} />
             {/* Section heading */}
-            <div style={{ textAlign: 'center', marginBottom: 'clamp(24px, 4vw, 48px)' }}>
+            <div style={{ textAlign: 'center', marginBottom: 'clamp(24px, 4vw, 48px)', position: 'relative', zIndex: 1 }}>
               <motion.h2
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -496,7 +535,7 @@ export default function LandingPage() {
                   letterSpacing: '0.02em',
                 }}
               >
-                Our <span style={{ color: 'red' }}>Services</span>
+                Our <span style={{ color: '#D90A14', fontStyle: 'italic' }}>Services</span>
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -516,12 +555,17 @@ export default function LandingPage() {
             </div>
 
             {/* Service cards grid — 4 columns, text left / image right */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: 'clamp(10px, 1.2vw, 18px)',
-              margin: '0 auto',
-            }}>
+            <div
+              className="services-grid-override"
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(4, 1fr)',
+                gap: 'clamp(10px, 1.2vw, 18px)',
+                margin: '0 auto',
+                position: 'relative',
+                zIndex: 1,
+              }}
+            >
               {services.map((svc, i) => (
                 <motion.div
                   key={svc.title}
@@ -531,14 +575,14 @@ export default function LandingPage() {
                   transition={{ duration: 0.5, delay: 0.1 + i * 0.12, ease: 'easeOut' }}
                   whileHover={{ y: -6, transition: { duration: 0.3 } }}
                   style={{
-                    background: '#1a1a1a',
+                    background: 'linear-gradient(135deg, rgba(35, 12, 10, 0.95) 0%, rgba(18, 10, 10, 0.98) 50%, rgba(10, 10, 10, 1) 100%)',
                     borderRadius: '14px',
                     overflow: 'hidden',
                     display: 'flex',
                     flexDirection: 'row',
                     position: 'relative',
                     cursor: 'pointer',
-                    border: '1px solid rgba(255,255,255,0.04)',
+                    border: '1px solid rgba(255,255,255,0.06)',
                     minHeight: 'clamp(200px, 22vw, 280px)',
                   }}
                 >
@@ -569,7 +613,7 @@ export default function LandingPage() {
 
                   {/* LEFT: Text content */}
                   <div style={{
-                    width: '75%',
+                    width: '55%',
                     padding: 'clamp(14px, 1.5vw, 22px) clamp(10px, 1vw, 16px)',
                     display: 'flex',
                     flexDirection: 'column',
@@ -590,23 +634,25 @@ export default function LandingPage() {
                     </h3>
                     <p style={{
                       fontSize: 'clamp(7px, 0.65vw, 9px)',
-                      color: '#9ca3af',
+                      color: '#ffffff',
                       margin: 0,
-                      fontWeight: 500,
+                      fontWeight: 600,
                       lineHeight: 1.4,
+                      opacity: 0.9,
                     }}>
                       {svc.clickText}
                     </p>
                     <p style={{
                       fontSize: 'clamp(7px, 0.7vw, 10px)',
-                      color: '#6b7280',
+                      color: '#e2e8f0',
                       lineHeight: 1.65,
                       margin: '4px 0 0 0',
                       flex: 1,
+                      opacity: 0.85,
                     }}>
                       {svc.desc}
                     </p>
-
+ 
                     {/* Learn More link */}
                     <div style={{
                       display: 'flex',
@@ -618,7 +664,7 @@ export default function LandingPage() {
                       <span style={{
                         fontSize: 'clamp(9px, 0.8vw, 12px)',
                         color: '#fff',
-                        fontWeight: 200,
+                        fontWeight: 600,
                         letterSpacing: '0.03em',
                       }}>
                         Learn More
@@ -628,9 +674,9 @@ export default function LandingPage() {
                       </svg>
                     </div>
                   </div>
-
+ 
                   {/* RIGHT: Image */}
-                  < div style={{
+                  <div style={{
                     width: '45%',
                     position: 'relative',
                     overflow: 'hidden',
@@ -653,7 +699,7 @@ export default function LandingPage() {
                       left: 0,
                       bottom: 0,
                       width: '50%',
-                      background: 'linear-gradient(to right, #1a1a1a 5%, transparent 100%)',
+                      background: 'linear-gradient(to right, #0a0a0a 5%, transparent 100%)',
                       pointerEvents: 'none',
                     }} />
                     {/* Red ambient glow on image */}
@@ -664,7 +710,7 @@ export default function LandingPage() {
                       width: '80%',
                       height: '80%',
                       borderRadius: '50%',
-                      background: 'radial-gradient(circle, rgba(217,10,20,0.15) 0%, transparent 65%)',
+                      background: 'radial-gradient(circle, rgba(217,10,20,0.12) 0%, transparent 65%)',
                       filter: 'blur(10px)',
                       pointerEvents: 'none',
                     }} />
