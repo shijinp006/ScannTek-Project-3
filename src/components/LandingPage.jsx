@@ -122,7 +122,7 @@ export default function LandingPage() {
               { label: 'Coaching' },
               { label: 'Membership' },
               { label: 'About Us' },
-            ].map(({ label }) => (
+            ].map(({ labe }) => (
               <a key={label} href="#" onClick={e => { e.preventDefault(); setActiveNav(label); setMobileMenuOpen(false); }}
                 style={{ fontSize: '18px', color: activeNav === label ? '#fff' : '#9ca3af', textDecoration: 'none', fontWeight: activeNav === label ? 600 : 400, display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                 {label}
