@@ -2,6 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import arrowSvg from '../assets/arrow.svg';
 import heroTrainer from '../assets/hero-image.png';
+import serviceLosing from '../assets/service-losing-weight.png';
+import serviceBuilding from '../assets/service-building-muscle.png';
+import serviceHome from '../assets/service-home-training.png';
+import serviceGym from '../assets/service-gym-plan.png';
 
 /* ── Reusable animation variants ── */
 const fadeUp = {
@@ -436,6 +440,252 @@ export default function LandingPage() {
         );
       })()}
 
-    </div>
+      {/* ══════════ OUR SERVICES ══════════ */}
+      {(() => {
+        const services = [
+          {
+            img: serviceLosing,
+            title: 'LOSING WEIGHT',
+            clickText: 'Click To Join Our Losing Weight Plans',
+            desc: 'Achieve Sustainable Weight Loss With Our Customized Programs Designed To Help You Burn Fat And Build A Healthier Lean Body. Start Your Journey To A Healthier Life.',
+          },
+          {
+            img: serviceBuilding,
+            title: 'BUILDING MUSCLE',
+            clickText: 'Click To Join Our Building Muscle Plans',
+            desc: 'Develop Strength And Define Your Muscles With Tailored Programs Designed To Help You Gain Lean Muscle Efficiently. Click On The Button Below And Start Your Journey Right Now. Don\'t Miss The Extras.',
+          },
+          {
+            img: serviceHome,
+            title: 'TRAINING IN HOME',
+            clickText: 'Click To See Our Ultimate Home Plans',
+            desc: 'Stay Fit And Strong With Our Effective Home Workout Programs. No Gym, No Minimal Equipment, You Can Reach Your Goals At A Lot Of Ways. Or Just Choose To Go Home.',
+          },
+          {
+            img: serviceGym,
+            title: 'GYM PLAN',
+            clickText: 'Click, Order Your Details, Get Your Plans.',
+            desc: 'Maximize Your Gym Sessions With Structured Plans That Guide You Towards Your Goals. Fitness Progress.',
+          },
+        ];
+        return (
+          <motion.section
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+            style={{
+              background: '#111',
+              padding: 'clamp(40px, 6vw, 80px) clamp(16px, 5vw, 80px)',
+              position: 'relative',
+              overflow: 'hidden',
+            }}
+          >
+            {/* Section heading */}
+            <div style={{ textAlign: 'center', marginBottom: 'clamp(24px, 4vw, 48px)' }}>
+              <motion.h2
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                style={{
+                  fontSize: 'clamp(24px, 3.5vw, 42px)',
+                  fontWeight: 800,
+                  color: '#fff',
+                  margin: '0 0 12px 0',
+                  letterSpacing: '0.02em',
+                }}
+              >
+                Our <span style={{ color: 'red' }}>Services</span>
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.15 }}
+                style={{
+                  fontSize: 'clamp(10px, 1.1vw, 12px)',
+                  color: '#9ca3af',
+                  maxWidth: '620px',
+                  margin: '0 auto',
+                  lineHeight: 1.6,
+                }}
+              >
+                At This Part You Can Easily Access All Of Our Services. Take A Look At Them And Chose Wich Ever You Want.
+              </motion.p>
+            </div>
+
+            {/* Service cards grid — 4 columns, text left / image right */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, 1fr)',
+              gap: 'clamp(10px, 1.2vw, 18px)',
+              margin: '0 auto',
+            }}>
+              {services.map((svc, i) => (
+                <motion.div
+                  key={svc.title}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: 0.1 + i * 0.12, ease: 'easeOut' }}
+                  whileHover={{ y: -6, transition: { duration: 0.3 } }}
+                  style={{
+                    background: '#1a1a1a',
+                    borderRadius: '14px',
+                    overflow: 'hidden',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    position: 'relative',
+                    cursor: 'pointer',
+                    border: '1px solid rgba(255,255,255,0.04)',
+                    minHeight: 'clamp(200px, 22vw, 280px)',
+                  }}
+                >
+                  {/* Red glow at top of card */}
+                  <div style={{
+                    position: 'absolute',
+                    top: '-30px',
+                    left: '30%',
+                    transform: 'translateX(-50%)',
+                    width: '100px',
+                    height: '50px',
+                    background: 'radial-gradient(ellipse, rgba(217,10,20,0.4) 0%, transparent 70%)',
+                    filter: 'blur(14px)',
+                    pointerEvents: 'none',
+                    zIndex: 2,
+                  }} />
+
+                  {/* Top red accent line */}
+                  <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: '2px',
+                    background: 'linear-gradient(to right, transparent, #D90A14, #CD4E17, transparent)',
+                    zIndex: 2,
+                  }} />
+
+                  {/* LEFT: Text content */}
+                  <div style={{
+                    width: '75%',
+                    padding: 'clamp(14px, 1.5vw, 22px) clamp(10px, 1vw, 16px)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '6px',
+                    position: 'relative',
+                    zIndex: 1,
+                  }}>
+                    <h3 style={{
+                      fontSize: 'clamp(11px, 1.1vw, 20px)',
+                      fontWeight: 900,
+                      color: '#D90A14',
+                      margin: 0,
+                      letterSpacing: '0.06em',
+                      fontFamily: "'Vazirmatn', sans-serif",
+                      textTransform: 'uppercase',
+                    }}>
+                      {svc.title}
+                    </h3>
+                    <p style={{
+                      fontSize: 'clamp(7px, 0.65vw, 9px)',
+                      color: '#9ca3af',
+                      margin: 0,
+                      fontWeight: 500,
+                      lineHeight: 1.4,
+                    }}>
+                      {svc.clickText}
+                    </p>
+                    <p style={{
+                      fontSize: 'clamp(7px, 0.7vw, 10px)',
+                      color: '#6b7280',
+                      lineHeight: 1.65,
+                      margin: '4px 0 0 0',
+                      flex: 1,
+                    }}>
+                      {svc.desc}
+                    </p>
+
+                    {/* Learn More link */}
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      marginTop: 'auto',
+                      paddingTop: '8px',
+                    }}>
+                      <span style={{
+                        fontSize: 'clamp(9px, 0.8vw, 12px)',
+                        color: '#fff',
+                        fontWeight: 200,
+                        letterSpacing: '0.03em',
+                      }}>
+                        Learn More
+                      </span>
+                      <svg width="20" height="6" viewBox="0 0 20 6" fill="none" style={{ marginTop: '1px' }}>
+                        <path d="M0 3h17M14 0.5l3 2.5-3 2.5" stroke="#CD4E17" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* RIGHT: Image */}
+                  < div style={{
+                    width: '45%',
+                    position: 'relative',
+                    overflow: 'hidden',
+                  }}>
+                    <img
+                      src={svc.img}
+                      alt={svc.title}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        objectPosition: 'top center',
+                        display: 'block',
+                      }}
+                    />
+                    {/* Gradient overlay on the left edge of image for smooth blend */}
+                    <div style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      bottom: 0,
+                      width: '50%',
+                      background: 'linear-gradient(to right, #1a1a1a 5%, transparent 100%)',
+                      pointerEvents: 'none',
+                    }} />
+                    {/* Red ambient glow on image */}
+                    <div style={{
+                      position: 'absolute',
+                      top: '10%',
+                      right: '-10%',
+                      width: '80%',
+                      height: '80%',
+                      borderRadius: '50%',
+                      background: 'radial-gradient(circle, rgba(217,10,20,0.15) 0%, transparent 65%)',
+                      filter: 'blur(10px)',
+                      pointerEvents: 'none',
+                    }} />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Responsive: stack cards on smaller screens */}
+            <style>{`
+              @media (max-width: 1024px) {
+                .services-grid-override { grid-template-columns: repeat(2, 1fr) !important; }
+              }
+              @media (max-width: 640px) {
+                .services-grid-override { grid-template-columns: 1fr !important; }
+              }
+            `}</style>
+          </motion.section >
+        );
+      })()}
+
+    </div >
   );
 }
