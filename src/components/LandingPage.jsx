@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import arrowSvg from '../assets/arrow.svg';
 import heroTrainer from '../assets/hero-image.png';
 import serviceLosing from '../assets/service-losing-weight.png';
@@ -75,10 +75,12 @@ function StatCard({ number, label, posStyleLg, posStyleMd, posStyle, variants, d
 export default function LandingPage() {
   const [activeNav, setActiveNav] = React.useState('Home');
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [selectedService, setSelectedService] = React.useState(null);
+  const [billingCycle, setBillingCycle] = React.useState('Monthly');
   return (
     <div style={{
       minHeight: '100vh',
-      background: '#0a0a0a',
+      background: 'linear-gradient(180deg, #050505 0%, #0d0807 35%, #0e0909 70%, #050505 100%)',
       color: '#fff',
       fontFamily: "'Vazirmatn', sans-serif",
       display: 'flex',
@@ -150,7 +152,6 @@ export default function LandingPage() {
         className="hidden sm:flex items-center justify-center"
         style={{
           padding: '24px 36px',
-          borderBottom: '1px solid rgba(255,255,255,0.06)',
           zIndex: 30,
           position: 'relative',
           gap: 'clamp(20px, 5vw, 60px)',
@@ -262,7 +263,7 @@ export default function LandingPage() {
         <motion.div initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.12, delayChildren: 0.3 } } }}
           style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', gap: '4px', maxWidth: '60%', flex: 1, justifyContent: 'center', marginTop: '-40px' }}>
           <motion.h2 variants={fadeUp} transition={{ duration: 0.5 }} style={{ fontSize: '16px', fontWeight: 700, color: '#fff', margin: 0 }}>Achive Your</motion.h2>
-          <motion.h1 variants={fadeUp} transition={{ duration: 0.6 }} style={{ fontSize: '24px', fontWeight: 900, fontStyle: 'italic', color: '#D90A14', fontFamily: "Impact, 'Arial Narrow', Arial, sans-serif", letterSpacing: '0.04em', textTransform: 'uppercase', margin: 0, filter: 'drop-shadow(0 0 10px rgba(217,10,20,0.7))', lineHeight: 1.05 }}>FITNESS GOALS</motion.h1>
+          <motion.h1 variants={fadeUp} transition={{ duration: 0.6 }} style={{ fontSize: '24px', fontWeight: 900, fontStyle: 'normal', color: '#D90A14', fontFamily: "'Gagalin', sans-serif", letterSpacing: '0.04em', textTransform: 'uppercase', margin: 0, filter: 'drop-shadow(0 0 10px rgba(217,10,20,0.7))', lineHeight: 1.05 }}>FITNESS GOALS</motion.h1>
           <motion.h2 variants={fadeUp} transition={{ duration: 0.5 }} style={{ fontSize: '16px', fontWeight: 700, color: '#fff', margin: 0 }}>With Fitmaker</motion.h2>
         </motion.div>
 
@@ -292,7 +293,7 @@ export default function LandingPage() {
           <motion.div initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.15, delayChildren: 0.5 } } }} style={{ width: '100%', maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
               <motion.h2 variants={fadeUp} transition={{ duration: 0.6, ease: 'easeOut' }} style={{ fontSize: 'clamp(20px, 2.5vw, 30px)', fontWeight: 700, color: '#fff', textAlign: 'center', margin: 0 }}>Achive Your</motion.h2>
-              <motion.h1 variants={fadeUp} transition={{ duration: 0.7, ease: 'easeOut' }} style={{ fontSize: 'clamp(24px, 4.5vw, 58px)', fontWeight: 900, fontStyle: 'italic', color: '#D90A14', fontFamily: "Impact, 'Arial Narrow', Arial, sans-serif", letterSpacing: '0.04em', textTransform: 'uppercase', textAlign: 'center', margin: 0, filter: 'drop-shadow(0 0 16px rgba(217,10,20,0.6))', lineHeight: 1, whiteSpace: 'nowrap' }}>FITNESS GOALS</motion.h1>
+              <motion.h1 variants={fadeUp} transition={{ duration: 0.7, ease: 'easeOut' }} style={{ fontSize: 'clamp(24px, 4.5vw, 58px)', fontWeight: 900, fontStyle: 'normal', color: '#D90A14', fontFamily: "'Gagalin', sans-serif", letterSpacing: '0.04em', textTransform: 'uppercase', textAlign: 'center', margin: 0, filter: 'drop-shadow(0 0 16px rgba(217,10,20,0.6))', lineHeight: 1, whiteSpace: 'nowrap' }}>FITNESS GOALS</motion.h1>
               <motion.h2 variants={fadeUp} transition={{ duration: 0.6, ease: 'easeOut' }} style={{ fontSize: 'clamp(20px, 2.5vw, 30px)', fontWeight: 700, color: '#fff', textAlign: 'center', margin: 0 }}>With FitMaker</motion.h2>
             </div>
             <motion.p variants={fadeUp} transition={{ duration: 0.6, ease: 'easeOut' }} style={{ fontSize: 'clamp(7px, 1vw, 12px)', color: '#9ca3af', lineHeight: 1.8, textAlign: 'start', margin: 0 }}>
@@ -406,7 +407,7 @@ export default function LandingPage() {
           <motion.div
             initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1.4, ease: 'easeOut' }}
-            style={{ background: '#161616', borderTop: '1px solid rgba(255,255,255,0.07)', zIndex: 10 }}
+            style={{ zIndex: 10 }}
           >
             <div className="flex sm:hidden flex-col" style={{ padding: '20px' }}>
               {stats.map(({ big, color, title, sub }, i) => (
@@ -535,7 +536,7 @@ export default function LandingPage() {
                   letterSpacing: '0.02em',
                 }}
               >
-                Our <span style={{ color: '#D90A14', fontStyle: 'italic' }}>Services</span>
+                Our <span style={{ color: '#D90A14' }}>Services</span>
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -554,181 +555,747 @@ export default function LandingPage() {
               </motion.p>
             </div>
 
-            {/* Service cards grid — 4 columns, text left / image right */}
-            <div
-              className="services-grid-override"
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(4, 1fr)',
-                gap: 'clamp(10px, 1.2vw, 18px)',
-                margin: '0 auto',
-                position: 'relative',
-                zIndex: 1,
-              }}
-            >
-              {services.map((svc, i) => (
-                <motion.div
-                  key={svc.title}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.5, delay: 0.1 + i * 0.12, ease: 'easeOut' }}
-                  whileHover={{ y: -6, transition: { duration: 0.3 } }}
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(35, 12, 10, 0.95) 0%, rgba(18, 10, 10, 0.98) 50%, rgba(10, 10, 10, 1) 100%)',
-                    borderRadius: '14px',
-                    overflow: 'hidden',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    position: 'relative',
-                    cursor: 'pointer',
-                    border: '1px solid rgba(255,255,255,0.06)',
-                    minHeight: 'clamp(200px, 22vw, 280px)',
-                  }}
-                >
-                  {/* Red glow at top of card */}
-                  <div style={{
-                    position: 'absolute',
-                    top: '-30px',
-                    left: '30%',
-                    transform: 'translateX(-50%)',
-                    width: '100px',
-                    height: '50px',
-                    background: 'radial-gradient(ellipse, rgba(217,10,20,0.4) 0%, transparent 70%)',
-                    filter: 'blur(14px)',
-                    pointerEvents: 'none',
-                    zIndex: 2,
-                  }} />
+            {/* Infinite Auto-Scrolling Marquee */}
+            <div className="marquee-container" style={{ position: 'relative', width: '100%', overflow: 'hidden', zIndex: 1 }}>
+              <div className="marquee-track">
+                {[1, 2].map((groupNum) => (
+                  <div key={groupNum} className="marquee-group">
+                    {services.map((svc, i) => (
+                      <motion.div
+                        key={`${groupNum}-${svc.title}`}
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.5, delay: 0.1 + i * 0.12, ease: 'easeOut' }}
+                        whileHover={{ y: -6, transition: { duration: 0.3 } }}
+                        onClick={() => setSelectedService(svc)}
+                        style={{
+                          background: 'linear-gradient(135deg, rgba(35, 12, 10, 0.95) 0%, rgba(18, 10, 10, 0.98) 50%, rgba(10, 10, 10, 1) 100%)',
+                          borderRadius: '14px',
+                          overflow: 'hidden',
+                          display: 'flex',
+                          flexDirection: 'row',
+                          position: 'relative',
+                          cursor: 'pointer',
+                          border: '1px solid rgba(255,255,255,0.06)',
+                          minHeight: 'clamp(200px, 22vw, 280px)',
+                          width: 'clamp(280px, 24vw, 380px)',
+                          flexShrink: 0,
+                        }}
+                      >
+                        {/* Red glow at top of card */}
+                        <div style={{
+                          position: 'absolute',
+                          top: '-30px',
+                          left: '30%',
+                          transform: 'translateX(-50%)',
+                          width: '100px',
+                          height: '50px',
+                          background: 'radial-gradient(ellipse, rgba(217,10,20,0.4) 0%, transparent 70%)',
+                          filter: 'blur(14px)',
+                          pointerEvents: 'none',
+                          zIndex: 2,
+                        }} />
 
-                  {/* Top red accent line */}
-                  <div style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: '2px',
-                    background: 'linear-gradient(to right, transparent, #D90A14, #CD4E17, transparent)',
-                    zIndex: 2,
-                  }} />
+                        {/* Top red accent line */}
+                        <div style={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          height: '2px',
+                          background: 'linear-gradient(to right, transparent, #D90A14, #CD4E17, transparent)',
+                          zIndex: 2,
+                        }} />
 
-                  {/* LEFT: Text content */}
-                  <div style={{
-                    width: '55%',
-                    padding: 'clamp(14px, 1.5vw, 22px) clamp(10px, 1vw, 16px)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '6px',
-                    position: 'relative',
-                    zIndex: 1,
-                  }}>
-                    <h3 style={{
-                      fontSize: 'clamp(11px, 1.1vw, 20px)',
-                      fontWeight: 900,
-                      color: '#D90A14',
-                      margin: 0,
-                      letterSpacing: '0.06em',
-                      fontFamily: "'Vazirmatn', sans-serif",
-                      textTransform: 'uppercase',
-                    }}>
-                      {svc.title}
-                    </h3>
-                    <p style={{
-                      fontSize: 'clamp(7px, 0.65vw, 9px)',
-                      color: '#ffffff',
-                      margin: 0,
-                      fontWeight: 600,
-                      lineHeight: 1.4,
-                      opacity: 0.9,
-                    }}>
-                      {svc.clickText}
-                    </p>
-                    <p style={{
-                      fontSize: 'clamp(7px, 0.7vw, 10px)',
-                      color: '#e2e8f0',
-                      lineHeight: 1.65,
-                      margin: '4px 0 0 0',
-                      flex: 1,
-                      opacity: 0.85,
-                    }}>
-                      {svc.desc}
-                    </p>
- 
-                    {/* Learn More link */}
-                    <div style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      marginTop: 'auto',
-                      paddingTop: '8px',
-                    }}>
-                      <span style={{
-                        fontSize: 'clamp(9px, 0.8vw, 12px)',
-                        color: '#fff',
-                        fontWeight: 600,
-                        letterSpacing: '0.03em',
-                      }}>
-                        Learn More
-                      </span>
-                      <svg width="20" height="6" viewBox="0 0 20 6" fill="none" style={{ marginTop: '1px' }}>
-                        <path d="M0 3h17M14 0.5l3 2.5-3 2.5" stroke="#CD4E17" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </div>
+                        {/* LEFT: Text content */}
+                        <div style={{
+                          width: '58%',
+                          padding: 'clamp(14px, 1.5vw, 22px) clamp(10px, 1vw, 16px)',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          textAlign: 'center',
+                          gap: '6px',
+                          position: 'relative',
+                          zIndex: 1,
+                        }}>
+                          <h3 style={{
+                            fontSize: 'clamp(12px, 1.25vw, 20px)',
+                            fontWeight: 900,
+                            fontStyle: 'normal',
+                            color: '#D90A14',
+                            margin: 0,
+                            letterSpacing: '0.02em',
+                            fontFamily: "'Gagalin', sans-serif",
+                            textTransform: 'uppercase',
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                          }}>
+                            {svc.title}
+                          </h3>
+                          <p style={{
+                            fontSize: 'clamp(7px, 0.65vw, 9px)',
+                            color: '#ffffff',
+                            margin: 0,
+                            fontWeight: 600,
+                            lineHeight: 1.4,
+                            opacity: 0.9,
+                          }}>
+                            {svc.clickText}
+                          </p>
+                          <p style={{
+                            fontSize: 'clamp(7px, 0.7vw, 10px)',
+                            color: '#e2e8f0',
+                            lineHeight: 1.65,
+                            margin: '4px 0 0 0',
+                            flex: 1,
+                            opacity: 0.85,
+                          }}>
+                            {svc.desc}
+                          </p>
+
+                          {/* Learn More link */}
+                          <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                            marginTop: 'auto',
+                            paddingTop: '8px',
+                          }}>
+                            <span style={{
+                              fontSize: 'clamp(9px, 0.8vw, 12px)',
+                              color: '#fff',
+                              fontWeight: 600,
+                              letterSpacing: '0.03em',
+                            }}>
+                              Learn More
+                            </span>
+                            <svg width="20" height="6" viewBox="0 0 20 6" fill="none" style={{ marginTop: '1px' }}>
+                              <path d="M0 3h17M14 0.5l3 2.5-3 2.5" stroke="#CD4E17" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                          </div>
+                        </div>
+
+                        {/* RIGHT: Image */}
+                        <div style={{
+                          width: '42%',
+                          position: 'relative',
+                          overflow: 'hidden',
+                        }}>
+                          <img
+                            src={svc.img}
+                            alt={svc.title}
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                              objectFit: 'cover',
+                              objectPosition: 'top center',
+                              display: 'block',
+                            }}
+                          />
+                          {/* Gradient overlay on the left edge of image for smooth blend */}
+                          <div style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            bottom: 0,
+                            width: '50%',
+                            background: 'linear-gradient(to right, #0a0a0a 5%, transparent 100%)',
+                            pointerEvents: 'none',
+                          }} />
+                          {/* Red ambient glow on image */}
+                          <div style={{
+                            position: 'absolute',
+                            top: '10%',
+                            right: '-10%',
+                            width: '80%',
+                            height: '80%',
+                            borderRadius: '50%',
+                            background: 'radial-gradient(circle, rgba(217,10,20,0.12) 0%, transparent 65%)',
+                            filter: 'blur(10px)',
+                            pointerEvents: 'none',
+                          }} />
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
- 
-                  {/* RIGHT: Image */}
-                  <div style={{
-                    width: '45%',
-                    position: 'relative',
-                    overflow: 'hidden',
-                  }}>
-                    <img
-                      src={svc.img}
-                      alt={svc.title}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        objectPosition: 'top center',
-                        display: 'block',
-                      }}
-                    />
-                    {/* Gradient overlay on the left edge of image for smooth blend */}
-                    <div style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      bottom: 0,
-                      width: '50%',
-                      background: 'linear-gradient(to right, #0a0a0a 5%, transparent 100%)',
-                      pointerEvents: 'none',
-                    }} />
-                    {/* Red ambient glow on image */}
-                    <div style={{
-                      position: 'absolute',
-                      top: '10%',
-                      right: '-10%',
-                      width: '80%',
-                      height: '80%',
-                      borderRadius: '50%',
-                      background: 'radial-gradient(circle, rgba(217,10,20,0.12) 0%, transparent 65%)',
-                      filter: 'blur(10px)',
-                      pointerEvents: 'none',
-                    }} />
-                  </div>
-                </motion.div>
-              ))}
+                ))}
+              </div>
             </div>
 
-            {/* Responsive: stack cards on smaller screens */}
+            {/* Custom CSS for Infinite Marquee Carousel */}
             <style>{`
-              @media (max-width: 1024px) {
-                .services-grid-override { grid-template-columns: repeat(2, 1fr) !important; }
+              @keyframes marquee {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
               }
-              @media (max-width: 640px) {
-                .services-grid-override { grid-template-columns: 1fr !important; }
+              .marquee-container {
+                mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+                -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+              }
+              .marquee-track {
+                display: flex;
+                width: max-content;
+                animation: marquee 25s linear infinite;
+              }
+              .marquee-track:hover {
+                animation-play-state: paused;
+              }
+              .marquee-group {
+                display: flex;
+                gap: 18px;
+                padding-right: 18px;
+                flex-shrink: 0;
+              }
+
+              /* Mobile View Override: Stacks cards vertically, hides marquee animation */
+              @media (max-width: 500px) {
+                .marquee-container {
+                  mask-image: none !important;
+                  -webkit-mask-image: none !important;
+                }
+                .marquee-track {
+                  animation: none !important;
+                  width: 100% !important;
+                  flex-direction: column !important;
+                  gap: 20px !important;
+                }
+                .marquee-group {
+                  flex-direction: column !important;
+                  width: 100% !important;
+                  padding-right: 0 !important;
+                  gap: 20px !important;
+                }
+                .marquee-group:last-child {
+                  display: none !important;
+                }
+                .marquee-group > div {
+                  width: 100% !important;
+                }
               }
             `}</style>
           </motion.section >
+        );
+      })()}
+
+      {/* ══════════ DETAILED SERVICE MODAL (DUMMY DATA) ══════════ */}
+      <AnimatePresence>
+        {selectedService && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedService(null)}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'rgba(0, 0, 0, 0.85)',
+              backdropFilter: 'blur(8px)',
+              zIndex: 9999,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '20px',
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 20, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 350 }}
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                background: 'linear-gradient(135deg, #1c0e0d 0%, #0d0a0a 100%)',
+                border: '1px solid rgba(217, 10, 20, 0.3)',
+                boxShadow: '0 0 35px rgba(217, 10, 20, 0.2)',
+                borderRadius: '20px',
+                width: '100%',
+                maxWidth: '540px',
+                padding: 'clamp(20px, 3vw, 40px)',
+                position: 'relative',
+                overflow: 'hidden',
+              }}
+            >
+              {/* Glowing top line */}
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '3px',
+                background: 'linear-gradient(to right, #D90A14, #CD4E17)',
+              }} />
+
+              {/* Close Button */}
+              <button
+                onClick={() => setSelectedService(null)}
+                style={{
+                  position: 'absolute',
+                  top: '16px',
+                  right: '16px',
+                  background: 'rgba(255, 255, 255, 0.05)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  borderRadius: '50%',
+                  width: '32px',
+                  height: '32px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#fff',
+                  cursor: 'pointer',
+                  fontSize: '16px',
+                  fontWeight: 'bold',
+                  transition: '0.2s',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(217, 10, 20, 0.2)';
+                  e.currentTarget.style.borderColor = 'rgba(217, 10, 20, 0.4)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                }}
+              >
+                ✕
+              </button>
+
+              {/* Header */}
+              <h2 style={{
+                fontFamily: "'Gagalin', sans-serif",
+                fontSize: 'clamp(22px, 3vw, 32px)',
+                color: '#D90A14',
+                margin: '0 0 8px 0',
+                letterSpacing: '0.02em',
+                textTransform: 'uppercase',
+              }}>
+                {selectedService.title}
+              </h2>
+              <p style={{
+                fontSize: 'clamp(11px, 1.2vw, 14px)',
+                color: '#fff',
+                fontWeight: 600,
+                margin: '0 0 20px 0',
+                opacity: 0.9,
+              }}>
+                {selectedService.clickText}
+              </p>
+
+              {/* Divider */}
+              <div style={{ height: '1px', background: 'rgba(255,255,255,0.08)', marginBottom: '20px' }} />
+
+              {/* Body Content */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <div>
+                  <h4 style={{ color: '#CD4E17', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 6px 0', fontWeight: 700 }}>
+                    Program Overview
+                  </h4>
+                  <p style={{ color: '#d1d5db', fontSize: '13px', lineHeight: 1.6, margin: 0 }}>
+                    {selectedService.desc} This customized training plan is built around your individual routine, targeting optimal metabolic conditioning and body adaptation to ensure you achieve your fitness benchmarks quickly and safely.
+                  </p>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginTop: '4px' }}>
+                  <div>
+                    <h4 style={{ color: '#CD4E17', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 6px 0', fontWeight: 700 }}>
+                      Features Included
+                    </h4>
+                    <ul style={{ color: '#d1d5db', fontSize: '13px', margin: 0, paddingLeft: '16px', lineHeight: 1.6 }}>
+                      <li>Custom nutrition coach</li>
+                      <li>Weekly progression tracking</li>
+                      <li>Interactive video plans</li>
+                      <li>24/7 priority support</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 style={{ color: '#CD4E17', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 6px 0', fontWeight: 700 }}>
+                      Target Benchmarks
+                    </h4>
+                    <ul style={{ color: '#d1d5db', fontSize: '13px', margin: 0, paddingLeft: '16px', lineHeight: 1.6 }}>
+                      <li>Cardio & Stamina boost</li>
+                      <li>Core strength definition</li>
+                      <li>Metabolic acceleration</li>
+                      <li>Sustainable habits</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Button */}
+              <button
+                onClick={() => setSelectedService(null)}
+                style={{
+                  marginTop: '28px',
+                  width: '100%',
+                  padding: '12px',
+                  background: 'linear-gradient(to right, #D90A14, #CD4E17)',
+                  border: 'none',
+                  borderRadius: '8px',
+                  color: '#fff',
+                  fontWeight: 700,
+                  fontSize: '14px',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 15px rgba(217, 10, 20, 0.3)',
+                  transition: 'transform 0.2s, boxShadow 0.2s',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.02)';
+                  e.currentTarget.style.boxShadow = '0 6px 20px rgba(217, 10, 20, 0.4)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(217, 10, 20, 0.3)';
+                }}
+              >
+                Start Free Trial
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ══════════ OUR PLANS SECTION ══════════ */}
+      {(() => {
+        const plans = [
+          {
+            title: 'PRO PLAN',
+            borderColor: 'rgba(205, 78, 23, 0.45)',
+            btnColor: '#CD4E17',
+            priceMonthly: '99',
+            priceAnnually: '79',
+            desc: 'Our Pro Plan Offers Advanced Workouts And Personalized Nutrition Coaching To Help You Reach Your Goals Faster. Sign Up Right Now.',
+            features: [
+              'Access To All Of Our Exercise Videos',
+              'Progress Tracking',
+              'Supportive Online Community',
+              'Advanced, Personalized Workout Plans',
+              'Comprehensive Nutrition Coaching',
+              'Access To Advanced Workout Programs',
+              'Body Composition Analysis'
+            ]
+          },
+          {
+            title: 'CUSTOM PLAN',
+            borderColor: 'rgba(217, 10, 20, 0.7)',
+            btnColor: '#D90A14',
+            priceMonthly: '149',
+            priceAnnually: '119',
+            desc: 'Experience A Fully Tailored Fitness Experience With Our Custom Plan. Work One-On-One With A Dedicated Trainer To Achieve Your Goals.',
+            features: [
+              'Access To All Of Our Exercise Videos',
+              'Progress Tracking',
+              'Supportive Online Community',
+              'Fully Customized Workout And Nutrition Plan',
+              'Weekly Check-Ins With Your Trainer',
+              'Access To All Platform Features',
+              'Exclusive Gear Discounts'
+            ],
+            featured: true
+          },
+          {
+            title: 'BEGGINER PLAN',
+            borderColor: 'rgba(205, 78, 23, 0.45)',
+            btnColor: '#CD4E17',
+            priceMonthly: '49',
+            priceAnnually: '39',
+            desc: 'Start Your Fitness Journey With Our Beginner Plan. Build A Strong Foundation With Basic Workouts And Essential Nutrition Guidance.',
+            features: [
+              'Access To All Of Our Exercise Videos',
+              'Progress Tracking',
+              'Supportive Online Community',
+              'Personalized Workout Plans',
+              'Basic Nutrition Guidance',
+              'Access To Group Fitness Classes'
+            ]
+          }
+        ];
+
+        return (
+          <motion.section
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+            style={{
+              background: 'linear-gradient(180deg, #050505 0%, #0d0807 35%, #0e0909 70%, #050505 100%)',
+              padding: 'clamp(24px, 4vw, 48px) clamp(16px, 5vw, 80px)',
+              fontFamily: "'Vazirmatn', sans-serif",
+              position: 'relative',
+              overflow: 'hidden',
+              zIndex: 1,
+            }}
+          >
+            <style>{`
+              .plans-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+                margin-top: 20px;
+              }
+              .plans-subtitle {
+                font-size: clamp(12px, 1.2vw, 15px);
+                color: #9ca3af;
+                margin: 0 auto 12px auto;
+                line-height: 1.6;
+                white-space: nowrap;
+              }
+              @media (max-width: 500px) {
+                .plans-grid {
+                  grid-template-columns: 1fr;
+                  gap: 20px;
+                }
+                .plans-subtitle {
+                  white-space: normal;
+                  padding: 0 16px;
+                }
+              }
+            `}</style>
+            {/* Background ambient glow for premium look */}
+            <div style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '80%',
+              height: '70%',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(217, 10, 20, 0.08) 0%, transparent 70%)',
+              filter: 'blur(80px)',
+              pointerEvents: 'none',
+              zIndex: 0,
+            }} />
+
+            <div style={{ position: 'relative', zIndex: 1, maxWidth: '1200px', margin: '0 auto' }}>
+
+              {/* Section Header */}
+              <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                <h2 style={{
+                  fontSize: 'clamp(28px, 4vw, 46px)',
+                  fontWeight: 900,
+                  margin: '0 0 8px 0',
+                  letterSpacing: '0.02em',
+                  color: '#fff',
+                }}>
+                  Our <span style={{ color: '#D90A14' }}>Plans</span>
+                </h2>
+                <p className="plans-subtitle">
+                  Select The Plan That Suits Your Fitness Goals And Let Our Expert Coaches Guide You Every Step Of The Way.
+                </p>
+
+                {/* Billing toggle */}
+                <div style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  background: 'rgba(255, 255, 255, 0.03)',
+                  border: '1px solid #D90A14',
+                  borderRadius: '999px',
+                  padding: '4px',
+                  gap: '4px',
+                }}>
+                  <button
+                    onClick={() => setBillingCycle('Monthly')}
+                    style={{
+                      background: billingCycle === 'Monthly' ? '#D90A14' : 'transparent',
+                      border: 'none',
+                      borderRadius: '999px',
+                      color: '#fff',
+                      padding: '8px 24px',
+                      fontSize: '13px',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      transition: 'background 0.3s ease',
+                    }}
+                  >
+                    Monthly
+                  </button>
+                  <button
+                    onClick={() => setBillingCycle('Annually')}
+                    style={{
+                      background: billingCycle === 'Annually' ? '#D90A14' : 'transparent',
+                      border: 'none',
+                      borderRadius: '999px',
+                      color: '#fff',
+                      padding: '8px 24px',
+                      fontSize: '13px',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      transition: 'background 0.3s ease',
+                    }}
+                  >
+                    Annually
+                  </button>
+                </div>
+              </div>
+
+              {/* Cards Grid */}
+              <div className="plans-grid" style={{ alignItems: 'stretch' }}>
+                {plans.map((plan, i) => (
+                  <motion.div
+                    key={plan.title}
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.15 }}
+                    transition={{ duration: 0.5, delay: i * 0.15 }}
+                    whileHover={{ y: -8, transition: { duration: 0.25 } }}
+                    style={{
+                      background: 'rgba(15, 10, 10, 0.95)',
+                      border: `1.5px solid ${plan.borderColor}`,
+                      boxShadow: plan.featured ? '0 0 30px rgba(217, 10, 20, 0.15)' : 'none',
+                      borderRadius: '16px',
+                      padding: '20px 18px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      textAlign: 'center',
+                      position: 'relative',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    {/* Top Package label */}
+                    <span style={{
+                      color: '#CD4E17',
+                      fontSize: '12px',
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.1em',
+                      marginBottom: '8px',
+                    }}>
+                      Package
+                    </span>
+
+                    {/* Title */}
+                    <h3 style={{
+                      fontFamily: "'Gagalin', sans-serif",
+                      fontSize: 'clamp(22px, 2.5vw, 32px)',
+                      fontWeight: 900,
+                      fontStyle: 'normal',
+                      color: '#fff',
+                      margin: '0 0 16px 0',
+                      letterSpacing: '0.03em',
+                      textTransform: 'uppercase',
+                      whiteSpace: 'nowrap',
+                    }}>
+                      {plan.title}
+                    </h3>
+
+
+
+
+                    {/* Description Section */}
+                    <span style={{
+                      color: '#CD4E17',
+                      fontSize: '11px',
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
+                      marginBottom: '6px',
+                    }}>
+                      Description
+                    </span>
+                    <p style={{
+                      fontSize: 'clamp(9px, 0.8vw, 11px)',
+                      color: '#9ca3af',
+                      lineHeight: 1.55,
+                      margin: '0 0 18px 0',
+                    }}>
+                      {plan.desc}
+                    </p>
+
+                    {/* Features Section */}
+                    <span style={{
+                      color: '#CD4E17',
+                      fontSize: '11px',
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
+                      marginBottom: '10px',
+                    }}>
+                      Features
+                    </span>
+                    <ul style={{
+                      listStyle: 'none',
+                      padding: 0,
+                      margin: '0 0 36px 0',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '8px',
+                      textAlign: 'left',
+                      width: '100%',
+                      flex: 1,
+                    }}>
+                      {plan.features.map((feat) => (
+                        <li key={feat} style={{
+                          fontSize: '12px',
+                          color: '#d1d5db',
+                          lineHeight: 1.5,
+                          display: 'flex',
+                          alignItems: 'flex-start',
+                          gap: '6px',
+                        }}>
+                          <span style={{ color: plan.btnColor }}>•</span>
+                          <span>{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* Price Block */}
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'baseline',
+                      gap: '2px',
+                      marginBottom: '24px',
+                    }}>
+                      <span style={{
+                        fontSize: '36px',
+                        fontWeight: 900,
+                        color: '#fff',
+                      }}>
+                        {billingCycle === 'Monthly' ? plan.priceMonthly : plan.priceAnnually}$
+                      </span>
+                      <span style={{
+                        fontSize: '12px',
+                        color: '#6b7280',
+                        fontWeight: 600,
+                      }}>
+                        /USDT
+                      </span>
+                    </div>
+
+                    {/* Button */}
+                    <button style={{
+                      width: '100%',
+                      padding: '14px',
+                      background: plan.btnColor,
+                      border: 'none',
+                      borderRadius: '999px',
+                      color: '#fff',
+                      fontWeight: 700,
+                      fontSize: '14px',
+                      cursor: 'pointer',
+                      transition: 'transform 0.2s, boxShadow 0.2s',
+                    }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'scale(1.03)';
+                        e.currentTarget.style.boxShadow = `0 4px 15px ${plan.btnColor}40`;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                        e.currentTarget.style.boxShadow = 'none';
+                      }}
+                    >
+                      Choose This Plan
+                    </button>
+
+                  </motion.div>
+                ))}
+              </div>
+
+            </div>
+          </motion.section>
         );
       })()}
 
