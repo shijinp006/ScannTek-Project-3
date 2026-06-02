@@ -1,6 +1,8 @@
 import React from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import arrowSvg from '../assets/arrow.svg';
+import doubleCotSvg from '../assets/doublecot.svg';
 import heroTrainer from '../assets/hero-image.png';
 import serviceLosing from '../assets/service-losing-weight.png';
 import serviceBuilding from '../assets/service-building-muscle.png';
@@ -13,6 +15,11 @@ import toolBmi from '../assets/d135e47fd40ce0cd2d2ccb9103fc472d6c94bc2f.png';
 import toolMacro1 from '../assets/38ff352b88627b6db80be025bc73d4a344b24e18.png';
 import toolGoal from '../assets/8ecb73d3ffec6aaf55ccc9ec87da40d3c7c91123.png';
 import toolMacro2 from '../assets/69573ea629b490916a264f05f51d7e6ba3f27174.png';
+
+// Testimonial assets
+import testimonialMain from '../assets/ba0b4b6140f1442df69f99820b959f89e382e97c.png';
+import testimonialJosh from '../assets/8514ab438f6d09d5879c609b997cb0e43526baff.png';
+import testimonialEdward from '../assets/4552bcd93dbae33f0a40dac0e6bb7b5afb9b0f32.png';
 
 /* ── Interactive Calculators for Fitness Tools ── */
 
@@ -149,7 +156,7 @@ function MacroCalc() {
       } else if (goal === 'build') {
         pRatio = 0.35; cRatio = 0.45; fRatio = 0.2;
       }
-      
+
       const pCals = calories * pRatio;
       const cCals = calories * cRatio;
       const fCals = calories * fRatio;
@@ -216,7 +223,7 @@ function GoalCalc() {
     if (weeks > 0 && currentW > 0 && targetW > 0) {
       const difference = targetW - currentW;
       const weeklyRate = (difference / weeks).toFixed(2);
-      
+
       let workoutsPerWeek = 4;
       let advice = '';
       if (focus === 'strength') {
@@ -356,6 +363,7 @@ export default function LandingPage() {
   const [billingCycle, setBillingCycle] = React.useState('Monthly');
   const [selectedTool, setSelectedTool] = React.useState(null);
   const [toolPage, setToolPage] = React.useState(0);
+  const [activeTestimonial, setActiveTestimonial] = React.useState(0);
   const toolsScrollRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -1804,7 +1812,7 @@ export default function LandingPage() {
             }} />
 
             <div style={{ position: 'relative', zIndex: 1, maxWidth: '1200px', margin: '0 auto' }}>
-              
+
               {/* Header row */}
               <div className="tools-header-row" style={{
                 display: 'flex',
@@ -1858,7 +1866,7 @@ export default function LandingPage() {
                         e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)';
                       }}
                     >
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
                     </button>
                     <button
                       onClick={() => setToolPage(1)}
@@ -1885,7 +1893,7 @@ export default function LandingPage() {
                         e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)';
                       }}
                     >
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
                     </button>
                   </div>
                   {/* Indicators */}
@@ -1983,7 +1991,7 @@ export default function LandingPage() {
                           }}
                         />
                       </div>
-                      
+
                       {/* Learn More */}
                       <div className="tool-learn-more" style={{
                         display: 'flex',
@@ -2078,6 +2086,488 @@ export default function LandingPage() {
               }
             `}</style>
           </motion.section>
+        );
+      })()}
+
+      {/* ══════════ WHAT OUR CUSTOMERS SAY SECTION ══════════ */}
+      {(() => {
+        const testimonials = [
+          {
+            name: 'Steven Haward',
+            role: 'Our Trainer',
+            img: testimonialMain,
+            text: "I've Been Using Fitmaker For The Past Three Months, And I'm Genuinely Impressed. The Website Is Easy To Navigate, And Everything Is Laid Out Clearly. I Purchased The Premium Plan, And The Personalized Coaching Has Been A Game-Changer For Me. My Coach Is Incredibly Supportive And Always Available To Answer My Questions. The Weekly Video Sessions Keep Me Motivated, And The Custom Meal Plans Have Helped Me Stay On Track With My Goals. Highly Recommended For Anyone Serious About Their Fitness Journey!",
+          },
+          {
+            name: 'Josh Oliver',
+            role: 'Our Trainer',
+            img: testimonialJosh,
+            text: "Fitmaker Has Completely Transformed My Approach To Fitness. The Personalized Workout Plans Are Incredibly Detailed And Effective. I've Seen More Progress In Two Months Than I Did In A Year On My Own. The Community Support And Expert Guidance Make All The Difference. Truly A Premium Experience!",
+          },
+          {
+            name: 'Edward Hawley',
+            role: 'Our Trainer',
+            img: testimonialEdward,
+            text: "As A Busy Professional, Finding Time For Fitness Was Always A Challenge. Fitmaker's Flexible Scheduling And Home Training Options Have Made It Possible For Me To Stay Consistent. The Nutrition Coaching Is Top-Notch, And My Trainer Is Always Just A Message Away. Best Investment I've Made In My Health!",
+          },
+        ];
+
+        const current = testimonials[activeTestimonial];
+        const sideCards = testimonials.filter((_, i) => i !== activeTestimonial);
+
+        return (
+          <motion.section
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+            className="testimonial-section"
+            style={{
+              background: 'linear-gradient(180deg, #050505 0%, #0d0807 35%, #0e0909 70%, #050505 100%)',
+              padding: 'clamp(40px, 6vw, 80px) clamp(16px, 5vw, 80px)',
+              fontFamily: "'Vazirmatn', sans-serif",
+              position: 'relative',
+              overflow: 'hidden',
+              zIndex: 1,
+            }}
+          >
+            {/* Background ambient glow */}
+            <div style={{
+              position: 'absolute',
+              top: '50%',
+              left: '30%',
+              transform: 'translate(-50%, -50%)',
+              width: '60%',
+              height: '80%',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(217, 10, 20, 0.07) 0%, transparent 70%)',
+              filter: 'blur(80px)',
+              pointerEvents: 'none',
+              zIndex: 0,
+            }} />
+
+            <div className="testimonial-inner" style={{ position: 'relative', zIndex: 1, maxWidth: '1200px', margin: '0 auto' }}>
+
+              {/* Section Header */}
+              <div className="testimonial-header" style={{ textAlign: 'center', marginBottom: '40px' }}>
+                {/* Title row — on mobile this becomes flex row with arrows on the right */}
+                <div className="testimonial-header-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <h2 style={{
+                    fontSize: 'clamp(28px, 4vw, 46px)',
+                    fontWeight: 900,
+                    margin: '0 0 12px 0',
+                    letterSpacing: '0.02em',
+                    color: '#fff',
+                  }}>
+                    What Our <span style={{ color: '#D90A14' }}>Customers Say</span>
+                  </h2>
+                  {/* Mobile-only arrows — shown only on ≤640px */}
+                  <div className="testimonial-nav-mobile" style={{ display: 'none', gap: '8px', marginLeft: '10px', marginBottom: '12px', flexShrink: 0 }}>
+                    <button
+                      onClick={() => setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
+                      aria-label="Previous testimonial mobile"
+                      style={{ width: '26px', height: '26px', border: '1px solid rgba(255,255,255,0.25)', borderRadius: '5px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'transparent', color: '#fff', cursor: 'pointer' }}
+                    >
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
+                    </button>
+                    <button
+                      onClick={() => setActiveTestimonial((prev) => (prev + 1) % testimonials.length)}
+                      aria-label="Next testimonial mobile"
+                      style={{ width: '26px', height: '26px', border: '1px solid rgba(255,255,255,0.25)', borderRadius: '5px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'transparent', color: '#fff', cursor: 'pointer' }}
+                    >
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                    </button>
+                  </div>
+                </div>
+                <p style={{
+                  fontSize: 'clamp(11px, 1.2vw, 14px)',
+                  color: '#9ca3af',
+                  maxWidth: '600px',
+                  margin: '0 auto',
+                  lineHeight: 1.6,
+                }}>
+                  At This Part You Can See Few Of The Many Positive Reviews Of Our Customers.
+                </p>
+              </div>
+
+              {/* Testimonial Layout */}
+              <div className="testimonial-layout" style={{
+                display: 'flex',
+                flexWrap: 'nowrap',
+                alignItems: 'stretch',
+                gap: '0',
+                position: 'relative',
+                minHeight: '420px',
+                paddingBottom: '20px',
+              }}>
+
+                {/* Left: Main trainer image */}
+                <motion.div
+                  key={`main-img-${activeTestimonial}`}
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="testimonial-main-img"
+                  style={{
+                    flex: '0 0 270px',
+                    height: '480px',
+                    position: 'relative',
+                    zIndex: 4,
+                  }}
+                >
+                  <img
+                    src={current.img}
+                    alt={current.name}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'center 15%',
+                      display: 'block',
+                      filter: 'brightness(0.9) contrast(1.05)',
+                    }}
+                  />
+                  {/* Fade-out gradient at bottom */}
+                  <div style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: '40%',
+                    background: 'linear-gradient(to top, #0a0606 0%, transparent 100%)',
+                    pointerEvents: 'none',
+                  }} />
+                </motion.div>
+
+                {/* Card + arrows wrapper (desktop/tablet: column) */}
+                <div style={{
+                  flex: 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  minWidth: 0,
+                }}>
+                  {/* Center: Testimonial Card */}
+                  <motion.div
+                    key={`card-${activeTestimonial}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    className="testimonial-card"
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      padding: '30px 40px',
+                      background: 'rgba(54, 8, 10, 0.95)',
+                      border: '1.5px solid rgba(217, 10, 20, 0.25)',
+                      borderRadius: '20px',
+                      position: 'relative',
+                      zIndex: 3,
+                      marginLeft: '-40px',
+                      marginTop: '30px',
+                      height: '320px',
+                      boxShadow: '0 15px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(217, 10, 20, 0.15)',
+                    }}
+                  >
+                    {/* Name & Role Row */}
+                    <div style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'flex-start',
+                      marginBottom: '16px',
+                    }}>
+                      <div>
+                        <h3 style={{
+                          fontSize: 'clamp(18px, 2vw, 24px)',
+                          fontWeight: 600,
+                          color: '#fff',
+                          margin: '0 0 2px 0',
+                        }}>
+                          {current.name}
+                        </h3>
+                        <span style={{
+                          fontSize: '13px',
+                          color: 'white',
+                          fontWeight: 600,
+                        }}>
+                          {current.role}
+                        </span>
+                      </div>
+                      {/* Quote icon */}
+                      <img
+                        src={doubleCotSvg}
+                        alt="Quote"
+                        style={{
+                          width: '38.4px',
+                          height: '28.8px',
+                          display: 'block',
+                          opacity: 0.9,
+                          marginTop: '-4px',
+                        }}
+                      />
+                    </div>
+
+                    {/* Testimonial text */}
+                    <p style={{
+                      fontSize: 'clamp(10px, 1vw, 13px)',
+                      color: '#d1d5db',
+                      lineHeight: 1.7,
+                      margin: 0,
+                    }}>
+                      {current.text}
+                    </p>
+                  </motion.div>
+                </div>
+
+                {/* Right: Side portrait cards + arrows in single line */}
+                <div className="testimonial-side-cards-wrapper" style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'flex-end',
+                  gap: '16px',
+                  flex: '0 0 auto',
+                  marginLeft: '24px',
+                }}>
+                  {/* Arrows below/to-the-left of portrait cards — desktop/tablet only */}
+                  <div className="testimonial-nav-desktop" style={{
+                    display: 'flex',
+                    gap: '10px',
+                    marginRight: '8px',
+                  }}>
+                    <button
+                      onClick={() => setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
+                      aria-label="Previous testimonial"
+                      style={{ width: '30px', height: '30px', border: '1px solid rgba(255,255,255,0.25)', borderRadius: '5px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'transparent', color: '#fff', cursor: 'pointer', transition: 'all 0.2s ease' }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.45)'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)'; }}
+                    >
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
+                    </button>
+                    <button
+                      onClick={() => setActiveTestimonial((prev) => (prev + 1) % testimonials.length)}
+                      aria-label="Next testimonial"
+                      style={{ width: '30px', height: '30px', border: '1px solid rgba(255,255,255,0.25)', borderRadius: '5px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'transparent', color: '#fff', cursor: 'pointer', transition: 'all 0.2s ease' }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.45)'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)'; }}
+                    >
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                    </button>
+                  </div>
+
+                  {/* Portrait cards row */}
+                  <div className="testimonial-side-cards" style={{
+                    display: 'flex',
+                    gap: '16px',
+                    alignItems: 'flex-end',
+                  }}>
+                    {sideCards.map((person, i) => (
+                      <motion.div
+                        key={person.name}
+                        initial={{ opacity: 0, x: 30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.5, delay: 0.15 + i * 0.1 }}
+                        onClick={() => setActiveTestimonial(testimonials.indexOf(person))}
+                        style={{
+                          width: '100px',
+                          height: '330px',
+                          borderRadius: '12px',
+                          overflow: 'hidden',
+                          position: 'relative',
+                          cursor: 'pointer',
+                          border: '1.5px solid rgba(205, 78, 23, 0.4)',
+                          transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+                          marginBottom: '15px',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.borderColor = 'rgba(217, 10, 20, 0.7)';
+                          e.currentTarget.style.boxShadow = '0 0 20px rgba(217, 10, 20, 0.2)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.borderColor = 'rgba(205, 78, 23, 0.4)';
+                          e.currentTarget.style.boxShadow = 'none';
+                        }}
+                      >
+                        <img
+                          src={person.img}
+                          alt={person.name}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            objectPosition: 'top center',
+                            display: 'block',
+                          }}
+                        />
+                        {/* Bottom gradient overlay */}
+                        <div style={{
+                          position: 'absolute',
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          height: '50%',
+                          background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)',
+                          pointerEvents: 'none',
+                        }} />
+                        {/* Vertical name */}
+                        <span style={{
+                          position: 'absolute',
+                          bottom: '55px',
+                          left: '50%',
+                          transform: 'translateX(-50%) rotate(-90deg)',
+                          transformOrigin: 'center center',
+                          color: '#fff',
+                          fontSize: '12px',
+                          fontWeight: 700,
+                          whiteSpace: 'nowrap',
+                          letterSpacing: '0.05em',
+                        }}>
+                          {person.name}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <style>{`
+              /* ── Desktop (default) ── */
+              .testimonial-layout {
+                flex-direction: row;
+                flex-wrap: nowrap !important;
+              }
+              .testimonial-main-img {
+                flex: 0 0 270px !important;
+              }
+
+              /* ── Tablet (641px – 900px): keep single row ── */
+              @media (max-width: 900px) and (min-width: 641px) {
+                .testimonial-section {
+                  padding: 30px 16px !important;
+                }
+                .testimonial-header {
+                  margin-bottom: 24px !important;
+                }
+                .testimonial-layout {
+                  flex-direction: row !important;
+                  flex-wrap: nowrap !important;
+                  min-height: auto !important;
+                  align-items: center !important;
+                }
+                .testimonial-main-img {
+                  flex: 0 0 160px !important;
+                  height: 240px !important;
+                  min-width: 0 !important;
+                }
+                .testimonial-card {
+                  margin-left: -20px !important;
+                  margin-top: 10px !important;
+                  padding: 14px 18px !important;
+                  height: 200px !important;
+                  min-width: 0 !important;
+                  overflow: hidden !important;
+                }
+                .testimonial-side-cards-wrapper {
+                  margin-left: 10px !important;
+                }
+                .testimonial-nav-desktop {
+                  display: flex !important;
+                  margin-left: 0 !important;
+                  margin-top: 8px !important;
+                }
+                .testimonial-card h3 {
+                  font-size: 15px !important;
+                }
+                .testimonial-card p {
+                  font-size: 10px !important;
+                  line-height: 1.5 !important;
+                  -webkit-line-clamp: 5 !important;
+                  display: -webkit-box !important;
+                  -webkit-box-orient: vertical !important;
+                  overflow: hidden !important;
+                }
+                .testimonial-side-cards {
+                  flex-shrink: 0 !important;
+                  margin-left: 10px !important;
+                  padding-bottom: 10px !important;
+                  gap: 8px !important;
+                }
+                .testimonial-side-cards > div {
+                  width: 72px !important;
+                  height: 250px !important;
+                  margin-bottom: 12px !important;
+                  padding: 0 !important;
+                }
+              }
+
+              /* ── Mobile (≤ 640px): horizontal row, arrows in header, no side cards ── */
+              @media (max-width: 640px) {
+                .testimonial-section {
+                  padding: 28px 16px !important;
+                }
+                .testimonial-header {
+                  text-align: left !important;
+                  margin-bottom: 20px !important;
+                }
+                .testimonial-header-row {
+                  justify-content: space-between !important;
+                  align-items: flex-start !important;
+                }
+                .testimonial-header-row h2 {
+                  font-size: 18px !important;
+                  margin-bottom: 0 !important;
+                  white-space: nowrap !important;
+                }
+                .testimonial-nav-mobile {
+                  display: flex !important;
+                }
+                .testimonial-nav-desktop {
+                  display: none !important;
+                }
+                .testimonial-layout {
+                  flex-direction: row !important;
+                  min-height: auto !important;
+                  align-items: stretch !important;
+                }
+                .testimonial-main-img {
+                  flex: 0 0 120px !important;
+                  height: 220px !important;
+                  overflow: hidden;
+                }
+                .testimonial-card {
+                  margin-left: -16px !important;
+                  margin-top: 0 !important;
+                  margin-bottom: 0 !important;
+                  padding: 14px 16px !important;
+                  height: 220px !important;
+                  border-radius: 12px !important;
+                }
+                .testimonial-card h3 {
+                  font-size: 14px !important;
+                }
+                .testimonial-card span {
+                  font-size: 11px !important;
+                }
+                .testimonial-card p {
+                  font-size: 10px !important;
+                  line-height: 1.5 !important;
+                  -webkit-line-clamp: 7 !important;
+                  display: -webkit-box !important;
+                  -webkit-box-orient: vertical !important;
+                  overflow: hidden !important;
+                  margin-bottom: 0 !important;
+                }
+                .testimonial-side-cards-wrapper {
+                  display: none !important;
+                }
+                .testimonial-side-cards {
+                  display: none !important;
+                }
+              }
+            `}</style>
+          </motion.section >
         );
       })()}
 
