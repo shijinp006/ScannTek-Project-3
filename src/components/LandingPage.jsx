@@ -7,6 +7,283 @@ import serviceBuilding from '../assets/service-building-muscle.png';
 import serviceHome from '../assets/service-home-training.png';
 import serviceGym from '../assets/service-gym-plan.png';
 
+// Fitness Tool assets
+import toolCalorie from '../assets/af56840a26856a0143a20449181f094ebb0365b9.png';
+import toolBmi from '../assets/d135e47fd40ce0cd2d2ccb9103fc472d6c94bc2f.png';
+import toolMacro1 from '../assets/38ff352b88627b6db80be025bc73d4a344b24e18.png';
+import toolGoal from '../assets/8ecb73d3ffec6aaf55ccc9ec87da40d3c7c91123.png';
+import toolMacro2 from '../assets/69573ea629b490916a264f05f51d7e6ba3f27174.png';
+
+/* ── Interactive Calculators for Fitness Tools ── */
+
+function CalorieCalc() {
+  const [age, setAge] = React.useState(25);
+  const [gender, setGender] = React.useState('male');
+  const [weight, setWeight] = React.useState(70);
+  const [height, setHeight] = React.useState(175);
+  const [activity, setActivity] = React.useState(1.375);
+  const [result, setResult] = React.useState(null);
+
+  const calculate = () => {
+    let bmr = 0;
+    if (gender === 'male') {
+      bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+    } else {
+      bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+    }
+    const calories = Math.round(bmr * activity);
+    setResult(calories);
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginTop: '12px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+        <div>
+          <label style={{ fontSize: '12px', color: '#9ca3af', display: 'block', marginBottom: '4px' }}>Age</label>
+          <input type="number" value={age} onChange={e => setAge(Number(e.target.value))} style={{ width: '100%', padding: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', outline: 'none' }} />
+        </div>
+        <div>
+          <label style={{ fontSize: '12px', color: '#9ca3af', display: 'block', marginBottom: '4px' }}>Gender</label>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <button onClick={() => setGender('male')} style={{ flex: 1, padding: '10px', background: gender === 'male' ? '#D90A14' : 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', cursor: 'pointer', transition: '0.2s' }}>Male</button>
+            <button onClick={() => setGender('female')} style={{ flex: 1, padding: '10px', background: gender === 'female' ? '#D90A14' : 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', cursor: 'pointer', transition: '0.2s' }}>Female</button>
+          </div>
+        </div>
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+        <div>
+          <label style={{ fontSize: '12px', color: '#9ca3af', display: 'block', marginBottom: '4px' }}>Weight (kg)</label>
+          <input type="number" value={weight} onChange={e => setWeight(Number(e.target.value))} style={{ width: '100%', padding: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', outline: 'none' }} />
+        </div>
+        <div>
+          <label style={{ fontSize: '12px', color: '#9ca3af', display: 'block', marginBottom: '4px' }}>Height (cm)</label>
+          <input type="number" value={height} onChange={e => setHeight(Number(e.target.value))} style={{ width: '100%', padding: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', outline: 'none' }} />
+        </div>
+      </div>
+      <div>
+        <label style={{ fontSize: '12px', color: '#9ca3af', display: 'block', marginBottom: '4px' }}>Activity Level</label>
+        <select value={activity} onChange={e => setActivity(Number(e.target.value))} style={{ width: '100%', padding: '10px', background: 'rgba(15,10,10,0.95)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', outline: 'none' }}>
+          <option value={1.2}>Sedentary (Little/No Exercise)</option>
+          <option value={1.375}>Lightly Active (1-3 Days/Week)</option>
+          <option value={1.55}>Moderately Active (3-5 Days/Week)</option>
+          <option value={1.725}>Very Active (6-7 Days/Week)</option>
+        </select>
+      </div>
+      <button onClick={calculate} style={{ padding: '12px', background: 'linear-gradient(to right, #D90A14, #CD4E17)', border: 'none', borderRadius: '8px', color: '#fff', fontWeight: 'bold', cursor: 'pointer', marginTop: '8px' }}>Calculate Calories</button>
+      {result && (
+        <div style={{ background: 'rgba(217,10,20,0.1)', border: '1px solid rgba(217,10,20,0.3)', borderRadius: '8px', padding: '16px', textAlign: 'center', marginTop: '12px' }}>
+          <span style={{ fontSize: '11px', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Your Daily Caloric Needs</span>
+          <h3 style={{ fontSize: '28px', fontWeight: 900, color: '#fff', margin: '4px 0' }}>{result} <span style={{ fontSize: '14px', fontWeight: 600, color: '#D90A14' }}>kcal</span></h3>
+          <p style={{ fontSize: '11px', color: '#9ca3af', margin: 0, lineHeight: 1.4 }}>This is the estimated amount of daily calories needed to maintain your current weight.</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function BmiCalc() {
+  const [weight, setWeight] = React.useState(70);
+  const [height, setHeight] = React.useState(175);
+  const [result, setResult] = React.useState(null);
+
+  const calculate = () => {
+    if (weight > 0 && height > 0) {
+      const heightInMeters = height / 100;
+      const bmiVal = (weight / (heightInMeters * heightInMeters)).toFixed(1);
+      let category = '';
+      let color = '';
+      if (bmiVal < 18.5) {
+        category = 'Underweight';
+        color = '#38bdf8';
+      } else if (bmiVal < 25) {
+        category = 'Normal Weight';
+        color = '#22c55e';
+      } else if (bmiVal < 30) {
+        category = 'Overweight';
+        color = '#f97316';
+      } else {
+        category = 'Obese';
+        color = '#ef4444';
+      }
+      setResult({ val: bmiVal, cat: category, color });
+    }
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginTop: '12px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+        <div>
+          <label style={{ fontSize: '12px', color: '#9ca3af', display: 'block', marginBottom: '4px' }}>Weight (kg)</label>
+          <input type="number" value={weight} onChange={e => setWeight(Number(e.target.value))} style={{ width: '100%', padding: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', outline: 'none' }} />
+        </div>
+        <div>
+          <label style={{ fontSize: '12px', color: '#9ca3af', display: 'block', marginBottom: '4px' }}>Height (cm)</label>
+          <input type="number" value={height} onChange={e => setHeight(Number(e.target.value))} style={{ width: '100%', padding: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', outline: 'none' }} />
+        </div>
+      </div>
+      <button onClick={calculate} style={{ padding: '12px', background: 'linear-gradient(to right, #D90A14, #CD4E17)', border: 'none', borderRadius: '8px', color: '#fff', fontWeight: 'bold', cursor: 'pointer', marginTop: '8px' }}>Calculate BMI</button>
+      {result && (
+        <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '16px', textAlign: 'center', marginTop: '12px' }}>
+          <span style={{ fontSize: '11px', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Your BMI Result</span>
+          <h3 style={{ fontSize: '32px', fontWeight: 900, color: result.color, margin: '4px 0' }}>{result.val}</h3>
+          <span style={{ fontSize: '12px', fontWeight: 700, color: '#fff', display: 'inline-block', padding: '4px 12px', borderRadius: '4px', background: result.color, marginTop: '4px' }}>{result.cat}</span>
+          <p style={{ fontSize: '11px', color: '#9ca3af', margin: '10px 0 0 0', lineHeight: 1.4 }}>
+            A healthy BMI is between 18.5 and 24.9. Maintain a balanced diet and exercise regularly to stay within the healthy range.
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function MacroCalc() {
+  const [calories, setCalories] = React.useState(2000);
+  const [goal, setGoal] = React.useState('maintain');
+  const [result, setResult] = React.useState(null);
+
+  const calculate = () => {
+    if (calories > 0) {
+      let pRatio = 0.3, cRatio = 0.4, fRatio = 0.3;
+      if (goal === 'lose') {
+        pRatio = 0.4; cRatio = 0.3; fRatio = 0.3;
+      } else if (goal === 'build') {
+        pRatio = 0.35; cRatio = 0.45; fRatio = 0.2;
+      }
+      
+      const pCals = calories * pRatio;
+      const cCals = calories * cRatio;
+      const fCals = calories * fRatio;
+
+      const protein = Math.round(pCals / 4);
+      const carbs = Math.round(cCals / 4);
+      const fat = Math.round(fCals / 9);
+
+      setResult({ protein, carbs, fat, pRatio, cRatio, fRatio });
+    }
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginTop: '12px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+        <div>
+          <label style={{ fontSize: '12px', color: '#9ca3af', display: 'block', marginBottom: '4px' }}>Daily Calories</label>
+          <input type="number" value={calories} onChange={e => setCalories(Number(e.target.value))} style={{ width: '100%', padding: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', outline: 'none' }} />
+        </div>
+        <div>
+          <label style={{ fontSize: '12px', color: '#9ca3af', display: 'block', marginBottom: '4px' }}>Goal</label>
+          <select value={goal} onChange={e => setGoal(e.target.value)} style={{ width: '100%', padding: '10px', background: 'rgba(15,10,10,0.95)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', outline: 'none' }}>
+            <option value="maintain">Maintain Weight</option>
+            <option value="lose">Lose Fat</option>
+            <option value="build">Build Muscle</option>
+          </select>
+        </div>
+      </div>
+      <button onClick={calculate} style={{ padding: '12px', background: 'linear-gradient(to right, #D90A14, #CD4E17)', border: 'none', borderRadius: '8px', color: '#fff', fontWeight: 'bold', cursor: 'pointer', marginTop: '8px' }}>Calculate Macros</button>
+      {result && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '12px' }}>
+          <span style={{ fontSize: '11px', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.05em', textAlign: 'center' }}>Daily Macronutrient Targets</span>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
+            <div style={{ background: 'rgba(217,10,20,0.1)', border: '1px solid rgba(217,10,20,0.3)', borderRadius: '8px', padding: '12px', textAlign: 'center' }}>
+              <span style={{ fontSize: '10px', color: '#D90A14', fontWeight: 700, display: 'block', textTransform: 'uppercase' }}>Protein</span>
+              <h4 style={{ fontSize: '20px', fontWeight: 900, color: '#fff', margin: '4px 0' }}>{result.protein}g</h4>
+              <span style={{ fontSize: '9px', color: '#9ca3af' }}>{Math.round(result.pRatio * 100)}%</span>
+            </div>
+            <div style={{ background: 'rgba(205,78,23,0.1)', border: '1px solid rgba(205,78,23,0.3)', borderRadius: '8px', padding: '12px', textAlign: 'center' }}>
+              <span style={{ fontSize: '10px', color: '#CD4E17', fontWeight: 700, display: 'block', textTransform: 'uppercase' }}>Carbs</span>
+              <h4 style={{ fontSize: '20px', fontWeight: 900, color: '#fff', margin: '4px 0' }}>{result.carbs}g</h4>
+              <span style={{ fontSize: '9px', color: '#9ca3af' }}>{Math.round(result.cRatio * 100)}%</span>
+            </div>
+            <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '12px', textAlign: 'center' }}>
+              <span style={{ fontSize: '10px', color: '#9ca3af', fontWeight: 700, display: 'block', textTransform: 'uppercase' }}>Fat</span>
+              <h4 style={{ fontSize: '20px', fontWeight: 900, color: '#fff', margin: '4px 0' }}>{result.fat}g</h4>
+              <span style={{ fontSize: '9px', color: '#9ca3af' }}>{Math.round(result.fRatio * 100)}%</span>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function GoalCalc() {
+  const [focus, setFocus] = React.useState('strength');
+  const [currentW, setCurrentW] = React.useState(70);
+  const [targetW, setTargetW] = React.useState(75);
+  const [weeks, setWeeks] = React.useState(12);
+  const [result, setResult] = React.useState(null);
+
+  const calculate = () => {
+    if (weeks > 0 && currentW > 0 && targetW > 0) {
+      const difference = targetW - currentW;
+      const weeklyRate = (difference / weeks).toFixed(2);
+      
+      let workoutsPerWeek = 4;
+      let advice = '';
+      if (focus === 'strength') {
+        workoutsPerWeek = 4;
+        advice = 'Focus on progressive overload, lifting heavy compound weights with a high protein diet.';
+      } else if (focus === 'endurance') {
+        workoutsPerWeek = 5;
+        advice = 'Incorporate zone 2 cardio sessions alongside moderate weight circuit training.';
+      } else {
+        workoutsPerWeek = 4;
+        advice = 'Maintain a caloric deficit, target high-intensity interval training (HIIT) and metabolic conditioning.';
+      }
+
+      setResult({ diff: difference, rate: weeklyRate, frequency: workoutsPerWeek, advice });
+    }
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginTop: '12px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
+        <div>
+          <label style={{ fontSize: '11px', color: '#9ca3af', display: 'block', marginBottom: '4px' }}>Current Wt</label>
+          <input type="number" value={currentW} onChange={e => setCurrentW(Number(e.target.value))} style={{ width: '100%', padding: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', outline: 'none' }} />
+        </div>
+        <div>
+          <label style={{ fontSize: '11px', color: '#9ca3af', display: 'block', marginBottom: '4px' }}>Target Wt</label>
+          <input type="number" value={targetW} onChange={e => setTargetW(Number(e.target.value))} style={{ width: '100%', padding: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', outline: 'none' }} />
+        </div>
+        <div>
+          <label style={{ fontSize: '11px', color: '#9ca3af', display: 'block', marginBottom: '4px' }}>Weeks</label>
+          <input type="number" value={weeks} onChange={e => setWeeks(Number(e.target.value))} style={{ width: '100%', padding: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', outline: 'none' }} />
+        </div>
+      </div>
+      <div>
+        <label style={{ fontSize: '12px', color: '#9ca3af', display: 'block', marginBottom: '4px' }}>Fitness Focus</label>
+        <select value={focus} onChange={e => setFocus(e.target.value)} style={{ width: '100%', padding: '10px', background: 'rgba(15,10,10,0.95)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', outline: 'none' }}>
+          <option value="strength">Muscle & Strength Gain</option>
+          <option value="endurance">Endurance & Conditioning</option>
+          <option value="fatloss">Fat Loss & Definition</option>
+        </select>
+      </div>
+      <button onClick={calculate} style={{ padding: '12px', background: 'linear-gradient(to right, #D90A14, #CD4E17)', border: 'none', borderRadius: '8px', color: '#fff', fontWeight: 'bold', cursor: 'pointer', marginTop: '8px' }}>Calculate Plan</button>
+      {result && (
+        <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '16px', display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '12px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+            <div style={{ textAlign: 'center' }}>
+              <span style={{ fontSize: '11px', color: '#9ca3af', display: 'block' }}>Target Rate</span>
+              <h4 style={{ fontSize: '18px', fontWeight: 900, color: '#D90A14', margin: '2px 0' }}>{result.rate} kg</h4>
+              <span style={{ fontSize: '10px', color: '#9ca3af' }}>per week</span>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <span style={{ fontSize: '11px', color: '#9ca3af', display: 'block' }}>Workouts</span>
+              <h4 style={{ fontSize: '18px', fontWeight: 900, color: '#CD4E17', margin: '2px 0' }}>{result.frequency} days</h4>
+              <span style={{ fontSize: '10px', color: '#9ca3af' }}>per week</span>
+            </div>
+          </div>
+          <div style={{ height: '1px', background: 'rgba(255,255,255,0.08)' }} />
+          <div>
+            <span style={{ fontSize: '11px', color: '#CD4E17', fontWeight: 700, textTransform: 'uppercase', display: 'block', marginBottom: '2px' }}>Training Recommendation</span>
+            <p style={{ fontSize: '11px', color: '#d1d5db', margin: 0, lineHeight: 1.4 }}>{result.advice}</p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* ── Reusable animation variants ── */
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -77,6 +354,35 @@ export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [selectedService, setSelectedService] = React.useState(null);
   const [billingCycle, setBillingCycle] = React.useState('Monthly');
+  const [selectedTool, setSelectedTool] = React.useState(null);
+  const [toolPage, setToolPage] = React.useState(0);
+  const toolsScrollRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (toolsScrollRef.current) {
+      const container = toolsScrollRef.current;
+      const scrollAmount = toolPage * (container.scrollWidth - container.clientWidth);
+      container.scrollTo({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  }, [toolPage]);
+
+  const handleToolsScroll = () => {
+    if (toolsScrollRef.current) {
+      const container = toolsScrollRef.current;
+      const maxScroll = container.scrollWidth - container.clientWidth;
+      if (maxScroll <= 0) return;
+      const pct = container.scrollLeft / maxScroll;
+      if (pct > 0.5) {
+        setToolPage(1);
+      } else {
+        setToolPage(0);
+      }
+    }
+  };
+
   return (
     <div style={{
       minHeight: '100vh',
@@ -958,6 +1264,124 @@ export default function LandingPage() {
         )}
       </AnimatePresence>
 
+      {/* ══════════ DETAILED FITNESS TOOL MODAL ══════════ */}
+      <AnimatePresence>
+        {selectedTool && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedTool(null)}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'rgba(0, 0, 0, 0.85)',
+              backdropFilter: 'blur(8px)',
+              zIndex: 9999,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '20px',
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 20, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 350 }}
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                background: 'linear-gradient(135deg, #1c0e0d 0%, #0d0a0a 100%)',
+                border: `1px solid ${selectedTool.color}50`,
+                boxShadow: `0 0 35px ${selectedTool.color}25`,
+                borderRadius: '20px',
+                width: '100%',
+                maxWidth: '480px',
+                padding: 'clamp(20px, 3vw, 36px)',
+                position: 'relative',
+                overflow: 'hidden',
+              }}
+            >
+              {/* Glowing top line */}
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '3px',
+                background: `linear-gradient(to right, ${selectedTool.color}, #CD4E17)`,
+              }} />
+
+              {/* Close Button */}
+              <button
+                onClick={() => setSelectedTool(null)}
+                style={{
+                  position: 'absolute',
+                  top: '16px',
+                  right: '16px',
+                  background: 'rgba(255, 255, 255, 0.05)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  borderRadius: '50%',
+                  width: '32px',
+                  height: '32px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#fff',
+                  cursor: 'pointer',
+                  fontSize: '16px',
+                  fontWeight: 'bold',
+                  transition: '0.2s',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(217, 10, 20, 0.2)';
+                  e.currentTarget.style.borderColor = 'rgba(217, 10, 20, 0.4)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                }}
+              >
+                ✕
+              </button>
+
+              {/* Header */}
+              <h2 style={{
+                fontFamily: "'Vazirmatn', sans-serif",
+                fontSize: 'clamp(20px, 2.5vw, 26px)',
+                fontWeight: 900,
+                color: '#fff',
+                margin: '0 0 4px 0',
+                textTransform: 'uppercase',
+              }}>
+                Interactive <span style={{ color: selectedTool.color }}>{selectedTool.title}</span>
+              </h2>
+              <p style={{
+                fontSize: '13px',
+                color: '#9ca3af',
+                margin: '0 0 16px 0',
+                lineHeight: 1.4,
+              }}>
+                Use this tool to track your fitness parameters and optimize your training targets.
+              </p>
+
+              {/* Divider */}
+              <div style={{ height: '1px', background: 'rgba(255,255,255,0.08)', marginBottom: '16px' }} />
+
+              {/* Calculator Form */}
+              {selectedTool.type === 'calorie' && <CalorieCalc />}
+              {selectedTool.type === 'bmi' && <BmiCalc />}
+              {(selectedTool.type === 'macro1' || selectedTool.type === 'macro2') && <MacroCalc />}
+              {selectedTool.type === 'goal' && <GoalCalc />}
+
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* ══════════ OUR PLANS SECTION ══════════ */}
       {(() => {
         const plans = [
@@ -1295,6 +1719,364 @@ export default function LandingPage() {
               </div>
 
             </div>
+          </motion.section>
+        );
+      })()}
+
+      {/* ══════════ OUR FITNESS TOOLS SECTION ══════════ */}
+      {(() => {
+        const toolsList = [
+          {
+            type: 'calorie',
+            img: toolCalorie,
+            title: 'Calorie Calculator',
+            color: '#D90A14',
+            arrowColor: '#D90A14'
+          },
+          {
+            type: 'bmi',
+            img: toolBmi,
+            title: 'BMI Calculator',
+            color: '#CD4E17',
+            arrowColor: '#CD4E17'
+          },
+          {
+            type: 'macro1',
+            img: toolMacro1,
+            title: 'Macronutrient Calculator',
+            color: '#D90A14',
+            arrowColor: '#D90A14'
+          },
+          {
+            type: 'goal',
+            img: toolGoal,
+            title: 'Goal Setting Tool',
+            color: '#CD4E17',
+            arrowColor: '#CD4E17'
+          },
+          {
+            type: 'macro2',
+            img: toolMacro2,
+            title: 'Macronutrient Calculator',
+            color: '#D90A14',
+            arrowColor: '#D90A14'
+          }
+        ];
+
+        return (
+          <motion.section
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+            style={{
+              background: 'linear-gradient(180deg, #050505 0%, #0c0807 50%, #050505 100%)',
+              padding: 'clamp(40px, 6vw, 80px) clamp(16px, 5vw, 80px)',
+              position: 'relative',
+              overflow: 'hidden',
+              zIndex: 1,
+            }}
+          >
+            {/* Ambient glows */}
+            <div style={{
+              position: 'absolute',
+              top: '20%',
+              left: '-10%',
+              width: '40%',
+              height: '60%',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(217,10,20,0.06) 0%, transparent 70%)',
+              filter: 'blur(70px)',
+              pointerEvents: 'none',
+              zIndex: 0,
+            }} />
+            <div style={{
+              position: 'absolute',
+              bottom: '10%',
+              right: '-10%',
+              width: '40%',
+              height: '60%',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(205,78,23,0.06) 0%, transparent 70%)',
+              filter: 'blur(70px)',
+              pointerEvents: 'none',
+              zIndex: 0,
+            }} />
+
+            <div style={{ position: 'relative', zIndex: 1, maxWidth: '1200px', margin: '0 auto' }}>
+              
+              {/* Header row */}
+              <div className="tools-header-row" style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: '8px',
+                flexWrap: 'wrap',
+                gap: '16px'
+              }}>
+                <h2 className="tools-title" style={{
+                  fontSize: 'clamp(28px, 4vw, 42px)',
+                  fontWeight: 900,
+                  margin: 0,
+                  letterSpacing: '0.02em',
+                  color: '#fff',
+                  fontFamily: "'Vazirmatn', sans-serif",
+                }}>
+                  Our Fitness <span style={{ color: '#D90A14' }}>Tools</span>
+                </h2>
+
+                {/* Slider Controls */}
+                <div className="tools-controls" style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-end',
+                  gap: '6px'
+                }}>
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <button
+                      onClick={() => setToolPage(0)}
+                      aria-label="Previous tools"
+                      style={{
+                        width: '36px',
+                        height: '36px',
+                        border: '1px solid rgba(255, 255, 255, 0.25)',
+                        borderRadius: '6px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        background: 'transparent',
+                        color: '#fff',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.45)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'transparent';
+                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+                      }}
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    </button>
+                    <button
+                      onClick={() => setToolPage(1)}
+                      aria-label="Next tools"
+                      style={{
+                        width: '36px',
+                        height: '36px',
+                        border: '1px solid rgba(255, 255, 255, 0.25)',
+                        borderRadius: '6px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        background: 'transparent',
+                        color: '#fff',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.45)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'transparent';
+                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+                      }}
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                  </div>
+                  {/* Indicators */}
+                  <div style={{ display: 'flex', gap: '6px', paddingRight: '4px', marginTop: '2px' }}>
+                    <div style={{
+                      width: toolPage === 0 ? '24px' : '10px',
+                      height: '6px',
+                      borderRadius: '999px',
+                      background: toolPage === 0 ? '#D90A14' : 'rgba(255,255,255,0.15)',
+                      transition: 'all 0.3s ease'
+                    }} />
+                    <div style={{
+                      width: toolPage === 1 ? '24px' : '10px',
+                      height: '6px',
+                      borderRadius: '999px',
+                      background: toolPage === 1 ? '#D90A14' : 'rgba(255,255,255,0.15)',
+                      transition: 'all 0.3s ease'
+                    }} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Subtitle description */}
+              <p style={{
+                fontSize: 'clamp(11px, 1.2vw, 13.5px)',
+                color: '#9ca3af',
+                maxWidth: '650px',
+                margin: '0 auto 32px auto',
+                textAlign: 'center',
+                lineHeight: 1.6,
+              }}>
+                Access A Variety Of Tools To Help You Reach Your Fitness Goals More Effectively
+              </p>
+
+              {/* Tools Slider Container */}
+              <div
+                ref={toolsScrollRef}
+                onScroll={handleToolsScroll}
+                className="tools-slider-container"
+                style={{
+                  display: 'flex',
+                  gap: '20px',
+                  overflowX: 'auto',
+                  scrollSnapType: 'x mandatory',
+                  padding: '10px 4px 20px 4px',
+                  scrollbarWidth: 'none',
+                  msOverflowStyle: 'none',
+                }}
+              >
+                {toolsList.map((tool, index) => {
+                  return (
+                    <motion.div
+                      key={index}
+                      onClick={() => setSelectedTool(tool)}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.08 }}
+                      whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                      style={{
+                        flex: '0 0 auto',
+                        width: 'calc((100% - 80px) / 5)',
+                        minWidth: '200px',
+                        scrollSnapAlign: 'start',
+                        background: 'rgba(15, 10, 10, 0.95)',
+                        border: `1.5px solid ${tool.color}25`,
+                        borderRadius: '16px',
+                        overflow: 'hidden',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        padding: '8px',
+                        boxShadow: `0 0 15px ${tool.color}05`,
+                        transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = `${tool.color}75`;
+                        e.currentTarget.style.boxShadow = `0 0 25px ${tool.color}20`;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = `${tool.color}25`;
+                        e.currentTarget.style.boxShadow = `0 0 15px ${tool.color}05`;
+                      }}
+                    >
+                      <div style={{ width: '100%' }}>
+                        <img
+                          src={tool.img}
+                          alt={tool.title}
+                          style={{
+                            width: '100%',
+                            height: 'auto',
+                            borderRadius: '12px',
+                            display: 'block',
+                          }}
+                        />
+                      </div>
+                      
+                      {/* Learn More */}
+                      <div className="tool-learn-more" style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        padding: '8px 12px 14px 12px',
+                        marginTop: '12px',
+                      }}>
+                        <span style={{
+                          fontSize: '12.5px',
+                          color: '#fff',
+                          fontWeight: 600,
+                          letterSpacing: '0.02em',
+                        }}>
+                          Learn More
+                        </span>
+                        <svg width="20" height="6" viewBox="0 0 20 6" fill="none" style={{ marginTop: '1px' }}>
+                          <path d="M0 3h17M14 0.5l3 2.5-3 2.5" stroke={tool.arrowColor} strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+            </div>
+
+            <style>{`
+              .tools-slider-container::-webkit-scrollbar {
+                display: none;
+              }
+              @media (max-width: 1024px) {
+                .tools-slider-container {
+                  gap: 12px !important;
+                }
+                .tools-slider-container > div {
+                  width: calc((100% - 48px) / 5) !important;
+                  min-width: 130px !important;
+                }
+              }
+              @media (max-width: 768px) {
+                .tools-slider-container {
+                  gap: 8px !important;
+                }
+                .tools-slider-container > div {
+                  width: calc((100% - 32px) / 5) !important;
+                  min-width: 100px !important;
+                }
+              }
+              @media (max-width: 480px) {
+                .tools-header-row {
+                  flex-wrap: nowrap !important;
+                  justify-content: space-between !important;
+                  gap: 8px !important;
+                  margin-bottom: 12px !important;
+                }
+                .tools-title {
+                  font-size: 20px !important;
+                  white-space: nowrap !important;
+                }
+                .tools-controls {
+                  align-items: flex-end !important;
+                }
+                .tools-controls button {
+                  width: 28px !important;
+                  height: 28px !important;
+                }
+                .tools-controls svg {
+                  width: 12px !important;
+                  height: 12px !important;
+                }
+                .tools-slider-container {
+                  gap: 10px !important;
+                }
+                .tools-slider-container > div {
+                  width: calc((100% - 20px) / 3) !important;
+                  min-width: 100px !important;
+                }
+                .tool-learn-more {
+                  gap: 4px !important;
+                  padding: 4px 6px 8px 6px !important;
+                  margin-top: 6px !important;
+                  white-space: nowrap !important;
+                }
+                .tool-learn-more span {
+                  font-size: 9px !important;
+                }
+                .tool-learn-more svg {
+                  width: 14px !important;
+                  height: 5px !important;
+                }
+              }
+            `}</style>
           </motion.section>
         );
       })()}
