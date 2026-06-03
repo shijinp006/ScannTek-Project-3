@@ -1,5 +1,5 @@
-import React from 'react';
-import { useState } from 'react';
+﻿import React from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import arrowSvg from '../assets/arrow.svg';
 import doubleCotSvg from '../assets/doublecot.svg';
@@ -370,8 +370,11 @@ export default function LandingPage() {
   const [selectedTool, setSelectedTool] = React.useState(null);
   const [toolPage, setToolPage] = React.useState(0);
   const [activeTestimonial, setActiveTestimonial] = React.useState(0);
-  const [activeTrainerIndex, setActiveTrainerIndex] = React.useState(1);
+  const [activeTrainerIndex, setActiveTrainerIndex] = React.useState(0);
+  const [selectedTrainer, setSelectedTrainer] = React.useState(null);
+  const [showAllTrainers, setShowAllTrainers] = React.useState(false);
   const toolsScrollRef = React.useRef(null);
+  const trainerContainerRef = React.useRef(null);
 
   React.useEffect(() => {
     if (toolsScrollRef.current) {
@@ -383,6 +386,16 @@ export default function LandingPage() {
       });
     }
   }, [toolPage]);
+
+  React.useEffect(() => {
+    if (trainerContainerRef.current) {
+      const card = trainerContainerRef.current.querySelector('.trainer-card');
+      if (card) {
+        const offset = activeTrainerIndex * (card.offsetWidth + 12);
+        trainerContainerRef.current.scrollTo({ left: offset, behavior: 'smooth' });
+      }
+    }
+  }, [activeTrainerIndex]);
 
   const handleToolsScroll = () => {
     if (toolsScrollRef.current) {
@@ -2592,21 +2605,33 @@ export default function LandingPage() {
             name: 'Sam Cole',
             role: 'Personal Trainer',
             img: trainerSam,
+            experience: '8 Years',
+            specialties: ['Weight Loss', 'Strength Training', 'HIIT'],
+            bio: 'Sam is a certified personal trainer with 8 years of experience helping clients achieve their fitness goals. He specializes in high-intensity interval training and sustainable weight management programs.',
           },
           {
             name: 'Michael Harris',
             role: 'Personal Trainer',
             img: trainerMichael,
+            experience: '6 Years',
+            specialties: ['Muscle Building', 'Bodybuilding', 'Nutrition'],
+            bio: 'Michael is passionate about body transformation. With 6 years of coaching, he has helped hundreds of clients build lean muscle and improve their physique through science-backed training methods.',
           },
           {
             name: 'John Anderson',
             role: 'Personal Trainer',
             img: trainerJohn,
+            experience: '10 Years',
+            specialties: ['Athletic Performance', 'Functional Fitness', 'Flexibility'],
+            bio: 'John brings a decade of experience in athletic training. He focuses on functional movement, injury prevention, and performance optimization for clients of all fitness levels.',
           },
           {
             name: 'Tom Blake',
             role: 'Personal Trainer',
             img: trainerTom,
+            experience: '5 Years',
+            specialties: ['Home Training', 'Cardio', 'Mobility'],
+            bio: 'Tom specializes in home-based fitness programs that deliver gym-quality results. His innovative approach makes staying fit accessible to everyone, anywhere, with minimal equipment.',
           },
         ];
 
@@ -2644,7 +2669,7 @@ export default function LandingPage() {
                     margin: 0,
                     letterSpacing: '0.02em',
                     color: '#fff',
-                    textTransform: 'uppercase',
+
                   }}>
                     Meet Our <span style={{ color: '#D90A14' }}>Trainers</span>
                   </h2>
@@ -2659,7 +2684,7 @@ export default function LandingPage() {
                 }} className="trainers-nav-group">
                   <div style={{ display: 'flex', gap: '10px' }}>
                     <button
-                      onClick={() => setActiveTrainerIndex((prev) => (prev - 1 + 4) % 4)}
+                      onClick={() => setActiveTrainerIndex((prev) => Math.max(prev - 1, 0))}
                       style={{
                         width: '42px',
                         height: '42px',
@@ -2681,7 +2706,7 @@ export default function LandingPage() {
                       </svg>
                     </button>
                     <button
-                      onClick={() => setActiveTrainerIndex((prev) => (prev + 1) % 4)}
+                      onClick={() => setActiveTrainerIndex((prev) => Math.min(prev + 1, trainers.length - 1))}
                       style={{
                         width: '42px',
                         height: '42px',
@@ -2736,16 +2761,21 @@ export default function LandingPage() {
               </p>
 
               {/* Slider / Grid container */}
-              <div className="trainers-grid-container" style={{
-                position: 'relative',
-                width: '100%',
-                overflow: 'hidden'
-              }}>
+              <div
+                ref={trainerContainerRef}
+                className="trainers-grid-container"
+                style={{
+                  position: 'relative',
+                  width: '100%',
+                  overflowX: 'scroll',
+                  scrollBehavior: 'smooth',
+                  msOverflowStyle: 'none',
+                  scrollbarWidth: 'none',
+                }}
+              >
                 <div className="trainers-slider" style={{
                   display: 'flex',
-                  gap: '24px',
-                  width: '100%',
-                  transition: 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)',
+                  gap: '12px',
                 }}>
                   {trainers.map((trainer, idx) => {
                     const isActive = idx === activeTrainerIndex;
@@ -2758,13 +2788,13 @@ export default function LandingPage() {
                           background: 'rgba(25, 25, 25, 0.95)',
                           border: isActive ? '1.5px solid rgba(217, 10, 20, 0.4)' : '1.5px solid rgba(255, 255, 255, 0.05)',
                           borderRadius: '20px',
-                          padding: '24px 20px 20px 20px',
+                          padding: '16px 16px 14px 16px',
                           display: 'flex',
                           flexDirection: 'column',
-                          height: '420px',
+                          height: '380px',
                           boxSizing: 'border-box',
                           overflow: 'hidden',
-                          transition: 'all 0.3s ease',
+                          transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
                           boxShadow: isActive ? '0 15px 35px rgba(217, 10, 20, 0.12)' : '0 10px 30px rgba(0,0,0,0.5)',
                         }}
                       >
@@ -2860,12 +2890,16 @@ export default function LandingPage() {
                           }}>
                             {trainer.role}
                           </p>
-                          <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                            cursor: 'pointer',
-                          }} className="trainer-learn-more">
+                          <div
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '8px',
+                              cursor: 'pointer',
+                            }}
+                            className="trainer-learn-more"
+                            onClick={() => setSelectedTrainer(trainer)}
+                          >
                             <span style={{
                               fontSize: '13.5px',
                               fontWeight: 600,
@@ -2903,6 +2937,7 @@ export default function LandingPage() {
                     transition: 'all 0.3s ease',
                   }}
                   className="trainers-view-all-btn"
+                  onClick={() => setShowAllTrainers(true)}
                 >
                   View All
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#CD4E17" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginTop: '1px' }}>
@@ -2915,6 +2950,9 @@ export default function LandingPage() {
 
             {/* Responsive Styles */}
             <style>{`
+              .trainers-grid-container::-webkit-scrollbar {
+                display: none;
+              }
               .trainer-nav-btn:hover {
                 border-color: #D90A14 !important;
                 background: rgba(217, 10, 20, 0.05) !important;
@@ -2941,51 +2979,56 @@ export default function LandingPage() {
                 stroke: #fff !important;
               }
               
-              /* Breakpoints for slider behavior */
-              @media (min-width: 601px) {
+              /* ── Desktop (≥ 901px): show 4 cards ── */
+              @media (min-width: 901px) {
                 .trainers-slider {
-                  transform: none !important;
                   flex-wrap: nowrap !important;
                 }
                 .trainer-card {
-                  flex: 1 1 0 !important;
+                  flex: 0 0 calc((100% - 36px) / 4) !important;
                   min-width: 0 !important;
+                  height: 380px !important;
                 }
               }
+              /* ── Tablet (601px – 900px): show 4 cards ── */
               @media (max-width: 900px) and (min-width: 601px) {
+                .trainers-slider {
+                  flex-wrap: nowrap !important;
+                }
                 .trainer-card {
-                  height: 360px !important;
+                  flex: 0 0 calc((100% - 36px) / 4) !important;
+                  min-width: 0 !important;
+                  height: 340px !important;
                 }
                 .trainers-header-row {
                   margin-bottom: 12px !important;
                 }
               }
+              /* ── Mobile (≤ 600px): show 1.2 cards for peek ── */
               @media (max-width: 600px) {
+                .trainers-grid-container {
+                  overflow: hidden !important;
+                }
                 .trainers-slider {
-                  transform: none !important;
                   flex-wrap: nowrap !important;
                 }
                 .trainer-card {
-                  flex: 0 0 calc((100% - 16px) / 3) !important;
+                  flex: 0 0 calc(60% - 12px) !important;
                   min-width: 0 !important;
-                  height: 280px !important;
-                  padding: 12px 8px 12px 8px !important;
-                  border-radius: 12px !important;
+                  height: 240px !important;
+                  padding: 12px 12px 12px 12px !important;
+                  border-radius: 14px !important;
                 }
                 .trainer-card h3 {
-                  font-size: 13px !important;
+                  font-size: 16px !important;
                   margin-bottom: 1px !important;
                 }
                 .trainer-card p {
-                  font-size: 10px !important;
+                  font-size: 11px !important;
                   margin-bottom: 6px !important;
                 }
                 .trainer-learn-more span {
-                  font-size: 10px !important;
-                }
-                .trainer-learn-more svg {
-                  width: 14px !important;
-                  height: 4px !important;
+                  font-size: 12px !important;
                 }
                 .trainers-header-row h2 {
                   font-size: 18px !important;
@@ -3009,14 +3052,175 @@ export default function LandingPage() {
                 .trainers-section {
                   padding: 32px 12px !important;
                 }
-                .trainers-grid-container {
-                  gap: 8px !important;
-                }
               }
             `}</style>
           </motion.section>
         );
       })()}
+
+      {/* ══ TRAINER LEARN MORE MODAL ══ */}
+      {selectedTrainer && (
+        <div
+          onClick={() => setSelectedTrainer(null)}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 9999,
+            background: 'rgba(0,0,0,0.82)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            padding: '20px',
+            backdropFilter: 'blur(6px)',
+          }}
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            style={{
+              background: 'linear-gradient(145deg, #1a0808 0%, #110505 100%)',
+              border: '1.5px solid rgba(217,10,20,0.3)',
+              borderRadius: '24px',
+              padding: '0',
+              maxWidth: '520px',
+              width: '100%',
+              overflow: 'hidden',
+              boxShadow: '0 30px 80px rgba(0,0,0,0.8), 0 0 40px rgba(217,10,20,0.1)',
+              position: 'relative',
+            }}
+          >
+            {/* Close */}
+            <button
+              onClick={() => setSelectedTrainer(null)}
+              style={{
+                position: 'absolute', top: '16px', right: '16px',
+                background: 'rgba(255,255,255,0.08)', border: 'none',
+                borderRadius: '50%', width: '34px', height: '34px',
+                color: '#fff', fontSize: '18px', cursor: 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                zIndex: 10, transition: 'background 0.2s',
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = 'rgba(217,10,20,0.4)'}
+              onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
+            >✕</button>
+
+            {/* Image banner */}
+            <div style={{ position: 'relative', height: '240px', background: '#0d0404', overflow: 'hidden' }}>
+              <img
+                src={selectedTrainer.img}
+                alt={selectedTrainer.name}
+                style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom center' }}
+              />
+              <div style={{
+                position: 'absolute', bottom: 0, left: 0, right: 0, height: '60%',
+                background: 'linear-gradient(to top, #1a0808 0%, transparent 100%)',
+              }} />
+              <div style={{
+                position: 'absolute', bottom: '16px', left: '24px',
+              }}>
+                <h2 style={{ fontSize: '26px', fontWeight: 900, color: '#fff', margin: '0 0 2px 0' }}>{selectedTrainer.name}</h2>
+                <span style={{ fontSize: '13px', color: '#D90A14', fontWeight: 600 }}>{selectedTrainer.role}</span>
+              </div>
+            </div>
+
+            {/* Body */}
+            <div style={{ padding: '20px 24px 28px 24px' }}>
+              {/* Experience */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+                <span style={{
+                  background: 'rgba(217,10,20,0.15)', border: '1px solid rgba(217,10,20,0.3)',
+                  borderRadius: '999px', padding: '4px 14px', fontSize: '12px',
+                  color: '#D90A14', fontWeight: 700,
+                }}>⏱ {selectedTrainer.experience} Experience</span>
+              </div>
+              {/* Bio */}
+              <p style={{ fontSize: '13.5px', color: '#d1d5db', lineHeight: 1.7, margin: '0 0 18px 0' }}>
+                {selectedTrainer.bio}
+              </p>
+              {/* Specialties */}
+              <div>
+                <p style={{ fontSize: '11px', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px', fontWeight: 700 }}>Specialties</p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                  {selectedTrainer.specialties.map(s => (
+                    <span key={s} style={{
+                      background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)',
+                      borderRadius: '8px', padding: '6px 14px', fontSize: '12.5px', color: '#fff', fontWeight: 500,
+                    }}>{s}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ══ VIEW ALL TRAINERS MODAL ══ */}
+      {showAllTrainers && (
+        <div
+          onClick={() => setShowAllTrainers(false)}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 9999,
+            background: 'rgba(0,0,0,0.88)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            padding: '20px',
+            backdropFilter: 'blur(6px)',
+          }}
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            style={{
+              background: '#0d0404',
+              border: '1.5px solid rgba(217,10,20,0.25)',
+              borderRadius: '24px',
+              padding: '28px',
+              maxWidth: '900px',
+              width: '100%',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+              boxShadow: '0 30px 80px rgba(0,0,0,0.9)',
+              position: 'relative',
+            }}
+          >
+            <button
+              onClick={() => setShowAllTrainers(false)}
+              style={{
+                position: 'absolute', top: '16px', right: '16px',
+                background: 'rgba(255,255,255,0.08)', border: 'none',
+                borderRadius: '50%', width: '34px', height: '34px',
+                color: '#fff', fontSize: '18px', cursor: 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                transition: 'background 0.2s',
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = 'rgba(217,10,20,0.4)'}
+              onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
+            >✕</button>
+            <h2 style={{ fontSize: '22px', fontWeight: 900, color: '#fff', margin: '0 0 24px 0' }}>
+              All <span style={{ color: '#D90A14' }}>Trainers</span>
+            </h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '16px' }}>
+              {[
+                { name: 'Sam Cole', role: 'Personal Trainer', img: trainerSam },
+                { name: 'Michael Harris', role: 'Personal Trainer', img: trainerMichael },
+                { name: 'John Anderson', role: 'Personal Trainer', img: trainerJohn },
+                { name: 'Tom Blake', role: 'Personal Trainer', img: trainerTom },
+              ].map(t => (
+                <div key={t.name} style={{
+                  background: 'rgba(25,25,25,0.95)',
+                  border: '1.5px solid rgba(217,10,20,0.2)',
+                  borderRadius: '16px', overflow: 'hidden',
+                  transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+                }}
+                  onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 12px 30px rgba(217,10,20,0.2)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none'; }}
+                >
+                  <div style={{ height: '200px', background: '#0d0404', overflow: 'hidden' }}>
+                    <img src={t.img} alt={t.name} style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom center' }} />
+                  </div>
+                  <div style={{ padding: '12px 14px' }}>
+                    <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#fff', margin: '0 0 2px 0' }}>{t.name}</h3>
+                    <p style={{ fontSize: '11.5px', color: '#9ca3af', margin: 0 }}>{t.role}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
     </div >
   );
