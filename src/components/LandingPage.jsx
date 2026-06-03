@@ -386,6 +386,38 @@ export default function LandingPage() {
   const [showAllBlogs, setShowAllBlogs] = React.useState(false);
   const [authTab, setAuthTab] = React.useState('signup');
   const [activeFaq, setActiveFaq] = React.useState(0);
+  const [activeDropdown, setActiveDropdown] = React.useState(null);
+
+  React.useEffect(() => {
+    const handleGlobalClick = () => {
+      setActiveDropdown(null);
+    };
+    window.addEventListener('click', handleGlobalClick);
+    return () => window.removeEventListener('click', handleGlobalClick);
+  }, []);
+
+  const handleNavClick = (label) => {
+    setActiveNav(label);
+    setActiveDropdown(null);
+    setMobileMenuOpen(false);
+
+    if (label === 'Home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (label === 'Programs') {
+      const section = document.getElementById('plans-section');
+      if (section) section.scrollIntoView({ behavior: 'smooth' });
+    } else if (label === 'Coaching') {
+      const section = document.getElementById('services-section');
+      if (section) section.scrollIntoView({ behavior: 'smooth' });
+    } else if (label === 'Membership') {
+      const section = document.getElementById('plans-section');
+      if (section) section.scrollIntoView({ behavior: 'smooth' });
+    } else if (label === 'About Us') {
+      const section = document.getElementById('testimonials-section');
+      if (section) section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const [blogPosts, setBlogPosts] = React.useState([
     {
       id: 1,
@@ -495,8 +527,8 @@ export default function LandingPage() {
             <span style={{ fontSize: '7px', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#9ca3af' }}>Transform Your Body</span>
           </div>
           {/* Search bar */}
-          <div style={{ display: 'flex', alignItems: 'center', background: 'rgba(255,255,255,0.06)', borderRadius: '999px', padding: '5px 12px', gap: '6px', flex: 1, margin: '0 10px' }}>
-            <img src={searchSvg} alt="" style={{ width: '11px', height: '11px', opacity: 0.6 }} />
+          <div style={{ display: 'flex', alignItems: 'center', background: 'rgba(255,255,255,0.06)', borderRadius: '10px', padding: '5px 12px', gap: '6px', flex: 1, margin: '0 10px' }}>
+            <img src={searchSvg} alt="" style={{ width: '20px', height: '20px', opacity: 0.6 }} />
             <span style={{ fontSize: '11px', color: '#6b7280' }}>Search</span>
           </div>
           {/* Hamburger */}
@@ -513,17 +545,74 @@ export default function LandingPage() {
             style={{ position: 'fixed', top: '75px', left: 0, width: '100%', background: '#0a0a0a', zIndex: 100, display: 'flex', flexDirection: 'column', gap: '20px', padding: '30px 24px' }}>
             {[
               { label: 'Home' },
-              { label: 'Programs' },
-              { label: 'Coaching' },
+              { label: 'Programs', arrow: true },
+              { label: 'Coaching', arrow: true },
               { label: 'Membership' },
               { label: 'About Us' },
-            ].map(({ label }) => (
-              <a key={label} href="#" onClick={e => { e.preventDefault(); setActiveNav(label); setMobileMenuOpen(false); }}
-                style={{ fontSize: '18px', color: activeNav === label ? '#fff' : '#9ca3af', textDecoration: 'none', fontWeight: activeNav === label ? 600 : 400, display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                {label}
-                {activeNav === label && <div style={{ width: '8px', height: '8px', background: '#D90A14', borderRadius: '50%' }} />}
-              </a>
-            ))}
+            ].map(({ label, arrow }) => {
+              const isMobileDropdownOpen = activeDropdown === label;
+              return (
+                <div key={label} style={{ display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                    <a href="#" onClick={e => { 
+                      e.preventDefault(); 
+                      handleNavClick(label);
+                    }}
+                      style={{ fontSize: '18px', color: activeNav === label ? '#fff' : '#9ca3af', textDecoration: 'none', fontWeight: activeNav === label ? 600 : 400 }}>
+                      {label}
+                    </a>
+                    {arrow && (
+                      <span 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          e.preventDefault();
+                          setActiveDropdown(activeDropdown === label ? null : label);
+                        }}
+                        style={{ 
+                          display: 'inline-flex', 
+                          alignItems: 'center', 
+                          transform: isMobileDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                          transition: 'transform 0.2s ease',
+                          color: '#D90A14',
+                          padding: '8px',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </span>
+                    )}
+                    {activeNav === label && !arrow && <div style={{ width: '8px', height: '8px', background: '#D90A14', borderRadius: '50%' }} />}
+                  </div>
+                  {arrow && isMobileDropdownOpen && (
+                    <div style={{ padding: '12px 16px', display: 'flex', flexDirection: 'column', gap: '12px', borderLeft: '2px solid #D90A14', margin: '8px 0 0 8px' }}>
+                      {(label === 'Coaching' ? [
+                        'Personal Trainer',
+                        'Online Coaching',
+                        'Nutrition Specialist',
+                        'Group Classes'
+                      ] : [
+                        'Weight Loss',
+                        'Building Muscles',
+                        'Home Workout',
+                        'Gym Plan'
+                      ]).map((item) => (
+                        <div 
+                          key={item} 
+                          onClick={() => {
+                            handleNavClick(label);
+                          }}
+                          style={{ fontSize: '15px', color: '#d1d5db', cursor: 'pointer' }}
+                        >
+                          {item}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
             <div style={{ display: 'flex', gap: '12px', marginTop: 'auto', marginBottom: '100px' }}>
               <button style={{ padding: '14px 16px', borderRadius: '999px', background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', fontSize: '14px', flex: 1, fontWeight: 600 }}>Login</button>
               <button style={{ padding: '14px 16px', borderRadius: '999px', background: '#D90A14', border: 'none', color: '#fff', fontSize: '14px', flex: 1, fontWeight: 700 }}>Sign Up</button>
@@ -593,13 +682,109 @@ export default function LandingPage() {
             { label: 'About Us' },
           ].map(({ label, arrow }) => {
             const isActive = activeNav === label;
+            const isDropdownOpen = activeDropdown === label;
             return (
-              <motion.li key={label} variants={fadeDown} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer' }} onClick={() => setActiveNav(label)}>
-                <a href="#" onClick={e => e.preventDefault()} className={`text-[10px] md:text-[11.5px] lg:text-[13.5px] flex items-center gap-[5px] no-underline ${isActive ? 'font-semibold text-white' : 'font-medium text-[#d1d5db]'}`} style={{ whiteSpace: 'nowrap' }}>
-                  {label}
-                  {arrow && <img src={arrowSvg} alt="" className="w-[8px] lg:w-[10px] h-auto" />}
-                </a>
+              <motion.li 
+                key={label} 
+                variants={fadeDown} 
+                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', position: 'relative' }} 
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                  <a 
+                    href="#" 
+                    onClick={e => {
+                      e.preventDefault();
+                      handleNavClick(label);
+                    }} 
+                    className={`text-[10px] md:text-[11.5px] lg:text-[13.5px] no-underline ${isActive ? 'font-semibold text-white' : 'font-medium text-[#d1d5db]'}`} 
+                    style={{ whiteSpace: 'nowrap', cursor: 'pointer' }}
+                  >
+                    {label}
+                  </a>
+                  {arrow && (
+                    <span 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        setActiveDropdown(activeDropdown === label ? null : label);
+                      }}
+                      style={{ 
+                        display: 'inline-flex', 
+                        alignItems: 'center', 
+                        transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.2s ease',
+                        cursor: 'pointer',
+                        padding: '4px',
+                      }}
+                    >
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#D90A14" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </span>
+                  )}
+                </div>
                 {isActive && <motion.span layoutId="nav-underline" style={{ display: 'block', height: '2px', width: '100%', background: '#D90A14', borderRadius: '2px' }} />}
+
+                {/* Dropdown Menu */}
+                {arrow && isDropdownOpen && (
+                  <div 
+                    style={{
+                      position: 'absolute',
+                      top: '100%',
+                      left: '50%',
+                      transform: 'translateX(-50%) translateY(12px)',
+                      background: 'rgba(24, 14, 14, 0.98)',
+                      border: '1.5px solid rgba(217, 10, 20, 0.4)',
+                      borderRadius: '12px',
+                      padding: '16px 20px',
+                      zIndex: 100,
+                      minWidth: '220px',
+                      boxShadow: '0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(217, 10, 20, 0.1)',
+                    }}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <ul style={{ listStyleType: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      {(label === 'Coaching' ? [
+                        'Personal Trainer',
+                        'Online Coaching',
+                        'Nutrition Specialist',
+                        'Group Classes'
+                      ] : [
+                        'Weight Loss',
+                        'Building Muscles',
+                        'Home Workout',
+                        'Gym Plan'
+                      ]).map((item) => (
+                        <li 
+                          key={item} 
+                          onClick={() => {
+                            handleNavClick(label);
+                          }}
+                          style={{
+                            fontSize: '12px',
+                            color: '#d1d5db',
+                            padding: '6px 10px',
+                            borderRadius: '6px',
+                            transition: 'all 0.2s ease',
+                            textAlign: 'left',
+                            width: '100%',
+                            cursor: 'pointer'
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background = 'rgba(217, 10, 20, 0.12)';
+                            e.currentTarget.style.color = '#fff';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = 'transparent';
+                            e.currentTarget.style.color = '#d1d5db';
+                          }}
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </motion.li>
             );
           })}
@@ -858,6 +1043,7 @@ export default function LandingPage() {
         ];
         return (
           <motion.section
+            id="services-section"
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
@@ -1521,6 +1707,7 @@ export default function LandingPage() {
 
         return (
           <motion.section
+            id="plans-section"
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
@@ -1846,6 +2033,7 @@ export default function LandingPage() {
 
         return (
           <motion.section
+            id="tools-section"
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
@@ -2183,13 +2371,35 @@ export default function LandingPage() {
             img: testimonialEdward,
             text: "As A Busy Professional, Finding Time For Fitness Was Always A Challenge. Fitmaker's Flexible Scheduling And Home Training Options Have Made It Possible For Me To Stay Consistent. The Nutrition Coaching Is Top-Notch, And My Trainer Is Always Just A Message Away. Best Investment I've Made In My Health!",
           },
+          {
+            name: 'Sarah Jenkins',
+            role: 'Fitness Coach',
+            img: testimonialMain,
+            text: "The community support here is absolutely incredible. I joined expecting just another workout app, but the daily check-ins and custom meal plans kept me accountable. Lost 15 pounds in 6 weeks, but more importantly, I feel energized and strong!",
+          },
+          {
+            name: 'Marcus Thorne',
+            role: 'Gym Member',
+            img: testimonialJosh,
+            text: "The trainers are top-notch and highly knowledgeable. Every routine is optimized for my specific recovery needs. Highly recommended for anyone looking to step up their fitness game with structured, expert coaching.",
+          },
+          {
+            name: 'Sophia Rodriguez',
+            role: 'Yoga Instructor',
+            img: testimonialEdward,
+            text: "I love the clean interface and the ease of scheduling my sessions. Having a custom nutrition guide alongside my strength routines made all the difference in achieving my body recomposition goals. Five stars!",
+          }
         ];
 
         const current = testimonials[activeTestimonial];
-        const sideCards = testimonials.filter((_, i) => i !== activeTestimonial);
+        const sideCards = [
+          testimonials[(activeTestimonial + 1) % testimonials.length],
+          testimonials[(activeTestimonial + 2) % testimonials.length]
+        ];
 
         return (
           <motion.section
+            id="testimonials-section"
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
@@ -2690,6 +2900,7 @@ export default function LandingPage() {
 
         return (
           <motion.section
+            id="trainers-section"
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
@@ -3970,29 +4181,16 @@ export default function LandingPage() {
       })()}
 
       {/* ══ FOOTER SECTION ══ */}
-      <footer id="fitmaker-footer" style={{
+      <footer style={{
         background: '#080808',
         padding: '60px clamp(16px, 6vw, 80px) 40px clamp(16px, 6vw, 80px)',
         position: 'relative',
         zIndex: 10,
         width: '100%',
       }}>
-        <style>{`
-          @media (min-width: 768px) and (max-width: 1023px) {
-            #fitmaker-footer h3 { font-size: 11px !important; letter-spacing: 0.02em !important; }
-            #fitmaker-footer p  { font-size: 10px !important; line-height: 1.55 !important; }
-            #fitmaker-footer a  { font-size: 10px !important; }
-            #fitmaker-footer .footer-contact-text { font-size: 10px !important; }
-          }
-          @media (max-width: 767px) {
-            #fitmaker-footer .footer-link-col h3 { text-align: center; font-size: 11px !important; }
-            #fitmaker-footer .footer-link-col a  { font-size: 11px !important; text-align: center; width: 100% !important; }
-            #fitmaker-footer .footer-link-col > div { align-items: center; }
-          }
-        `}</style>
-        <div className="grid grid-cols-3 md:grid-cols-12 gap-x-[8px] gap-y-[28px] md:gap-[16px] lg:gap-[24px] xl:gap-[48px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-[32px] sm:gap-[40px] lg:gap-[24px] xl:gap-[48px]">
           {/* Column 1: Logo & Info */}
-          <div className="col-span-3 md:col-span-4" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div className="col-span-1 sm:col-span-2 lg:col-span-4" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <div style={{
                 width: '36px', height: '28px', background: '#D90A14',
@@ -4020,7 +4218,7 @@ export default function LandingPage() {
               Transform Your Body with FitMaker, Your Trusted Partner in Fitness. With Over <span style={{ color: '#D90A14', fontWeight: 600 }}>5 Years</span> of Experience, We Offer Expert Coaching, Tailored Workout Plans, and Comprehensive Nutritional Guidance. <span style={{ color: '#CD4E17', fontWeight: 600 }}>Join Our Community</span> and Start Your Journey Towards a Healthier, Stronger You. Ready to Make a Change?
             </p>
 
-            <div style={{ display: 'flex', gap: '20px', marginTop: '8px' }}>
+            <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
               {[
                 {
                   name: 'facebook',
@@ -4056,11 +4254,20 @@ export default function LandingPage() {
           </div>
 
           {/* Column 2: Company */}
-          <div className="col-span-1 md:col-span-2 footer-link-col" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div className="col-span-1 sm:col-span-1 lg:col-span-2" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#D90A14', margin: '0 0 4px 0', letterSpacing: '0.03em' }}>Company</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '11px' }}>
               {['About Us', 'Our Services', 'Careers', 'Blog', 'Testimonial', 'Contact Us'].map(l => (
-                <a key={l} href="#" onClick={e => e.preventDefault()} style={{
+                <a key={l} href="#" onClick={e => {
+                  e.preventDefault();
+                  let targetId = '';
+                  if (l === 'About Us' || l === 'Testimonial') targetId = 'testimonials-section';
+                  else if (l === 'Our Services') targetId = 'services-section';
+                  if (targetId) {
+                    const section = document.getElementById(targetId);
+                    if (section) section.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }} style={{
                   fontSize: '13px', color: '#9ca3af', textDecoration: 'none', transition: 'color 0.2s', width: 'fit-content'
                 }}
                   onMouseEnter={e => e.currentTarget.style.color = '#fff'}
@@ -4073,11 +4280,21 @@ export default function LandingPage() {
           </div>
 
           {/* Column 3: Resources */}
-          <div className="col-span-1 md:col-span-2 footer-link-col" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div className="col-span-1 sm:col-span-1 lg:col-span-2" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#D90A14', margin: '0 0 4px 0', letterSpacing: '0.03em' }}>Resources</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '11px' }}>
               {['Fitness Tools', 'Workout Videos', 'Nutrition Guides', 'FAQ', 'Success Stories', 'Membership'].map(l => (
-                <a key={l} href="#" onClick={e => e.preventDefault()} style={{
+                <a key={l} href="#" onClick={e => {
+                  e.preventDefault();
+                  let targetId = '';
+                  if (l === 'Fitness Tools') targetId = 'tools-section';
+                  else if (l === 'FAQ') targetId = 'faq';
+                  else if (l === 'Membership') targetId = 'plans-section';
+                  if (targetId) {
+                    const section = document.getElementById(targetId);
+                    if (section) section.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }} style={{
                   fontSize: '13px', color: '#9ca3af', textDecoration: 'none', transition: 'color 0.2s', width: 'fit-content'
                 }}
                   onMouseEnter={e => e.currentTarget.style.color = '#fff'}
@@ -4090,11 +4307,19 @@ export default function LandingPage() {
           </div>
 
           {/* Column 4: Programs */}
-          <div className="col-span-1 md:col-span-2 footer-link-col" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div className="col-span-1 sm:col-span-1 lg:col-span-2" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#D90A14', margin: '0 0 4px 0', letterSpacing: '0.03em' }}>Programs</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '11px' }}>
               {['Weight Loss', 'Building Muscles', 'Home Workout', 'Gym Plan', 'Our Plans', 'Fitness Group'].map(l => (
-                <a key={l} href="#" onClick={e => e.preventDefault()} style={{
+                <a key={l} href="#" onClick={e => {
+                  e.preventDefault();
+                  let targetId = '';
+                  if (l === 'Weight Loss' || l === 'Building Muscles' || l === 'Home Workout' || l === 'Gym Plan' || l === 'Our Plans') targetId = 'plans-section';
+                  if (targetId) {
+                    const section = document.getElementById(targetId);
+                    if (section) section.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }} style={{
                   fontSize: '13px', color: '#9ca3af', textDecoration: 'none', transition: 'color 0.2s', width: 'fit-content'
                 }}
                   onMouseEnter={e => e.currentTarget.style.color = '#fff'}
@@ -4107,7 +4332,7 @@ export default function LandingPage() {
           </div>
 
           {/* Column 5: Contact Us */}
-          <div className="col-span-1 md:col-span-2" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div className="col-span-1 sm:col-span-1 lg:col-span-2" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#CD4E17', margin: '0 0 4px 0', letterSpacing: '0.03em' }}>Contact Us</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
               {[
@@ -4126,7 +4351,7 @@ export default function LandingPage() {
               ].map((item, idx) => (
                 <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   {item.icon}
-                  <span className="footer-contact-text" style={{ fontSize: '13px', color: '#9ca3af' }}>{item.text}</span>
+                  <span style={{ fontSize: '13px', color: '#9ca3af' }}>{item.text}</span>
                 </div>
               ))}
             </div>
