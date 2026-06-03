@@ -4171,7 +4171,7 @@ export default function LandingPage() {
       }}>
         <div className="grid grid-cols-1 sm:grid-cols-6 lg:grid-cols-12 gap-[32px] sm:gap-[40px] lg:gap-[24px] xl:gap-[48px]">
           {/* Column 1: Logo & Info */}
-          <div className="col-span-1 sm:col-span-2 lg:col-span-4" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div className="col-span-3 sm:col-span-2 lg:col-span-4" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <div style={{
                 width: '36px', height: '28px', background: '#D90A14',
@@ -4200,7 +4200,7 @@ export default function LandingPage() {
               Transform Your Body with FitMaker, Your Trusted Partner in Fitness. With Over <span style={{ color: '#D90A14', fontWeight: 600 }}>5 Years</span> of Experience, We Offer Expert Coaching, Tailored Workout Plans, and Comprehensive Nutritional Guidance. <span style={{ color: '#CD4E17', fontWeight: 600 }}>Join Our Community</span> and Start Your Journey Towards a Healthier, Stronger You. Ready to Make a Change?
             </p>
 
-            <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
+            <div style={{ display: 'flex', gap: '12px', marginTop: '8px', justifyContent: 'space-between' }}>
               {[
                 {
                   name: 'facebook',
@@ -4236,9 +4236,11 @@ export default function LandingPage() {
           </div>
 
           {/* Column 2: Company */}
-          <div className="col-span-1 sm:col-span-1 lg:col-span-2" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#D90A14', margin: '0 0 4px 0', letterSpacing: '0.03em' }}>Company</h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '11px' }}>
+          <div className="col-span-1 sm:col-span-1 lg:col-span-2" style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
+            <h3 className=" text-[12px]  sm:text-[15px] md:text-[15px] lg:text-[15px] font-extrabold text-[#D90A14] mb-1 tracking-[0.03em]">
+              Company
+            </h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '11px', alignItems: 'center' }}>
               {['About Us', 'Our Services', 'Careers', 'Blog', 'Testimonial', 'Contact Us'].map(l => (
                 <a
                   key={l}
@@ -4259,7 +4261,7 @@ export default function LandingPage() {
                       if (section) section.scrollIntoView({ behavior: 'smooth' });
                     }
                   }}
-                  className="w-fit text-[10px] sm:text-[8px] md:text-[8px] lg:text-[12px] text-gray-400 no-underline transition-colors duration-200 hover:text-white"
+                  className="w-fit text-[8px] sm:text-[8px] md:text-[8px] lg:text-[12px] text-gray-400 no-underline transition-colors duration-200 hover:text-white"
                 >
                   {l}
                 </a>
@@ -4268,9 +4270,10 @@ export default function LandingPage() {
           </div>
 
           {/* Column 3: Resources */}
-          <div className="col-span-1 sm:col-span-1 lg:col-span-2" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#D90A14', margin: '0 0 4px 0', letterSpacing: '0.03em' }}>Resources</h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '11px' }}>
+          <div className="col-span-1 sm:col-span-1 lg:col-span-2" style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
+            <h3 className=" text-[12px]  sm:text-[15px] md:text-[15px] lg:text-[15px] font-extrabold text-[#D90A14] mb-1 tracking-[0.03em]  ">
+              Resources
+            </h3>            <div style={{ display: 'flex', flexDirection: 'column', gap: '11px', alignItems: 'center' }}>
               {['Fitness Tools', 'Workout Videos', 'Nutrition Guides', 'FAQ', 'Success Stories', 'Membership'].map(l => (
                 <a
                   key={l}
@@ -4289,7 +4292,7 @@ export default function LandingPage() {
                       if (section) section.scrollIntoView({ behavior: 'smooth' });
                     }
                   }}
-                  className="text-[10px] sm:text-[8px] md:text-[8px] lg:text-[12px] text-gray-400 no-underline transition-colors duration-200 w-fit hover:text-white"
+                  className="text-[8px] sm:text-[8px] md:text-[8px] lg:text-[12px] text-gray-400 no-underline transition-colors duration-200 w-fit hover:text-white"
                 >
                   {l}
                 </a>
@@ -4298,9 +4301,10 @@ export default function LandingPage() {
           </div>
 
           {/* Column 4: Programs */}
-          <div className="col-span-1 sm:col-span-1 lg:col-span-2" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#D90A14', margin: '0 0 4px 0', letterSpacing: '0.03em' }}>Programs</h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '11px' }}>
+          <div className="col-span-1 sm:col-span-1 lg:col-span-2" style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
+            <h3 className=" text-[12px]  sm:text-[15px] md:text-[15px] lg:text-[15px] font-extrabold text-[#D90A14] mb-1 tracking-[0.03em]">
+              Programs
+            </h3>            <div style={{ display: 'flex', flexDirection: 'column', gap: '11px', justifyContent: 'center', alignItems: 'center' }}>
               {['Weight Loss', 'Building Muscles', 'Home Workout', 'Gym Plan', 'Our Plans', 'Fitness Group'].map(l => (
                 <a
                   key={l}
@@ -4325,7 +4329,7 @@ export default function LandingPage() {
                     }
                   }}
                   className="
-    text-[10px]
+    text-[8px]
     sm:text-[8px]
     md:text-[8px]
     text-gray-400
@@ -4344,9 +4348,11 @@ export default function LandingPage() {
           </div>
 
           {/* Column 5: Contact Us */}
-          <div className="col-span-1 sm:col-span-1 lg:col-span-2" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#CD4E17', margin: '0 0 4px 0', letterSpacing: '0.03em' }}>Contact Us</h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          <div className="col-span-1 sm:col-span-1 lg:col-span-2" style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
+            <h3 className=" flex text-[12px]  sm:text-[15px] md:text-[15px] lg:text-[15px] font-extrabold text-[#D90A14] mb-1 tracking-[0.03em] justify-center">
+              Contact Us
+            </h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '11px' }}>
               {[
                 {
                   icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#fff', opacity: 0.8 }}><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>,
@@ -4363,7 +4369,7 @@ export default function LandingPage() {
               ].map((item, idx) => (
                 <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   {item.icon}
-                  <span className="text-[10px] sm:text-[8px] md:text-[8px] lg:text-[12px] text-gray-400 lg:text-[12px]">
+                  <span className="text-[8px] sm:text-[8px] md:text-[8px] lg:text-[12px] text-gray-400 lg:text-[12px]">
                     {item.text}
                   </span>
                 </div>
