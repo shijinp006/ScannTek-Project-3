@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import arrowSvg from '../assets/arrow.svg';
@@ -26,6 +26,14 @@ import trainerSam from '../assets/6059fac6119c3f846dc8160da258ff6493233b0c.png';
 import trainerMichael from '../assets/50893c736932ef090d1bacdd740cb0ccb39be9f5.png';
 import trainerJohn from '../assets/4db40e0d45768febc86b5dd950fedce957e9e19a.png';
 import trainerTom from '../assets/1a90e5cd7399735ff1d2ab1f41a2747eba676b3d.png';
+
+//Fit Mark Section
+
+import img1 from "../assets/img1.png";
+import img2 from "../assets/img2.png";
+import img3 from "../assets/img3.png";
+import img4 from "../assets/img4.png";
+import img5 from "../assets/img5.png"
 
 /* â”€â”€ Interactive Calculators for Fitness Tools â”€â”€ */
 
@@ -373,6 +381,50 @@ export default function LandingPage() {
   const [activeTrainerIndex, setActiveTrainerIndex] = React.useState(0);
   const [selectedTrainer, setSelectedTrainer] = React.useState(null);
   const [showAllTrainers, setShowAllTrainers] = React.useState(false);
+  const [selectedBlog, setSelectedBlog] = React.useState(null);
+  const [showAllBlogs, setShowAllBlogs] = React.useState(false);
+  const [blogPosts, setBlogPosts] = React.useState([
+    {
+      id: 1,
+      title: "5 Essential Exercises For Building Muscle",
+      date: "August 14",
+      category: "Strength Training",
+      img: img1,
+      content: "Building muscle requires a combination of structured resistance training, progressive overload, and adequate nutrition. The five essential exercises to include in your routine are: Squats (for lower body development), Bench Press (for chest and triceps), Deadlifts (for posterior chain strength), Overhead Press (for shoulder stability), and Pull-ups (for back strength). Focus on correct form, and slowly increase the weight over time to ensure continuous muscle growth."
+    },
+    {
+      id: 2,
+      title: "The Ultimate Guide To A Balanced Diet",
+      date: "August 12",
+      category: "Nutrition",
+      img: img2,
+      content: "A balanced diet is the cornerstone of fitness success. It's not about starvation, but fueling your body with the right macronutrients: lean proteins, complex carbohydrates, and healthy fats. Hydration plays a critical role, so aim for at least 3 liters of water daily. Ensure you consume plenty of leafy greens and fiber to aid digestion and maintain steady energy levels throughout your workouts."
+    },
+    {
+      id: 3,
+      title: "The Benefits Of HIIT Training",
+      date: "August 10",
+      category: "Cardio",
+      img: img3,
+      content: "High-Intensity Interval Training (HIIT) is one of the most efficient ways to burn fat and improve cardiovascular health. By alternating between short bursts of intense exercise and quick recovery periods, HIIT keeps your heart rate elevated and boosts your metabolism for hours after the workout ends. It is ideal for busy individuals, as a session can be completed in just 15 to 20 minutes."
+    },
+    {
+      id: 4,
+      title: "Home Workouts For Busy People",
+      date: "August 08",
+      category: "Home Workouts",
+      img: img4,
+      content: "No gym? No problem! Home workouts are highly effective if you utilize bodyweight movements or minimal equipment like resistance bands. Focus on compound exercises like push-ups, squats, lunges, and planks. To progress, decrease rest times or increase the number of repetitions. Consistency is key, so scheduling just 20 minutes a day can yield massive long-term results."
+    },
+    {
+      id: 5,
+      title: "How To Always Stay Motivated",
+      date: "August 05",
+      category: "Motivation",
+      img: img5,
+      content: "Motivation gets you started, but discipline keeps you going. To stay motivated on your fitness journey, set clear, measurable, and realistic goals. Track your progress with photos and strength benchmarks rather than just the scale. Find a workout partner or community, and remember to celebrate small victories along the way. Your mindset is your strongest muscle."
+    }
+  ]);
   const toolsScrollRef = React.useRef(null);
   const trainerContainerRef = React.useRef(null);
 
@@ -1521,7 +1573,7 @@ export default function LandingPage() {
               zIndex: 0,
             }} />
 
-            <div style={{ position: 'relative', zIndex: 1, maxWidth: '1200px', margin: '0 auto' }}>
+            <div style={{ position: 'relative', zIndex: 1, width: '100%', margin: '0 auto' }}>
 
               {/* Section Header */}
               <div style={{ textAlign: 'center', marginBottom: '20px' }}>
@@ -1831,7 +1883,7 @@ export default function LandingPage() {
               zIndex: 0,
             }} />
 
-            <div style={{ position: 'relative', zIndex: 1, maxWidth: '1200px', margin: '0 auto' }}>
+            <div style={{ position: 'relative', zIndex: 1, width: '100%', margin: '0 auto' }}>
 
               {/* Header row */}
               <div className="tools-header-row" style={{
@@ -2166,7 +2218,7 @@ export default function LandingPage() {
               zIndex: 0,
             }} />
 
-            <div className="testimonial-inner" style={{ position: 'relative', zIndex: 1, maxWidth: '1200px', margin: '0 auto' }}>
+            <div className="testimonial-inner" style={{ position: 'relative', zIndex: 1, width: '100%', margin: '0 auto' }}>
 
               {/* Section Header */}
               <div className="testimonial-header" style={{ textAlign: 'center', marginBottom: '40px' }}>
@@ -2651,7 +2703,7 @@ export default function LandingPage() {
               zIndex: 1,
             }}
           >
-            <div style={{ position: 'relative', zIndex: 1, maxWidth: '1200px', margin: '0 auto' }}>
+            <div style={{ position: 'relative', zIndex: 1, width: '100%', margin: '0 auto' }}>
 
               {/* Header row */}
               <div style={{
@@ -2930,7 +2982,7 @@ export default function LandingPage() {
                     borderRadius: '999px',
                     border: '1.5px solid #CD4E17',
                     background: 'transparent',
-                    color: '#fff',
+                    color: '#CD4E17',
                     fontSize: '14.5px',
                     fontWeight: 600,
                     cursor: 'pointer',
@@ -2947,6 +2999,249 @@ export default function LandingPage() {
               </div>
 
             </div>
+
+             <section className="w-full bg-[#0a0606] pt-20 pb-10 md:pt-24 md:pb-12 lg:pt-32 lg:pb-16 px-4 md:px-3 lg:px-12 overflow-hidden flex justify-center items-center" style={{ fontFamily: "'Vazirmatn', sans-serif", position: 'relative' }}>
+              {/* Background ambient red glow components */}
+              <div style={{
+                position: 'absolute',
+                top: '20%',
+                left: '-10%',
+                width: 'min(500px, 50vw)',
+                height: 'min(500px, 50vw)',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle, rgba(217, 10, 20, 0.1) 0%, rgba(120, 8, 8, 0.04) 45%, transparent 70%)',
+                filter: 'blur(70px)',
+                pointerEvents: 'none',
+                zIndex: 0,
+              }} />
+              <div style={{
+                position: 'absolute',
+                bottom: '10%',
+                right: '-15%',
+                width: 'min(600px, 60vw)',
+                height: 'min(600px, 60vw)',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle, rgba(217, 10, 20, 0.08) 0%, rgba(90, 5, 5, 0.03) 45%, transparent 70%)',
+                filter: 'blur(80px)',
+                pointerEvents: 'none',
+                zIndex: 0,
+              }} />
+
+              <div className="w-full" style={{ position: 'relative', zIndex: 1 }}>
+
+                {/* Header */}
+                <div className="flex items-center justify-between mb-2">
+                  <h2 className="text-white text-lg sm:text-xl md:text-xl lg:text-3xl font-bold" style={{ fontFamily: "'Vazirmatn', sans-serif" }}>
+                    Fitmaker <span className="text-[#D90A14]">Blog Posts</span>
+                  </h2>
+
+                  <div className="flex flex-col items-end gap-2">
+                    <div className="flex gap-3">
+                      <button
+                        className="trainer-nav-btn"
+                        style={{
+                          width: '42px',
+                          height: '42px',
+                          borderRadius: '10px',
+                          border: '1.5px solid rgba(255, 255, 255, 0.25)',
+                          background: 'transparent',
+                          color: '#fff',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s',
+                        }}
+                      >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="19" y1="12" x2="5" y2="12"></line>
+                          <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                      </button>
+                      <button
+                        className="trainer-nav-btn"
+                        style={{
+                          width: '42px',
+                          height: '42px',
+                          borderRadius: '10px',
+                          border: '1.5px solid rgba(255, 255, 255, 0.25)',
+                          background: 'transparent',
+                          color: '#fff',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s',
+                        }}
+                      >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="5" y1="12" x2="19" y2="12"></line>
+                          <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    {/* Dots indicator */}
+                    <div className="flex gap-1.5 items-center justify-end mt-1 pr-1.5">
+                      <span className="w-2 h-2 rounded-full bg-neutral-700" />
+                      <span className="w-5 h-2 rounded-full bg-[#D90A14]" />
+                      <span className="w-2 h-2 rounded-full bg-neutral-700" />
+                    </div>
+                  </div>
+                </div>
+
+                <p className="text-center text-gray-400 text-xs md:text-base" style={{ marginBottom: 'clamp(20px, 4vw, 48px)', color: '#9ca3af' }}>
+                  Discover Essential Tips To Maximize Your Workout Results And Reach
+                  Your Fitness Goals Faster.
+                </p>
+
+                {/* Blog Grid */}
+                <div className="grid md:grid-cols-3 gap-4">
+
+                  {/* Left Large Card */}
+                  <div className="md:col-span-1">
+                    <div className="relative h-[340px] md:h-[380px] lg:h-[496px] rounded-xl overflow-hidden group">
+                      <img
+                        src={blogPosts[0].img}
+                        alt=""
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+
+                      <div className="absolute bottom-5 left-5 right-5 z-10">
+                        <h3 className="text-white text-lg md:text-base lg:text-2xl font-bold mb-3 md:mb-4 leading-tight">
+                          {blogPosts[0].title}
+                        </h3>
+
+                        <div className="flex justify-between items-center w-full text-[10px] md:text-[10px] lg:text-sm text-gray-300">
+                          <div className="flex items-center gap-2 md:gap-3 lg:gap-4">
+                            <span className="flex items-center whitespace-nowrap">
+                              <svg className="w-4 h-4 text-gray-400 mr-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                              </svg>
+                              {blogPosts[0].date}
+                            </span>
+                            <span className="flex items-center whitespace-nowrap">
+                              <svg className="w-4 h-4 text-gray-400 mr-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                                <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                                <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                                <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                              </svg>
+                              {blogPosts[0].category}
+                            </span>
+                          </div>
+                          <span 
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedBlog(blogPosts[0]);
+                            }}
+                            className="text-white hover:text-[#D90A14] transition-colors flex items-center gap-1 cursor-pointer font-semibold whitespace-nowrap"
+                          >
+                            Learn More <span className="text-[#D90A14] font-bold">→</span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Grid */}
+                  <div className="md:col-span-2 grid grid-cols-2 gap-4">
+                    {blogPosts.slice(1).map((post, sliceIdx) => {
+                      const originalIdx = sliceIdx + 1;
+                      return (
+                        <div
+                          key={post.id}
+                          onClick={() => {
+                            const updated = [...blogPosts];
+                            const temp = updated[0];
+                            updated[0] = updated[originalIdx];
+                            updated[originalIdx] = temp;
+                            setBlogPosts(updated);
+                          }}
+                          className="relative h-[162px] md:h-[182px] lg:h-[240px] rounded-xl overflow-hidden group cursor-pointer"
+                        >
+                          <img
+                            src={post.img}
+                            alt=""
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+
+                          <div className="absolute bottom-4 left-4 right-4 z-10">
+                            <h3 className="text-white text-xs md:text-[11px] lg:text-lg font-semibold mb-2 md:mb-3 leading-snug">
+                              {post.title}
+                            </h3>
+
+                            <div className="flex justify-between items-center w-full text-[10px] md:text-[9px] lg:text-xs text-gray-300">
+                              <span className="flex items-center whitespace-nowrap">
+                                <svg className="w-3.5 h-3.5 text-gray-400 mr-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                  <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                                  <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                                  <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                                  <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                                </svg>
+                                {post.category}
+                              </span>
+                              <span
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setSelectedBlog(post);
+                                }}
+                                className="text-white hover:text-[#D90A14] transition-colors flex items-center gap-1 cursor-pointer font-semibold whitespace-nowrap"
+                              >
+                                Learn More <span className="text-[#D90A14] font-bold">→</span>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* View All */}
+                <div style={{ display: 'flex', justifyContent: 'center', marginTop: 'clamp(20px, 3.5vw, 40px)' }}>
+                  <button
+                    onClick={() => setShowAllBlogs(true)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '10px',
+                      background: 'transparent',
+                      border: '1.5px solid #D90A14',
+                      borderRadius: '32px',
+                      padding: '14px 44px',
+                      color: '#D90A14',
+                      fontSize: 'clamp(14px, 1.2vw, 16px)',
+                      fontWeight: 800,
+                      letterSpacing: '0.08em',
+                      textTransform: 'uppercase',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease',
+                      fontFamily: "'Vazirmatn', sans-serif",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = '#D90A14';
+                      e.currentTarget.style.color = '#fff';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'transparent';
+                      e.currentTarget.style.color = '#D90A14';
+                    }}
+                  >
+                    View All
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" style={{ transform: 'translateY(0.5px)' }}>
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </section>
 
             {/* Responsive Styles */}
             <style>{`
@@ -3214,6 +3509,193 @@ export default function LandingPage() {
                   <div style={{ padding: '12px 14px' }}>
                     <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#fff', margin: '0 0 2px 0' }}>{t.name}</h3>
                     <p style={{ fontSize: '11.5px', color: '#9ca3af', margin: 0 }}>{t.role}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ══ BLOG POST LEARN MORE MODAL ══ */}
+      {selectedBlog && (
+        <div
+          onClick={() => setSelectedBlog(null)}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 9999,
+            background: 'rgba(0,0,0,0.85)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            padding: '20px',
+            backdropFilter: 'blur(8px)',
+          }}
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            style={{
+              background: 'linear-gradient(145deg, #1a0808 0%, #110505 100%)',
+              border: '1.5px solid rgba(217,10,20,0.3)',
+              borderRadius: '24px',
+              padding: '0',
+              maxWidth: '560px',
+              width: '100%',
+              overflow: 'hidden',
+              boxShadow: '0 30px 80px rgba(0,0,0,0.8), 0 0 40px rgba(217,10,20,0.1)',
+              position: 'relative',
+              fontFamily: "'Vazirmatn', sans-serif"
+            }}
+          >
+            {/* Close */}
+            <button
+              onClick={() => setSelectedBlog(null)}
+              style={{
+                position: 'absolute', top: '16px', right: '16px',
+                background: 'rgba(255,255,255,0.08)', border: 'none',
+                borderRadius: '50%', width: '34px', height: '34px',
+                color: '#fff', fontSize: '18px', cursor: 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                zIndex: 10, transition: 'background 0.2s',
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = 'rgba(217,10,20,0.4)'}
+              onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
+            >✕</button>
+
+            {/* Image banner */}
+            <div style={{ position: 'relative', height: '260px', background: '#0d0404', overflow: 'hidden' }}>
+              <img
+                src={selectedBlog.img}
+                alt={selectedBlog.title}
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+              <div style={{
+                position: 'absolute', inset: 0,
+                background: 'linear-gradient(to top, #110505 5%, rgba(17,5,5,0.2) 60%, transparent 100%)',
+              }} />
+              <div style={{
+                position: 'absolute', bottom: '16px', left: '24px', right: '24px',
+              }}>
+                <span style={{ 
+                  fontSize: '11px', 
+                  color: '#fff', 
+                  background: '#D90A14', 
+                  padding: '3px 10px', 
+                  borderRadius: '4px',
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  display: 'inline-block',
+                  marginBottom: '8px'
+                }}>{selectedBlog.category}</span>
+                <h2 style={{ fontSize: '22px', fontWeight: 900, color: '#fff', margin: '0', lineHeight: 1.25 }}>{selectedBlog.title}</h2>
+              </div>
+            </div>
+
+            {/* Body */}
+            <div style={{ padding: '24px 24px 30px 24px' }}>
+              {/* Date & Info */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px', color: '#9ca3af', fontSize: '13px' }}>
+                <span className="flex items-center">
+                  <svg className="w-4 h-4 text-gray-400 mr-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline', verticalAlign: 'middle' }}>
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                  </svg>
+                  Published on {selectedBlog.date}
+                </span>
+              </div>
+              {/* Content */}
+              <p style={{ fontSize: '14.5px', color: '#d1d5db', lineHeight: 1.8, margin: '0' }}>
+                {selectedBlog.content}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ══ ALL BLOG POSTS DIALOG MODAL ══ */}
+      {showAllBlogs && (
+        <div
+          onClick={() => setShowAllBlogs(false)}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 9999,
+            background: 'rgba(0,0,0,0.92)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            padding: '20px',
+            backdropFilter: 'blur(8px)',
+          }}
+        >
+          <div
+            className="custom-scrollbar"
+            onClick={e => e.stopPropagation()}
+            style={{
+              background: '#0a0505',
+              border: '1.5px solid rgba(217,10,20,0.3)',
+              borderRadius: '24px',
+              padding: 'clamp(20px, 4vw, 36px)',
+              maxWidth: '1000px',
+              width: '100%',
+              maxHeight: '85vh',
+              overflowY: 'auto',
+              boxShadow: '0 30px 80px rgba(217,10,20,0.15)',
+              position: 'relative',
+            }}
+          >
+            <button
+               onClick={() => setShowAllBlogs(false)}
+               style={{
+                 position: 'absolute', top: '20px', right: '20px',
+                 background: 'rgba(255,255,255,0.08)', border: 'none',
+                 borderRadius: '50%', width: '36px', height: '36px',
+                 color: '#fff', fontSize: '18px', cursor: 'pointer',
+                 display: 'flex', alignItems: 'center', justifyContent: 'center',
+                 transition: 'background 0.2s',
+                 zIndex: 10,
+               }}
+               onMouseEnter={e => e.currentTarget.style.background = 'rgba(217,10,20,0.4)'}
+               onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
+            >✕</button>
+
+            <h2 style={{ fontSize: 'clamp(22px, 3vw, 32px)', fontWeight: 900, color: '#fff', margin: '0 0 8px 0', fontFamily: "'Vazirmatn', sans-serif" }}>
+              All Fitmaker <span style={{ color: '#D90A14' }}>Blog Posts</span>
+            </h2>
+            <p style={{ fontSize: '14px', color: '#9ca3af', margin: '0 0 32px 0' }}>
+              Explore all our fitness articles, tips, and guides.
+            </p>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+              {blogPosts.map(post => (
+                <div
+                  key={post.id}
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                    gap: '20px',
+                    background: 'rgba(15,10,10,0.6)',
+                    border: '1px solid rgba(217,10,20,0.15)',
+                    borderRadius: '16px',
+                    overflow: 'hidden',
+                    padding: '16px',
+                  }}
+                >
+                  {/* Image side */}
+                  <div style={{ height: '220px', borderRadius: '12px', overflow: 'hidden' }}>
+                    <img src={post.img} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </div>
+                  {/* Text content side */}
+                  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '4px' }}>
+                    <div>
+                      <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '8px' }}>
+                        <span style={{ fontSize: '11px', color: '#D90A14', background: 'rgba(217,10,20,0.1)', padding: '3px 8px', borderRadius: '4px', fontWeight: 700, textTransform: 'uppercase' }}>
+                          {post.category}
+                        </span>
+                        <span style={{ fontSize: '12px', color: '#9ca3af' }}>{post.date}</span>
+                      </div>
+                      <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#fff', margin: '0 0 10px 0', lineHeight: 1.3 }}>
+                        {post.title}
+                      </h3>
+                      <p style={{ fontSize: '13.5px', color: '#d1d5db', lineHeight: 1.6, margin: 0 }}>
+                        {post.content}
+                      </p>
+                    </div>
                   </div>
                 </div>
               ))}

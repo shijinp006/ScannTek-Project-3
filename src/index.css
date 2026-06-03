@@ -399,3 +399,34 @@
 .text-red    { color: #D90A14; }
 .text-orange { color: #f97316; }
 .text-white  { color: #ffffff; }
+
+/* Scrollbar hiding utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom thin red scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #D90A14;
+  border-radius: 3px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #b80811;
+}
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #D90A14 rgba(0, 0, 0, 0.2);
+}
+
+
