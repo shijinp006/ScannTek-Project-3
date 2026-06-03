@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import arrowSvg from '../assets/arrow.svg';
@@ -3968,6 +3968,183 @@ export default function LandingPage() {
           </section>
         );
       })()}
+
+      {/* ══ FOOTER SECTION ══ */}
+      <footer id="fitmaker-footer" style={{
+        background: '#080808',
+        padding: '60px clamp(16px, 6vw, 80px) 40px clamp(16px, 6vw, 80px)',
+        position: 'relative',
+        zIndex: 10,
+        width: '100%',
+      }}>
+        <style>{`
+          @media (min-width: 768px) and (max-width: 1023px) {
+            #fitmaker-footer h3 { font-size: 11px !important; letter-spacing: 0.02em !important; }
+            #fitmaker-footer p  { font-size: 10px !important; line-height: 1.55 !important; }
+            #fitmaker-footer a  { font-size: 10px !important; }
+            #fitmaker-footer .footer-contact-text { font-size: 10px !important; }
+          }
+          @media (max-width: 767px) {
+            #fitmaker-footer .footer-link-col h3 { text-align: center; font-size: 11px !important; }
+            #fitmaker-footer .footer-link-col a  { font-size: 11px !important; text-align: center; width: 100% !important; }
+            #fitmaker-footer .footer-link-col > div { align-items: center; }
+          }
+        `}</style>
+        <div className="grid grid-cols-3 md:grid-cols-12 gap-x-[8px] gap-y-[28px] md:gap-[16px] lg:gap-[24px] xl:gap-[48px]">
+          {/* Column 1: Logo & Info */}
+          <div className="col-span-3 md:col-span-4" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <div style={{
+                width: '36px', height: '28px', background: '#D90A14',
+                borderRadius: '4px', flexShrink: 0,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                <div style={{ width: '16px', height: '16px', background: '#D90A14', border: '2px solid rgba(255,255,255,0.4)', borderRadius: '2px' }} />
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1, gap: '2px' }}>
+                <span style={{ fontSize: '17px', fontWeight: 800, letterSpacing: '0.02em' }}>
+                  <span style={{ color: '#fff' }}>Fit</span>
+                  <span style={{ color: '#D90A14' }}>Maker</span>
+                </span>
+                <span style={{ fontSize: '8px', letterSpacing: '0.14em', textTransform: 'uppercase', color: '#9ca3af' }}>Transform Your Body</span>
+              </div>
+            </div>
+
+            <p style={{
+              fontSize: '13px',
+              color: '#9ca3af',
+              lineHeight: '1.65',
+              margin: '8px 0',
+              textAlign: 'justify',
+            }}>
+              Transform Your Body with FitMaker, Your Trusted Partner in Fitness. With Over <span style={{ color: '#D90A14', fontWeight: 600 }}>5 Years</span> of Experience, We Offer Expert Coaching, Tailored Workout Plans, and Comprehensive Nutritional Guidance. <span style={{ color: '#CD4E17', fontWeight: 600 }}>Join Our Community</span> and Start Your Journey Towards a Healthier, Stronger You. Ready to Make a Change?
+            </p>
+
+            <div style={{ display: 'flex', gap: '20px', marginTop: '8px' }}>
+              {[
+                {
+                  name: 'facebook',
+                  icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                },
+                {
+                  name: 'instagram',
+                  icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                },
+                {
+                  name: 'twitter',
+                  icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16z M4 20l6.768 -6.768 M20 4l-6.768 6.768" /></svg>
+                },
+                {
+                  name: 'youtube',
+                  icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon></svg>
+                }
+              ].map(s => (
+                <a key={s.name} href="#" onClick={e => e.preventDefault()} style={{
+                  width: '38px', height: '38px', borderRadius: '8px',
+                  border: '1.5px solid rgba(255,255,255,0.12)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  color: '#9ca3af', textDecoration: 'none', transition: 'all 0.2s ease',
+                  background: 'transparent',
+                }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = '#D90A14'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.transform = 'scale(1.05)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'; e.currentTarget.style.color = '#9ca3af'; e.currentTarget.style.transform = 'none'; }}
+                >
+                  {s.icon}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Column 2: Company */}
+          <div className="col-span-1 md:col-span-2 footer-link-col" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#D90A14', margin: '0 0 4px 0', letterSpacing: '0.03em' }}>Company</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '11px' }}>
+              {['About Us', 'Our Services', 'Careers', 'Blog', 'Testimonial', 'Contact Us'].map(l => (
+                <a key={l} href="#" onClick={e => e.preventDefault()} style={{
+                  fontSize: '13px', color: '#9ca3af', textDecoration: 'none', transition: 'color 0.2s', width: 'fit-content'
+                }}
+                  onMouseEnter={e => e.currentTarget.style.color = '#fff'}
+                  onMouseLeave={e => e.currentTarget.style.color = '#9ca3af'}
+                >
+                  {l}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Column 3: Resources */}
+          <div className="col-span-1 md:col-span-2 footer-link-col" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#D90A14', margin: '0 0 4px 0', letterSpacing: '0.03em' }}>Resources</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '11px' }}>
+              {['Fitness Tools', 'Workout Videos', 'Nutrition Guides', 'FAQ', 'Success Stories', 'Membership'].map(l => (
+                <a key={l} href="#" onClick={e => e.preventDefault()} style={{
+                  fontSize: '13px', color: '#9ca3af', textDecoration: 'none', transition: 'color 0.2s', width: 'fit-content'
+                }}
+                  onMouseEnter={e => e.currentTarget.style.color = '#fff'}
+                  onMouseLeave={e => e.currentTarget.style.color = '#9ca3af'}
+                >
+                  {l}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Column 4: Programs */}
+          <div className="col-span-1 md:col-span-2 footer-link-col" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#D90A14', margin: '0 0 4px 0', letterSpacing: '0.03em' }}>Programs</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '11px' }}>
+              {['Weight Loss', 'Building Muscles', 'Home Workout', 'Gym Plan', 'Our Plans', 'Fitness Group'].map(l => (
+                <a key={l} href="#" onClick={e => e.preventDefault()} style={{
+                  fontSize: '13px', color: '#9ca3af', textDecoration: 'none', transition: 'color 0.2s', width: 'fit-content'
+                }}
+                  onMouseEnter={e => e.currentTarget.style.color = '#fff'}
+                  onMouseLeave={e => e.currentTarget.style.color = '#9ca3af'}
+                >
+                  {l}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Column 5: Contact Us */}
+          <div className="col-span-1 md:col-span-2" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#CD4E17', margin: '0 0 4px 0', letterSpacing: '0.03em' }}>Contact Us</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              {[
+                {
+                  icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#fff', opacity: 0.8 }}><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>,
+                  text: 'Usa - Washington DC'
+                },
+                {
+                  icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#fff', opacity: 0.8 }}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>,
+                  text: '1234-56789'
+                },
+                {
+                  icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#fff', opacity: 0.8 }}><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>,
+                  text: 'Fitmakerrr@Gmail.Com'
+                }
+              ].map((item, idx) => (
+                <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  {item.icon}
+                  <span className="footer-contact-text" style={{ fontSize: '13px', color: '#9ca3af' }}>{item.text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div style={{
+          marginTop: '50px',
+          borderTop: '1px solid rgba(255,255,255,0.05)',
+          paddingTop: '20px',
+          display: 'flex',
+          justifyContent: 'center',
+          fontSize: '11px',
+          color: '#4b5563',
+        }}>
+          <span>&copy; {new Date().getFullYear()} FitMaker. All Rights Reserved.</span>
+        </div>
+      </footer>
 
       {/* ══ TRAINER LEARN MORE MODAL ══ */}
       {selectedTrainer && (
