@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import arrowSvg from '../assets/arrow.svg';
@@ -526,11 +526,7 @@ export default function LandingPage() {
             </span>
             <span style={{ fontSize: '7px', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#9ca3af' }}>Transform Your Body</span>
           </div>
-          {/* Search bar */}
-          <div style={{ display: 'flex', alignItems: 'center', background: 'rgba(255,255,255,0.06)', borderRadius: '10px', padding: '5px 12px', gap: '6px', flex: 1, margin: '0 10px' }}>
-            <img src={searchSvg} alt="" style={{ width: '20px', height: '20px', opacity: 0.6 }} />
-            <span style={{ fontSize: '11px', color: '#6b7280' }}>Search</span>
-          </div>
+
           {/* Hamburger */}
           <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: '5px', padding: '4px' }}>
             <span style={{ display: 'block', width: '20px', height: '2px', background: '#fff', borderRadius: '2px', transform: mobileMenuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none', transition: '0.3s' }} />
@@ -554,23 +550,20 @@ export default function LandingPage() {
               return (
                 <div key={label} style={{ display: 'flex', flexDirection: 'column' }}>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                    <a href="#" onClick={e => { 
-                      e.preventDefault(); 
-                      handleNavClick(label);
-                    }}
-                      style={{ fontSize: '18px', color: activeNav === label ? '#fff' : '#9ca3af', textDecoration: 'none', fontWeight: activeNav === label ? 600 : 400 }}>
+                    <span onClick={() => handleNavClick(label)}
+                      style={{ fontSize: '18px', color: activeNav === label ? '#fff' : '#9ca3af', fontWeight: activeNav === label ? 600 : 400, cursor: 'pointer' }}>
                       {label}
-                    </a>
+                    </span>
                     {arrow && (
-                      <span 
+                      <span
                         onClick={(e) => {
                           e.stopPropagation();
                           e.preventDefault();
                           setActiveDropdown(activeDropdown === label ? null : label);
                         }}
-                        style={{ 
-                          display: 'inline-flex', 
-                          alignItems: 'center', 
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
                           transform: isMobileDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                           transition: 'transform 0.2s ease',
                           color: '#D90A14',
@@ -598,8 +591,8 @@ export default function LandingPage() {
                         'Home Workout',
                         'Gym Plan'
                       ]).map((item) => (
-                        <div 
-                          key={item} 
+                        <div
+                          key={item}
                           onClick={() => {
                             handleNavClick(label);
                           }}
@@ -657,14 +650,6 @@ export default function LandingPage() {
             </span>
             <span style={{ fontSize: '8px', letterSpacing: '0.14em', textTransform: 'uppercase', color: '#9ca3af' }}>Transform Your Body</span>
           </div>
-          <button style={{
-            width: '30px', height: '30px', borderRadius: '50%',
-            border: '1px solid rgba(255,255,255,0.25)', background: 'transparent',
-            color: '#9ca3af', display: 'flex', alignItems: 'center',
-            justifyContent: 'center', cursor: 'pointer', marginLeft: '6px',
-          }}>
-            <img src={searchSvg} alt="Search" style={{ width: '13px', height: '13px', opacity: 0.7 }} />
-          </button>
         </motion.div>
 
         {/* Nav links */}
@@ -684,33 +669,29 @@ export default function LandingPage() {
             const isActive = activeNav === label;
             const isDropdownOpen = activeDropdown === label;
             return (
-              <motion.li 
-                key={label} 
-                variants={fadeDown} 
-                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', position: 'relative' }} 
+              <motion.li
+                key={label}
+                variants={fadeDown}
+                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', position: 'relative' }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                  <a 
-                    href="#" 
-                    onClick={e => {
-                      e.preventDefault();
-                      handleNavClick(label);
-                    }} 
-                    className={`text-[10px] md:text-[11.5px] lg:text-[13.5px] no-underline ${isActive ? 'font-semibold text-white' : 'font-medium text-[#d1d5db]'}`} 
+                  <span
+                    onClick={() => handleNavClick(label)}
+                    className={`text-[10px] md:text-[11.5px] lg:text-[13.5px] ${isActive ? 'font-semibold text-white' : 'font-medium text-[#d1d5db]'}`}
                     style={{ whiteSpace: 'nowrap', cursor: 'pointer' }}
                   >
                     {label}
-                  </a>
+                  </span>
                   {arrow && (
-                    <span 
+                    <span
                       onClick={(e) => {
                         e.stopPropagation();
                         e.preventDefault();
                         setActiveDropdown(activeDropdown === label ? null : label);
                       }}
-                      style={{ 
-                        display: 'inline-flex', 
-                        alignItems: 'center', 
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
                         transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                         transition: 'transform 0.2s ease',
                         cursor: 'pointer',
@@ -727,7 +708,7 @@ export default function LandingPage() {
 
                 {/* Dropdown Menu */}
                 {arrow && isDropdownOpen && (
-                  <div 
+                  <div
                     style={{
                       position: 'absolute',
                       top: '100%',
@@ -755,8 +736,8 @@ export default function LandingPage() {
                         'Home Workout',
                         'Gym Plan'
                       ]).map((item) => (
-                        <li 
-                          key={item} 
+                        <li
+                          key={item}
                           onClick={() => {
                             handleNavClick(label);
                           }}
@@ -4188,7 +4169,7 @@ export default function LandingPage() {
         zIndex: 10,
         width: '100%',
       }}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-[32px] sm:gap-[40px] lg:gap-[24px] xl:gap-[48px]">
+        <div className="grid grid-cols-1 sm:grid-cols-6 lg:grid-cols-12 gap-[32px] sm:gap-[40px] lg:gap-[24px] xl:gap-[48px]">
           {/* Column 1: Logo & Info */}
           <div className="col-span-1 sm:col-span-2 lg:col-span-4" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -4208,13 +4189,14 @@ export default function LandingPage() {
               </div>
             </div>
 
-            <p style={{
-              fontSize: '13px',
-              color: '#9ca3af',
-              lineHeight: '1.65',
-              margin: '8px 0',
-              textAlign: 'justify',
-            }}>
+            <p className=' text-[10px]
+  sm:text-[10px]
+  md:text-[10px]
+  lg:text-[12px]
+  text-gray-400
+  leading-relaxed
+  my-2
+  text-justify'>
               Transform Your Body with FitMaker, Your Trusted Partner in Fitness. With Over <span style={{ color: '#D90A14', fontWeight: 600 }}>5 Years</span> of Experience, We Offer Expert Coaching, Tailored Workout Plans, and Comprehensive Nutritional Guidance. <span style={{ color: '#CD4E17', fontWeight: 600 }}>Join Our Community</span> and Start Your Journey Towards a Healthier, Stronger You. Ready to Make a Change?
             </p>
 
@@ -4258,20 +4240,26 @@ export default function LandingPage() {
             <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#D90A14', margin: '0 0 4px 0', letterSpacing: '0.03em' }}>Company</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '11px' }}>
               {['About Us', 'Our Services', 'Careers', 'Blog', 'Testimonial', 'Contact Us'].map(l => (
-                <a key={l} href="#" onClick={e => {
-                  e.preventDefault();
-                  let targetId = '';
-                  if (l === 'About Us' || l === 'Testimonial') targetId = 'testimonials-section';
-                  else if (l === 'Our Services') targetId = 'services-section';
-                  if (targetId) {
-                    const section = document.getElementById(targetId);
-                    if (section) section.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }} style={{
-                  fontSize: '13px', color: '#9ca3af', textDecoration: 'none', transition: 'color 0.2s', width: 'fit-content'
-                }}
-                  onMouseEnter={e => e.currentTarget.style.color = '#fff'}
-                  onMouseLeave={e => e.currentTarget.style.color = '#9ca3af'}
+                <a
+                  key={l}
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+
+                    let targetId = '';
+
+                    if (l === 'About Us' || l === 'Testimonial') {
+                      targetId = 'testimonials-section';
+                    } else if (l === 'Our Services') {
+                      targetId = 'services-section';
+                    }
+
+                    if (targetId) {
+                      const section = document.getElementById(targetId);
+                      if (section) section.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className="w-fit text-[10px] sm:text-[8px] md:text-[8px] lg:text-[12px] text-gray-400 no-underline transition-colors duration-200 hover:text-white"
                 >
                   {l}
                 </a>
@@ -4284,21 +4272,24 @@ export default function LandingPage() {
             <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#D90A14', margin: '0 0 4px 0', letterSpacing: '0.03em' }}>Resources</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '11px' }}>
               {['Fitness Tools', 'Workout Videos', 'Nutrition Guides', 'FAQ', 'Success Stories', 'Membership'].map(l => (
-                <a key={l} href="#" onClick={e => {
-                  e.preventDefault();
-                  let targetId = '';
-                  if (l === 'Fitness Tools') targetId = 'tools-section';
-                  else if (l === 'FAQ') targetId = 'faq';
-                  else if (l === 'Membership') targetId = 'plans-section';
-                  if (targetId) {
-                    const section = document.getElementById(targetId);
-                    if (section) section.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }} style={{
-                  fontSize: '13px', color: '#9ca3af', textDecoration: 'none', transition: 'color 0.2s', width: 'fit-content'
-                }}
-                  onMouseEnter={e => e.currentTarget.style.color = '#fff'}
-                  onMouseLeave={e => e.currentTarget.style.color = '#9ca3af'}
+                <a
+                  key={l}
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+
+                    let targetId = '';
+
+                    if (l === 'Fitness Tools') targetId = 'tools-section';
+                    else if (l === 'FAQ') targetId = 'faq';
+                    else if (l === 'Membership') targetId = 'plans-section';
+
+                    if (targetId) {
+                      const section = document.getElementById(targetId);
+                      if (section) section.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className="text-[10px] sm:text-[8px] md:text-[8px] lg:text-[12px] text-gray-400 no-underline transition-colors duration-200 w-fit hover:text-white"
                 >
                   {l}
                 </a>
@@ -4311,19 +4302,40 @@ export default function LandingPage() {
             <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#D90A14', margin: '0 0 4px 0', letterSpacing: '0.03em' }}>Programs</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '11px' }}>
               {['Weight Loss', 'Building Muscles', 'Home Workout', 'Gym Plan', 'Our Plans', 'Fitness Group'].map(l => (
-                <a key={l} href="#" onClick={e => {
-                  e.preventDefault();
-                  let targetId = '';
-                  if (l === 'Weight Loss' || l === 'Building Muscles' || l === 'Home Workout' || l === 'Gym Plan' || l === 'Our Plans') targetId = 'plans-section';
-                  if (targetId) {
-                    const section = document.getElementById(targetId);
-                    if (section) section.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }} style={{
-                  fontSize: '13px', color: '#9ca3af', textDecoration: 'none', transition: 'color 0.2s', width: 'fit-content'
-                }}
-                  onMouseEnter={e => e.currentTarget.style.color = '#fff'}
-                  onMouseLeave={e => e.currentTarget.style.color = '#9ca3af'}
+                <a
+                  key={l}
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    let targetId = '';
+
+                    if (
+                      l === 'Weight Loss' ||
+                      l === 'Building Muscles' ||
+                      l === 'Home Workout' ||
+                      l === 'Gym Plan' ||
+                      l === 'Our Plans'
+                    ) {
+                      targetId = 'plans-section';
+                    }
+
+                    if (targetId) {
+                      const section = document.getElementById(targetId);
+                      if (section) section.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className="
+    text-[10px]
+    sm:text-[8px]
+    md:text-[8px]
+    text-gray-400
+    lg:text-[12px]
+    no-underline
+    transition-colors
+    duration-200
+    w-fit
+    hover:text-white
+  "
                 >
                   {l}
                 </a>
@@ -4351,7 +4363,9 @@ export default function LandingPage() {
               ].map((item, idx) => (
                 <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   {item.icon}
-                  <span style={{ fontSize: '13px', color: '#9ca3af' }}>{item.text}</span>
+                  <span className="text-[10px] sm:text-[8px] md:text-[8px] lg:text-[12px] text-gray-400 lg:text-[12px]">
+                    {item.text}
+                  </span>
                 </div>
               ))}
             </div>
