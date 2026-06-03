@@ -383,6 +383,8 @@ export default function LandingPage() {
   const [showAllTrainers, setShowAllTrainers] = React.useState(false);
   const [selectedBlog, setSelectedBlog] = React.useState(null);
   const [showAllBlogs, setShowAllBlogs] = React.useState(false);
+  const [authTab, setAuthTab] = React.useState('signup');
+  const [activeFaq, setActiveFaq] = React.useState(0);
   const [blogPosts, setBlogPosts] = React.useState([
     {
       id: 1,
@@ -3000,7 +3002,7 @@ export default function LandingPage() {
 
             </div>
 
-             <section className="w-full bg-[#0a0606] pt-20 pb-10 md:pt-24 md:pb-12 lg:pt-32 lg:pb-16 px-4 md:px-3 lg:px-12 overflow-hidden flex justify-center items-center" style={{ fontFamily: "'Vazirmatn', sans-serif", position: 'relative' }}>
+            <section className="w-full bg-[#0a0606] mt-10 md:mt-24 lg:mt-42 pt-20 pb-10 md:pt-24 md:pb-12 lg:pt-32 lg:pb-16 px-4 md:px-3 lg:px-12 overflow-hidden flex justify-center items-center" style={{ fontFamily: "'Vazirmatn', sans-serif", position: 'relative' }}>
               {/* Background ambient red glow components */}
               <div style={{
                 position: 'absolute',
@@ -3134,7 +3136,7 @@ export default function LandingPage() {
                               {blogPosts[0].category}
                             </span>
                           </div>
-                          <span 
+                          <span
                             onClick={(e) => {
                               e.stopPropagation();
                               setSelectedBlog(blogPosts[0]);
@@ -3350,6 +3352,621 @@ export default function LandingPage() {
               }
             `}</style>
           </motion.section>
+        );
+      })()}
+
+      {/* ══ JOIN OUR FITNESS COMMUNITY SECTION ══ */}
+      {(() => {
+        return (
+          <section
+            id="community"
+            style={{
+              width: '100%',
+              background: '#0a0606',
+              padding: 'clamp(48px, 7vw, 96px) clamp(16px, 5vw, 80px)',
+              fontFamily: "'Vazirmatn', sans-serif",
+              position: 'relative',
+              overflow: 'hidden',
+            }}
+          >
+            {/* Ambient red glow */}
+            <div style={{
+              position: 'absolute', top: '30%', right: '-10%',
+              width: 'min(500px, 50vw)', height: 'min(500px, 50vw)',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(217,10,20,0.08) 0%, rgba(120,8,8,0.03) 45%, transparent 70%)',
+              filter: 'blur(80px)', pointerEvents: 'none', zIndex: 0,
+            }} />
+            <div style={{
+              position: 'absolute', bottom: '10%', left: '-10%',
+              width: 'min(400px, 40vw)', height: 'min(400px, 40vw)',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(217,10,20,0.05) 0%, transparent 70%)',
+              filter: 'blur(60px)', pointerEvents: 'none', zIndex: 0,
+            }} />
+
+            <div id="community-container" style={{
+              maxWidth: '1680px', margin: '0 auto',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(12, 1fr)',
+              gap: 'clamp(32px, 4vw, 64px)',
+              alignItems: 'center',
+              position: 'relative', zIndex: 1,
+              width: '98%',
+            }}>
+              {/* ── Left Column ── */}
+              <div id="community-left-col" style={{ gridColumn: 'span 6' }}>
+                <h2 style={{
+                  fontSize: 'clamp(28px, 3.5vw, 44px)',
+                  fontWeight: 900,
+                  color: '#fff',
+                  margin: '0 0 16px 0',
+                  lineHeight: 1.15,
+                  letterSpacing: '-0.01em',
+                  whiteSpace: 'nowrap',
+                }}>
+                  Join Our <span style={{ color: '#D90A14' }}>Fitness Community</span>
+                </h2>
+                <p style={{
+                  fontSize: 'clamp(13px, 1.1vw, 15px)',
+                  color: '#9ca3af',
+                  lineHeight: 1.7,
+                  margin: '0 0 clamp(24px, 3vw, 40px) 0',
+                  maxWidth: '560px',
+                }}>
+                  Sign Up Now To Unlock Exclusive Access To Personalized Workout Plans, Expert Coaching, And A
+                  Supportive Community That Will Help You Achieve Your Fitness Goals.
+                </p>
+
+                {/* 2×2 Feature Cards */}
+                <div id="community-features-grid" style={{
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 1fr',
+                  gap: 'clamp(12px, 1.5vw, 20px)',
+                }}>
+                  {[
+                    { label: 'Personalized', rest: ' Workout Plans', desc: 'Customized routines that match your fitness level and goals, ensuring you achieve the best results in the most efficient way.' },
+                    { label: 'Expert ', rest: 'Coaching', desc: "Work with certified trainers who will guide you every step of the way to ensure you're on the right track." },
+                    { label: 'Community ', rest: 'Support', desc: 'Join a vibrant community of fitness enthusiasts where you can share experiences, get motivated, and stay inspired.' },
+                    { label: 'Exclusive ', rest: 'Resources', desc: 'Access premium content, including video tutorials, nutrition guides, and member-only discounts on fitness gear.' },
+                  ].map((card, i) => (
+                    <div
+                      key={i}
+                      className="community-feature-card"
+                      style={{
+                        background: '#000000',
+                        border: '1.5px solid rgba(217,10,20,0.12)',
+                        borderRadius: '16px',
+                        padding: 'clamp(14px, 1.5vw, 22px)',
+                        transition: 'border-color 0.2s, transform 0.2s, box-shadow 0.2s',
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.borderColor = 'rgba(217,10,20,0.35)';
+                        e.currentTarget.style.transform = 'translateY(-4px)';
+                        e.currentTarget.style.boxShadow = '0 10px 30px rgba(217,10,20,0.07)';
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.borderColor = 'rgba(217,10,20,0.12)';
+                        e.currentTarget.style.transform = 'none';
+                        e.currentTarget.style.boxShadow = 'none';
+                      }}
+                    >
+                      <h3 style={{ fontSize: 'clamp(13px, 1vw, 15px)', fontWeight: 700, color: '#fff', margin: '0 0 8px 0', whiteSpace: 'nowrap' }}>
+                        <span style={{ color: '#D90A14' }}>{card.label}</span>{card.rest}
+                      </h3>
+                      <p style={{ fontSize: 'clamp(11px, 0.9vw, 13px)', color: '#9ca3af', lineHeight: 1.65, margin: 0 }}>
+                        {card.desc}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* ── Right Column: Form Card ── */}
+              <div id="community-right-col" style={{ gridColumn: 'span 6', display: 'flex', justifyContent: 'center' }}>
+                <div style={{
+                  width: '100%',
+                  background: '#2e0506',
+                  borderRadius: '24px',
+                  padding: '24px 28px',
+                  boxShadow: '0 25px 60px rgba(0,0,0,0.6), 0 0 30px rgba(217,10,20,0.05)',
+                }}>
+                  {/* Tabs */}
+                  <div style={{ display: 'flex', gap: '28px', justifyContent: 'center', marginBottom: '18px', borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '8px', position: 'relative' }}>
+                    {['signup', 'login'].map(tab => (
+                      <button
+                        key={tab}
+                        onClick={() => setAuthTab(tab)}
+                        style={{
+                          background: 'none', border: 'none', cursor: 'pointer',
+                          fontSize: '16px', fontWeight: 700,
+                          color: authTab === tab ? '#D90A14' : '#9ca3af',
+                          padding: '0 0 4px 0',
+                          position: 'relative',
+                          transition: 'color 0.2s',
+                          fontFamily: "'Vazirmatn', sans-serif",
+                        }}
+                      >
+                        {tab === 'signup' ? 'Sign Up' : 'Login'}
+                        {authTab === tab && (
+                          <div style={{
+                            position: 'absolute', bottom: '-9px', left: 0, right: 0,
+                            height: '2px', background: '#D90A14',
+                            boxShadow: '0 0 8px #D90A14',
+                          }} />
+                        )}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Form */}
+                  <form
+                    onSubmit={e => { e.preventDefault(); alert(authTab === 'signup' ? 'Successfully Signed Up!' : 'Successfully Logged In!'); }}
+                    style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}
+                  >
+                    {authTab === 'signup' && (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                        <label style={{ fontSize: '12px', fontWeight: 700, color: '#fff', textTransform: 'capitalize', letterSpacing: '0.02em', fontFamily: "'Vazirmatn', sans-serif" }}>Name</label>
+                        <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                          <span style={{ position: 'absolute', left: '12px', color: '#fff', display: 'flex', opacity: 0.85 }}>
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
+                            </svg>
+                          </span>
+                          <input type="text" required placeholder="Enter Your Name" style={{
+                            width: '100%', background: 'transparent', border: '1.5px solid rgba(255,255,255,0.45)',
+                            borderRadius: '8px', padding: '8px 12px 8px 38px',
+                            color: '#fff', fontSize: '12.5px', outline: 'none', transition: 'border-color 0.2s',
+                            boxSizing: 'border-box', fontFamily: "'Vazirmatn', sans-serif",
+                          }}
+                            onFocus={e => e.target.style.borderColor = '#fff'}
+                            onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.45)'}
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      <label style={{ fontSize: '12px', fontWeight: 700, color: '#fff', textTransform: 'capitalize', letterSpacing: '0.02em', fontFamily: "'Vazirmatn', sans-serif" }}>E-Mail</label>
+                      <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                        <span style={{ position: 'absolute', left: '12px', color: '#fff', display: 'flex', opacity: 0.85 }}>
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
+                          </svg>
+                        </span>
+                        <input type="email" required placeholder="Enter Your E-Mail" style={{
+                          width: '100%', background: 'transparent', border: '1.5px solid rgba(255,255,255,0.45)',
+                          borderRadius: '8px', padding: '8px 12px 8px 38px',
+                          color: '#fff', fontSize: '12.5px', outline: 'none', transition: 'border-color 0.2s',
+                          boxSizing: 'border-box', fontFamily: "'Vazirmatn', sans-serif",
+                        }}
+                          onFocus={e => e.target.style.borderColor = '#fff'}
+                          onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.45)'}
+                        />
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      <label style={{ fontSize: '12px', fontWeight: 700, color: '#fff', textTransform: 'capitalize', letterSpacing: '0.02em', fontFamily: "'Vazirmatn', sans-serif" }}>Password</label>
+                      <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                        <span style={{ position: 'absolute', left: '12px', color: '#fff', display: 'flex', opacity: 0.85 }}>
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                          </svg>
+                        </span>
+                        <input type="password" required placeholder="Enter Your Password" style={{
+                          width: '100%', background: 'transparent', border: '1.5px solid rgba(255,255,255,0.45)',
+                          borderRadius: '8px', padding: '8px 12px 8px 38px',
+                          color: '#fff', fontSize: '12.5px', outline: 'none', transition: 'border-color 0.2s',
+                          boxSizing: 'border-box', fontFamily: "'Vazirmatn', sans-serif",
+                        }}
+                          onFocus={e => e.target.style.borderColor = '#fff'}
+                          onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.45)'}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Submit */}
+                    <button type="submit" style={{
+                      width: '100%', background: '#D90A14', border: 'none',
+                      borderRadius: '8px', padding: '10px', color: '#fff',
+                      fontSize: '13px', fontWeight: 800, letterSpacing: '0.02em',
+                      textTransform: 'none', cursor: 'pointer',
+                      marginTop: '2px', transition: 'background 0.2s, box-shadow 0.2s',
+                      boxShadow: '0 4px 20px rgba(217,10,20,0.25)',
+                      fontFamily: "'Vazirmatn', sans-serif",
+                    }}
+                      onMouseEnter={e => { e.currentTarget.style.background = '#b80811'; e.currentTarget.style.boxShadow = '0 4px 30px rgba(217,10,20,0.45)'; }}
+                      onMouseLeave={e => { e.currentTarget.style.background = '#D90A14'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(217,10,20,0.25)'; }}
+                    >
+                      {authTab === 'signup' ? 'Sign Up' : 'Login'}
+                    </button>
+
+                    {/* Divider */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.07)' }} />
+                      <span style={{ fontSize: '10.5px', color: '#6b7280', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Or</span>
+                      <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.07)' }} />
+                    </div>
+
+                    {/* Google */}
+                    <button type="button" onClick={() => alert('Signing in with Google...')} style={{
+                      width: '100%', background: 'transparent',
+                      border: '1.5px solid rgba(255,255,255,0.45)',
+                      borderRadius: '8px', padding: '8.5px',
+                      color: '#fff', fontSize: '12.5px', fontWeight: 700,
+                      cursor: 'pointer', display: 'flex', alignItems: 'center',
+                      justifyContent: 'center', gap: '8px',
+                      transition: 'border-color 0.2s',
+                      fontFamily: "'Vazirmatn', sans-serif",
+                    }}
+                      onMouseEnter={e => e.currentTarget.style.borderColor = '#fff'}
+                      onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.45)'}
+                    >
+                      <svg width="15" height="15" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v3.92h6.69a5.74 5.74 0 0 1-2.48 3.77v3.13h3.97c2.32-2.13 3.66-5.27 3.66-8.75z" />
+                        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.97-3.13c-1.1.74-2.5 1.18-3.96 1.18-3.05 0-5.63-2.06-6.55-4.83H1.42v3.23C3.4 21.35 7.42 24 12 24z" />
+                        <path fill="#FBBC05" d="M5.45 14.31a7.18 7.18 0 0 1 0-4.62V6.46H1.42a11.95 11.95 0 0 0 0 11.08l4.03-3.23z" />
+                        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.43-3.43C17.95 1.19 15.24 0 12 0 7.42 0 3.4 2.65 1.42 6.46l4.03 3.23c.92-2.77 3.5-4.83 6.55-4.83z" />
+                      </svg>
+                      {authTab === 'signup' ? 'Sign Up With Google' : 'Login With Google'}
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            {/* ── Responsive overrides ── */}
+            <style>{`
+              @media (min-width: 768px) and (max-width: 1024px) {
+                /* Container — wider, tighter gap */
+                #community-container {
+                  width: 98% !important;
+                  gap: 16px !important;
+                }
+                #community-left-col {
+                  grid-column: span 6 !important;
+                }
+                #community-right-col {
+                  grid-column: span 6 !important;
+                }
+
+                /* Heading — smaller */
+                #community-left-col h2 {
+                  font-size: 19px !important;
+                  margin-bottom: 6px !important;
+                }
+
+                /* Subtitle paragraph — smaller, less margin */
+                #community-left-col > div > p,
+                #community-left-col p {
+                  font-size: 10.5px !important;
+                  margin-bottom: 10px !important;
+                  line-height: 1.45 !important;
+                }
+
+                /* 2x2 cards — smaller gap & padding & border-radius */
+                #community-features-grid {
+                  gap: 6px !important;
+                }
+                .community-feature-card {
+                  padding: 8px 10px !important;
+                  border-radius: 12px !important;
+                }
+                .community-feature-card h3 {
+                  font-size: 10.5px !important;
+                  margin-bottom: 2px !important;
+                }
+                .community-feature-card p {
+                  font-size: 9.5px !important;
+                  line-height: 1.4 !important;
+                }
+
+                /* Form card — smaller padding, border-radius and compact */
+                #community-right-col > div {
+                  padding: 12px 14px !important;
+                  max-width: 100% !important;
+                  border-radius: 20px !important;
+                }
+
+                /* Tabs row — tighter */
+                #community-right-col > div > div:first-child {
+                  margin-bottom: 8px !important;
+                  padding-bottom: 4px !important;
+                  gap: 16px !important;
+                }
+                #community-right-col > div > div:first-child button {
+                  font-size: 12px !important;
+                  padding: 0 0 2px 0 !important;
+                }
+                #community-right-col > div > div:first-child button div {
+                  bottom: -5px !important;
+                }
+
+                /* Form gap */
+                #community-right-col form {
+                  gap: 6px !important;
+                }
+
+                /* Labels */
+                #community-right-col label {
+                  font-size: 9px !important;
+                }
+
+                /* Inputs */
+                #community-right-col input {
+                  padding: 5px 8px 5px 30px !important;
+                  font-size: 10.5px !important;
+                  border-radius: 6px !important;
+                }
+                #community-right-col span[style*="left"] {
+                  left: 8px !important;
+                  opacity: 0.7 !important;
+                }
+                #community-right-col span[style*="left"] svg {
+                  width: 12px !important;
+                  height: 12px !important;
+                }
+
+                /* Submit button */
+                #community-right-col button[type="submit"] {
+                  padding: 7px !important;
+                  font-size: 11px !important;
+                  margin-top: 1px !important;
+                  border-radius: 6px !important;
+                }
+
+                /* Google button */
+                #community-right-col button[type="button"] {
+                  padding: 6px !important;
+                  font-size: 10px !important;
+                  border-radius: 6px !important;
+                }
+
+                /* OR divider text */
+                #community-right-col p {
+                  font-size: 9px !important;
+                  margin: 2px 0 !important;
+                }
+              }
+
+              @media (max-width: 767px) {
+                #community {
+                  padding: 32px 14px !important;
+                }
+                #community-container {
+                  display: flex !important;
+                  flex-direction: column !important;
+                  width: 100% !important;
+                  gap: 22px !important;
+                }
+                #community-left-col, #community-right-col {
+                  grid-column: span 12 !important;
+                  width: 100% !important;
+                }
+
+                /* Header column content styling */
+                #community-left-col {
+                  text-align: center !important;
+                }
+                #community-left-col h2 {
+                  font-size: 19px !important;
+                  margin-bottom: 6px !important;
+                  white-space: normal !important;
+                  text-align: center !important;
+                }
+                #community-left-col p {
+                  font-size: 10.5px !important;
+                  margin: 0 auto 16px auto !important;
+                  line-height: 1.5 !important;
+                  max-width: 100% !important;
+                  text-align: center !important;
+                }
+
+                /* 2x2 Feature Cards Grid */
+                #community-features-grid {
+                  grid-template-columns: 1fr 1fr !important;
+                  gap: 10px !important;
+                }
+                .community-feature-card {
+                  padding: 10px 8px !important;
+                  border-radius: 12px !important;
+                  text-align: center !important;
+                }
+                .community-feature-card h3 {
+                  font-size: 10.5px !important;
+                  margin-bottom: 4px !important;
+                  white-space: normal !important;
+                  display: block !important;
+                }
+                .community-feature-card p {
+                  font-size: 9px !important;
+                  line-height: 1.35 !important;
+                }
+
+                /* Form Card Wrapper */
+                #community-right-col {
+                  justify-content: center !important;
+                }
+                #community-right-col > div {
+                  width: 100% !important;
+                  max-width: 100% !important;
+                  padding: 20px 16px !important;
+                  border-radius: 20px !important;
+                }
+
+                /* Tabs row spacing */
+                #community-right-col > div > div:first-child {
+                  margin-bottom: 12px !important;
+                  padding-bottom: 6px !important;
+                  gap: 20px !important;
+                }
+                #community-right-col > div > div:first-child button {
+                  font-size: 12.5px !important;
+                  padding: 0 0 2px 0 !important;
+                }
+                #community-right-col > div > div:first-child button div {
+                  bottom: -7px !important;
+                }
+
+                /* Form layout */
+                #community-right-col form {
+                  gap: 8px !important;
+                }
+                #community-right-col label {
+                  font-size: 9.5px !important;
+                  text-align: left !important;
+                  margin-bottom: 2px !important;
+                }
+                #community-right-col input {
+                  padding: 7px 10px 7px 34px !important;
+                  font-size: 10.5px !important;
+                  border-radius: 6px !important;
+                }
+                #community-right-col span[style*="left"] {
+                  left: 9px !important;
+                  opacity: 0.75 !important;
+                }
+                #community-right-col span[style*="left"] svg {
+                  width: 13px !important;
+                  height: 13px !important;
+                }
+
+                /* Submit & Alternative Auth Buttons */
+                #community-right-col button[type="submit"] {
+                  padding: 9px !important;
+                  font-size: 11.5px !important;
+                  margin-top: 2px !important;
+                  border-radius: 6px !important;
+                }
+                #community-right-col button[type="button"] {
+                  padding: 8px !important;
+                  font-size: 10.5px !important;
+                  border-radius: 6px !important;
+                }
+                #community-right-col p {
+                  font-size: 9.5px !important;
+                  margin: 3px 0 !important;
+                }
+              }
+            `}</style>
+          </section>
+        );
+      })()}
+
+      {/* ══ FAQ SECTION ══ */}
+      {(() => {
+        const faqs = [
+          {
+            q: "What Is FitMaker And How Can It Help Me Reach My Fitness Goals?",
+            a: "FitMaker Is An Online Fitness Platform That Offers Personalized Workout Plans, Expert Coaching, And Comprehensive Nutritional Guidance. Whether You're Looking To Lose Weight, Build Muscle, Or Simply Stay Fit, Our Tailored Programs And Community Support Will Help You Achieve Your Fitness Goals."
+          },
+          {
+            q: "How Do I Get Started With A Workout Plan On FitMaker?",
+            a: "To Get Started, Simply Choose A Plan That Fits Your Goals, Sign Up, And Complete Your Profile. Our System Will Generate A Personalized Workout Routine Based On Your Details, And You'll Get Instant Access To Expert Coaching."
+          },
+          {
+            q: "What Is Included In The Custom Plan?",
+            a: "The Custom Plan Includes Tailored Workout Routines, Complete Meal Plans, Weekly Progress Tracking, And Direct Messaging With Your Personal Trainer For Guidance And Motivation."
+          },
+          {
+            q: "Can I Change My Plan After Signing Up?",
+            a: "Yes, You Can Easily Modify Your Plan, Update Your Fitness Goals, Or Switch Between Different Workout Styles Anytime Directly From Your Member Portal."
+          },
+          {
+            q: "What Kind Of Support Can I Expect From My Trainer?",
+            a: "Your Trainer Will Provide Regular Feedback, Adjust Your Workout Routines As You Progress, Answer Your Nutrition Questions, And Keep You Accountable And Motivated Every Week."
+          }
+        ];
+        return (
+          <section id="faq" style={{
+            width: '100%', background: '#0a0606',
+            padding: '40px clamp(16px, 5vw, 80px) clamp(64px, 8vw, 100px)',
+            fontFamily: "'Vazirmatn', sans-serif",
+          }}>
+            <div style={{ margin: '0 auto', textAlign: 'center', width: '100%' }}>
+              <h2 style={{
+                fontSize: 'clamp(24px, 3vw, 32px)',
+                fontWeight: 900,
+                color: '#fff',
+                margin: '0 auto 32px auto',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em'
+              }}>
+                FAQ
+              </h2>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', textAlign: 'left', width: '100%', border: '1.5px solid #D90A14', gap: "20px", borderRadius: "10px" }}>
+                {faqs.map((faq, i) => {
+                  const isOpen = activeFaq === i;
+                  return (
+                    <div key={i} style={{
+                      background: '#19191a',
+                      border: '1.5px solid #D90A14',
+                      borderRadius: '8px',
+                      overflow: 'hidden',
+                      transition: 'border-color 0.25s, box-shadow 0.25s',
+                      boxShadow: isOpen ? '0 8px 24px rgba(217,10,20,0.08)' : 'none',
+                    }}>
+                      <button
+                        className="faq-question-text"
+                        onClick={() => setActiveFaq(isOpen ? null : i)}
+                        style={{
+                          width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                          padding: '18px 24px', background: 'none', border: 'none', cursor: 'pointer',
+                          color: '#fff', fontWeight: 700, fontSize: 'clamp(14px, 1.15vw, 16px)',
+                          fontFamily: "'Vazirmatn', sans-serif", textAlign: 'left', gap: '16px',
+                          outline: 'none',
+                        }}
+                      >
+                        <span style={{ lineHeight: 1.4 }}>{faq.q}</span>
+                        <span style={{
+                          color: isOpen ? '#D90A14' : '#CD4E17',
+                          flexShrink: 0,
+                          transition: 'transform 0.3s',
+                          transform: isOpen ? 'rotate(180deg)' : 'none',
+                          display: 'flex'
+                        }}>
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="6 9 12 15 18 9" />
+                          </svg>
+                        </span>
+                      </button>
+                      <div style={{
+                        maxHeight: isOpen ? '280px' : '0px',
+                        opacity: isOpen ? 1 : 0,
+                        overflow: 'hidden',
+                        transition: 'max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease'
+                      }}>
+                        <div className="faq-answer-text" style={{
+                          padding: '14px 24px 20px 24px',
+                          color: '#9ca3af',
+                          fontSize: 'clamp(13px, 0.95vw, 14.5px)',
+                          lineHeight: 1.65,
+                          borderTop: '1px solid rgba(217, 10, 20, 0.25)'
+                        }}>
+                          {faq.a}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <style>{`
+              @media (max-width: 640px) {
+                .faq-question-text {
+                  font-size: 13px !important;
+                  padding: 14px 16px !important;
+                }
+                .faq-answer-text {
+                  font-size: 11px !important;
+                  padding: 10px 16px 14px 16px !important;
+                }
+              }
+            `}</style>
+          </section>
         );
       })()}
 
@@ -3573,11 +4190,11 @@ export default function LandingPage() {
               <div style={{
                 position: 'absolute', bottom: '16px', left: '24px', right: '24px',
               }}>
-                <span style={{ 
-                  fontSize: '11px', 
-                  color: '#fff', 
-                  background: '#D90A14', 
-                  padding: '3px 10px', 
+                <span style={{
+                  fontSize: '11px',
+                  color: '#fff',
+                  background: '#D90A14',
+                  padding: '3px 10px',
                   borderRadius: '4px',
                   fontWeight: 700,
                   textTransform: 'uppercase',
@@ -3640,18 +4257,18 @@ export default function LandingPage() {
             }}
           >
             <button
-               onClick={() => setShowAllBlogs(false)}
-               style={{
-                 position: 'absolute', top: '20px', right: '20px',
-                 background: 'rgba(255,255,255,0.08)', border: 'none',
-                 borderRadius: '50%', width: '36px', height: '36px',
-                 color: '#fff', fontSize: '18px', cursor: 'pointer',
-                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                 transition: 'background 0.2s',
-                 zIndex: 10,
-               }}
-               onMouseEnter={e => e.currentTarget.style.background = 'rgba(217,10,20,0.4)'}
-               onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
+              onClick={() => setShowAllBlogs(false)}
+              style={{
+                position: 'absolute', top: '20px', right: '20px',
+                background: 'rgba(255,255,255,0.08)', border: 'none',
+                borderRadius: '50%', width: '36px', height: '36px',
+                color: '#fff', fontSize: '18px', cursor: 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                transition: 'background 0.2s',
+                zIndex: 10,
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = 'rgba(217,10,20,0.4)'}
+              onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
             >✕</button>
 
             <h2 style={{ fontSize: 'clamp(22px, 3vw, 32px)', fontWeight: 900, color: '#fff', margin: '0 0 8px 0', fontFamily: "'Vazirmatn', sans-serif" }}>
