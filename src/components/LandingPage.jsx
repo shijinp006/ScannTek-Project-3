@@ -2210,9 +2210,10 @@ export default function LandingPage() {
                   className="testimonial-main-img"
                   style={{
                     flex: '0 0 270px',
-                    height: '480px',
+                    height: '320px',
                     position: 'relative',
                     zIndex: 4,
+                    alignSelf: 'flex-end',
                   }}
                 >
                   <img
@@ -2244,7 +2245,7 @@ export default function LandingPage() {
                   flex: 1,
                   display: 'flex',
                   flexDirection: 'column',
-                  justifyContent: 'center',
+                  justifyContent: 'flex-end',
                   minWidth: 0,
                 }}>
                   {/* Center: Testimonial Card */}
@@ -2264,8 +2265,8 @@ export default function LandingPage() {
                       borderRadius: '20px',
                       position: 'relative',
                       zIndex: 3,
-                      marginLeft: '-40px',
-                      marginTop: '30px',
+                      marginLeft: '20px',
+                      marginTop: '0px',
                       height: '320px',
                       boxShadow: '0 15px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(217, 10, 20, 0.15)',
                     }}
@@ -2412,10 +2413,12 @@ export default function LandingPage() {
                         {/* Vertical name */}
                         <span style={{
                           position: 'absolute',
-                          bottom: '55px',
+                          bottom: '30px',
                           left: '50%',
-                          transform: 'translateX(-50%) rotate(-90deg)',
-                          transformOrigin: 'center center',
+                          width: '200px',
+                          textAlign: 'left',
+                          transform: 'rotate(-90deg) translateY(-50%)',
+                          transformOrigin: 'left center',
                           color: '#fff',
                           fontSize: '12px',
                           fontWeight: 700,
@@ -2440,6 +2443,7 @@ export default function LandingPage() {
               }
               .testimonial-main-img {
                 flex: 0 0 270px !important;
+                align-self: flex-end;
               }
 
               /* ── Tablet (641px – 900px): keep single row ── */
@@ -2462,7 +2466,7 @@ export default function LandingPage() {
                   min-width: 0 !important;
                 }
                 .testimonial-card {
-                  margin-left: -20px !important;
+                  margin-left: 12px !important;
                   margin-top: 10px !important;
                   padding: 14px 18px !important;
                   height: 200px !important;
@@ -2537,7 +2541,7 @@ export default function LandingPage() {
                   overflow: hidden;
                 }
                 .testimonial-card {
-                  margin-left: -16px !important;
+                  margin-left: 10px !important;
                   margin-top: 0 !important;
                   margin-bottom: 0 !important;
                   padding: 14px 16px !important;
@@ -2568,8 +2572,11 @@ export default function LandingPage() {
               }
             `}</style>
           </motion.section >
+
+
         );
       })()}
+
 
     </div >
   );
