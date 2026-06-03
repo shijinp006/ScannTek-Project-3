@@ -1,8 +1,9 @@
-import React from 'react';
+﻿import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import arrowSvg from '../assets/arrow.svg';
 import doubleCotSvg from '../assets/doublecot.svg';
+import searchSvg from '../assets/search.svg';
 import heroTrainer from '../assets/hero-image.png';
 import serviceLosing from '../assets/service-losing-weight.png';
 import serviceBuilding from '../assets/service-building-muscle.png';
@@ -482,7 +483,7 @@ export default function LandingPage() {
       <motion.nav
         variants={fadeDown} initial="hidden" animate="show"
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="flex sm:hidden flex-col items-center justify-center   px-4 mt-[25px] pt-20 pb-3  w-full h-[50px]"
+        className="flex sm:hidden flex-col items-center px-4 mt-[25px] pt-20 pb-3  w-full h-[50px] "
         style={{ zIndex: 50, position: 'relative' }}
       >
         <div className="flex items-center justify-between w-full">
@@ -495,7 +496,7 @@ export default function LandingPage() {
           </div>
           {/* Search bar */}
           <div style={{ display: 'flex', alignItems: 'center', background: 'rgba(255,255,255,0.06)', borderRadius: '999px', padding: '5px 12px', gap: '6px', flex: 1, margin: '0 10px' }}>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>
+            <img src={searchSvg} alt="" style={{ width: '11px', height: '11px', opacity: 0.6 }} />
             <span style={{ fontSize: '11px', color: '#6b7280' }}>Search</span>
           </div>
           {/* Hamburger */}
@@ -537,12 +538,12 @@ export default function LandingPage() {
         initial="hidden"
         animate="show"
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="hidden sm:flex items-center justify-center"
+        className="hidden sm:flex items-center justify-between w-full"
         style={{
-          padding: '24px 36px',
+          padding: '24px clamp(16px, 4vw, 48px)',
           zIndex: 30,
           position: 'relative',
-          gap: 'clamp(20px, 5vw, 60px)',
+          width: '100%',
         }}
       >
         {/* Logo */}
@@ -573,9 +574,7 @@ export default function LandingPage() {
             color: '#9ca3af', display: 'flex', alignItems: 'center',
             justifyContent: 'center', cursor: 'pointer', marginLeft: '6px',
           }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
-            </svg>
+            <img src={searchSvg} alt="Search" style={{ width: '13px', height: '13px', opacity: 0.7 }} />
           </button>
         </motion.div>
 
@@ -584,7 +583,7 @@ export default function LandingPage() {
           initial="hidden"
           animate="show"
           variants={{ show: { transition: { staggerChildren: 0.08, delayChildren: 0.3 } } }}
-          className="flex items-center gap-[20px] lg:gap-[30px] list-none p-0 m-0"
+          className="flex items-center gap-[12px] md:gap-[18px] lg:gap-[40px] xl:gap-[48px] list-none p-0 m-0"
         >
           {[
             { label: 'Home' },
@@ -596,7 +595,7 @@ export default function LandingPage() {
             const isActive = activeNav === label;
             return (
               <motion.li key={label} variants={fadeDown} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer' }} onClick={() => setActiveNav(label)}>
-                <a href="#" onClick={e => e.preventDefault()} className={`text-[11px] lg:text-[13.5px] flex items-center gap-[5px] no-underline ${isActive ? 'font-semibold text-white' : 'font-medium text-[#d1d5db]'}`} style={{ whiteSpace: 'nowrap' }}>
+                <a href="#" onClick={e => e.preventDefault()} className={`text-[10px] md:text-[11.5px] lg:text-[13.5px] flex items-center gap-[5px] no-underline ${isActive ? 'font-semibold text-white' : 'font-medium text-[#d1d5db]'}`} style={{ whiteSpace: 'nowrap' }}>
                   {label}
                   {arrow && <img src={arrowSvg} alt="" className="w-[8px] lg:w-[10px] h-auto" />}
                 </a>
@@ -615,14 +614,14 @@ export default function LandingPage() {
           className="flex items-center gap-[6px] lg:gap-[10px]"
         >
           <button style={{
-            padding: 'clamp(6px, 1vw, 6px) clamp(22px, 4vw, 28px)', borderRadius: '999px',
+            padding: 'clamp(6px, 1vw, 6px) clamp(12px, 2vw, 28px)', borderRadius: '999px',
             border: '1px solid transparent',
             background: 'linear-gradient(#0a0a0a, #0a0a0a) padding-box, linear-gradient(to right, #D90A14, #CD4E17) border-box',
             color: '#CD4E17', fontSize: 'clamp(11px, 1.5vw, 13px)', fontFamily: 'inherit', cursor: 'pointer',
             flexShrink: 0, whiteSpace: 'nowrap'
           }}>Login</button>
           <button style={{
-            padding: 'clamp(6px, 1vw, 6px) clamp(22px, 4vw, 28px)', borderRadius: '999px',
+            padding: 'clamp(6px, 1vw, 6px) clamp(12px, 2vw, 28px)', borderRadius: '999px',
             border: 'none', background: '#D90A14',
             color: '#fff', fontSize: 'clamp(11px, 1.5vw, 13px)', fontWeight: 600,
             fontFamily: 'inherit', cursor: 'pointer',
