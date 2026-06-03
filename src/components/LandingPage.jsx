@@ -21,7 +21,13 @@ import testimonialMain from '../assets/ba0b4b6140f1442df69f99820b959f89e382e97c.
 import testimonialJosh from '../assets/8514ab438f6d09d5879c609b997cb0e43526baff.png';
 import testimonialEdward from '../assets/4552bcd93dbae33f0a40dac0e6bb7b5afb9b0f32.png';
 
-/* ── Interactive Calculators for Fitness Tools ── */
+// Trainer assets
+import trainerSam from '../assets/6059fac6119c3f846dc8160da258ff6493233b0c.png';
+import trainerMichael from '../assets/50893c736932ef090d1bacdd740cb0ccb39be9f5.png';
+import trainerJohn from '../assets/4db40e0d45768febc86b5dd950fedce957e9e19a.png';
+import trainerTom from '../assets/1a90e5cd7399735ff1d2ab1f41a2747eba676b3d.png';
+
+/* â”€â”€ Interactive Calculators for Fitness Tools â”€â”€ */
 
 function CalorieCalc() {
   const [age, setAge] = React.useState(25);
@@ -291,7 +297,7 @@ function GoalCalc() {
   );
 }
 
-/* ── Reusable animation variants ── */
+/* â”€â”€ Reusable animation variants â”€â”€ */
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   show: { opacity: 1, y: 0 },
@@ -313,7 +319,7 @@ const popIn = {
   show: { opacity: 1, scale: 1 },
 };
 
-/* ── Stat card with framer-motion ── */
+/* â”€â”€ Stat card with framer-motion â”€â”€ */
 let _statCardId = 0;
 function StatCard({ number, label, posStyleLg, posStyleMd, posStyle, variants, delay = 0 }) {
   const id = React.useRef('sc-' + (++_statCardId)).current;
@@ -364,6 +370,7 @@ export default function LandingPage() {
   const [selectedTool, setSelectedTool] = React.useState(null);
   const [toolPage, setToolPage] = React.useState(0);
   const [activeTestimonial, setActiveTestimonial] = React.useState(0);
+  const [activeTrainerIndex, setActiveTrainerIndex] = React.useState(1);
   const toolsScrollRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -403,8 +410,8 @@ export default function LandingPage() {
       position: 'relative',
     }}>
 
-      {/* ══════════ NAVBAR ══════════ */}
-      {/* ── Mobile Navbar ── */}
+      {/* â•â•â•â•â•â•â•â•â•â• NAVBAR â•â•â•â•â•â•â•â•â•â• */}
+      {/* â”€â”€ Mobile Navbar â”€â”€ */}
       <motion.nav
         variants={fadeDown} initial="hidden" animate="show"
         transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -457,7 +464,7 @@ export default function LandingPage() {
         )}
       </motion.nav>
 
-      {/* ── Desktop / Tablet Navbar ── */}
+      {/* â”€â”€ Desktop / Tablet Navbar â”€â”€ */}
       <motion.nav
         variants={fadeDown}
         initial="hidden"
@@ -557,15 +564,15 @@ export default function LandingPage() {
         </motion.div>
       </motion.nav>
 
-      {/* ══════════ HERO ══════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â• HERO â•â•â•â•â•â•â•â•â•â• */}
 
-      {/* ── Mobile Hero ── */}
+      {/* â”€â”€ Mobile Hero â”€â”€ */}
       <div className="flex sm:hidden flex-col relative overflow-hidden"
         style={{ minHeight: '440px', padding: '40px 16px 20px', justifyContent: 'space-between' }}>
         {/* Red glow orb */}
         <div style={{ position: 'absolute', top: '20%', right: '-10px', width: '200px', height: '200px', borderRadius: '50%', background: 'radial-gradient(circle, #c01a0a 0%, rgba(140,15,8,0.55) 45%, transparent 75%)', filter: 'blur(12px)', pointerEvents: 'none', zIndex: 0 }} />
 
-        {/* Trainer image — smaller, positioned in middle right */}
+        {/* Trainer image â€” smaller, positioned in middle right */}
         <motion.img
           src={heroTrainer} alt="Fitness Trainer"
           initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }}
@@ -595,7 +602,7 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* ── Desktop / Tablet Hero ── */}
+      {/* â”€â”€ Desktop / Tablet Hero â”€â”€ */}
       <div className="hidden sm:flex flex-row relative overflow-hidden" style={{ flex: 1, minHeight: '520px' }}>
 
         {/* LEFT: Text content */}
@@ -620,7 +627,7 @@ export default function LandingPage() {
           </motion.div>
         </div>
 
-        {/* ── RIGHT: Image + Cards ── */}
+        {/* â”€â”€ RIGHT: Image + Cards â”€â”€ */}
         <div style={{
           width: '57%',
           position: 'relative',
@@ -629,7 +636,7 @@ export default function LandingPage() {
           justifyContent: 'center',
           overflow: 'visible',
         }}>
-          {/* Red glow orb — animated pulsing core */}
+          {/* Red glow orb â€” animated pulsing core */}
           <motion.div
             animate={{
               scale: [1, 1.08, 1],
@@ -649,7 +656,7 @@ export default function LandingPage() {
               zIndex: 1,
             }}
           />
-          {/* Outer ambient red halo — slow float */}
+          {/* Outer ambient red halo â€” slow float */}
           <motion.div
             animate={{
               scale: [1, 1.12, 1],
@@ -689,7 +696,7 @@ export default function LandingPage() {
             }}
           />
 
-          {/* ── Stat Cards ── */}
+          {/* â”€â”€ Stat Cards â”€â”€ */}
           <StatCard number="+ 1300" label="Positive Reviews"
             posStyleLg={{ top: '100px', right: '120px' }}
             posStyleMd={{ top: '52px', right: '16px' }}
@@ -709,7 +716,7 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* ══════════ STATS FOOTER ══════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â• STATS FOOTER â•â•â•â•â•â•â•â•â•â• */}
       {(() => {
         const stats = [
           { big: '96%', color: '#D90A14', title: 'Client Satisfaction', sub: 'Our Members Love Their Results And Experience' },
@@ -737,7 +744,7 @@ export default function LandingPage() {
                 </motion.div>
               ))}
             </div>
-            {/* Desktop/Tablet stats — horizontal grid */}
+            {/* Desktop/Tablet stats â€” horizontal grid */}
             <div className="hidden sm:grid" style={{ maxWidth: '1100px', margin: '0 auto', gridTemplateColumns: 'repeat(4, 1fr)', padding: '26px 48px' }}>
               {stats.map(({ big, color, title, sub }, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 1.5 + i * 0.1, ease: 'easeOut' }}
@@ -755,7 +762,7 @@ export default function LandingPage() {
         );
       })()}
 
-      {/* ══════════ OUR SERVICES ══════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â• OUR SERVICES â•â•â•â•â•â•â•â•â•â• */}
       {(() => {
         const services = [
           {
@@ -796,7 +803,7 @@ export default function LandingPage() {
               overflow: 'hidden',
             }}
           >
-            {/* Ambient red glow — upper right */}
+            {/* Ambient red glow â€” upper right */}
             <div style={{
               position: 'absolute',
               top: '-10%',
@@ -809,7 +816,7 @@ export default function LandingPage() {
               pointerEvents: 'none',
               zIndex: 0,
             }} />
-            {/* Ambient orange glow — left */}
+            {/* Ambient orange glow â€” left */}
             <div style={{
               position: 'absolute',
               top: '20%',
@@ -822,7 +829,7 @@ export default function LandingPage() {
               pointerEvents: 'none',
               zIndex: 0,
             }} />
-            {/* Ambient brown-red glow — bottom right */}
+            {/* Ambient brown-red glow â€” bottom right */}
             <div style={{
               position: 'absolute',
               bottom: '-10%',
@@ -1094,7 +1101,7 @@ export default function LandingPage() {
         );
       })()}
 
-      {/* ══════════ DETAILED SERVICE MODAL (DUMMY DATA) ══════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â• DETAILED SERVICE MODAL (DUMMY DATA) â•â•â•â•â•â•â•â•â•â• */}
       <AnimatePresence>
         {selectedService && (
           <motion.div
@@ -1175,7 +1182,7 @@ export default function LandingPage() {
                   e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
                 }}
               >
-                ✕
+                âœ•
               </button>
 
               {/* Header */}
@@ -1272,7 +1279,7 @@ export default function LandingPage() {
         )}
       </AnimatePresence>
 
-      {/* ══════════ DETAILED FITNESS TOOL MODAL ══════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â• DETAILED FITNESS TOOL MODAL â•â•â•â•â•â•â•â•â•â• */}
       <AnimatePresence>
         {selectedTool && (
           <motion.div
@@ -1353,7 +1360,7 @@ export default function LandingPage() {
                   e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
                 }}
               >
-                ✕
+                âœ•
               </button>
 
               {/* Header */}
@@ -1390,7 +1397,7 @@ export default function LandingPage() {
         )}
       </AnimatePresence>
 
-      {/* ══════════ OUR PLANS SECTION ══════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â• OUR PLANS SECTION â•â•â•â•â•â•â•â•â•â• */}
       {(() => {
         const plans = [
           {
@@ -1668,7 +1675,7 @@ export default function LandingPage() {
                           alignItems: 'flex-start',
                           gap: '6px',
                         }}>
-                          <span style={{ color: plan.btnColor }}>•</span>
+                          <span style={{ color: plan.btnColor }}>â€¢</span>
                           <span>{feat}</span>
                         </li>
                       ))}
@@ -1731,7 +1738,7 @@ export default function LandingPage() {
         );
       })()}
 
-      {/* ══════════ OUR FITNESS TOOLS SECTION ══════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â• OUR FITNESS TOOLS SECTION â•â•â•â•â•â•â•â•â•â• */}
       {(() => {
         const toolsList = [
           {
@@ -2089,7 +2096,7 @@ export default function LandingPage() {
         );
       })()}
 
-      {/* ══════════ WHAT OUR CUSTOMERS SAY SECTION ══════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â• WHAT OUR CUSTOMERS SAY SECTION â•â•â•â•â•â•â•â•â•â• */}
       {(() => {
         const testimonials = [
           {
@@ -2150,7 +2157,7 @@ export default function LandingPage() {
 
               {/* Section Header */}
               <div className="testimonial-header" style={{ textAlign: 'center', marginBottom: '40px' }}>
-                {/* Title row — on mobile this becomes flex row with arrows on the right */}
+                {/* Title row â€” on mobile this becomes flex row with arrows on the right */}
                 <div className="testimonial-header-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <h2 style={{
                     fontSize: 'clamp(28px, 4vw, 46px)',
@@ -2161,7 +2168,7 @@ export default function LandingPage() {
                   }}>
                     What Our <span style={{ color: '#D90A14' }}>Customers Say</span>
                   </h2>
-                  {/* Mobile-only arrows — shown only on ≤640px */}
+                  {/* Mobile-only arrows â€” shown only on â‰¤640px */}
                   <div className="testimonial-nav-mobile" style={{ display: 'none', gap: '8px', marginLeft: '10px', marginBottom: '12px', flexShrink: 0 }}>
                     <button
                       onClick={() => setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
@@ -2330,7 +2337,7 @@ export default function LandingPage() {
                   flex: '0 0 auto',
                   marginLeft: '24px',
                 }}>
-                  {/* Arrows below/to-the-left of portrait cards — desktop/tablet only */}
+                  {/* Arrows below/to-the-left of portrait cards â€” desktop/tablet only */}
                   <div className="testimonial-nav-desktop" style={{
                     display: 'flex',
                     gap: '10px',
@@ -2436,7 +2443,7 @@ export default function LandingPage() {
             </div>
 
             <style>{`
-              /* ── Desktop (default) ── */
+              /* â”€â”€ Desktop (default) â”€â”€ */
               .testimonial-layout {
                 flex-direction: row;
                 flex-wrap: nowrap !important;
@@ -2446,7 +2453,7 @@ export default function LandingPage() {
                 align-self: flex-end;
               }
 
-              /* ── Tablet (641px – 900px): keep single row ── */
+              /* â”€â”€ Tablet (641px â€“ 900px): keep single row â”€â”€ */
               @media (max-width: 900px) and (min-width: 641px) {
                 .testimonial-section {
                   padding: 30px 16px !important;
@@ -2506,7 +2513,7 @@ export default function LandingPage() {
                 }
               }
 
-              /* ── Mobile (≤ 640px): horizontal row, arrows in header, no side cards ── */
+              /* â”€â”€ Mobile (â‰¤ 640px): horizontal row, arrows in header, no side cards â”€â”€ */
               @media (max-width: 640px) {
                 .testimonial-section {
                   padding: 28px 16px !important;
@@ -2577,6 +2584,439 @@ export default function LandingPage() {
         );
       })()}
 
+
+      {/* â•â•â•â•â•â•â•â•â•â• MEET OUR TRAINERS SECTION â•â•â•â•â•â•â•â•â•â• */}
+      {(() => {
+        const trainers = [
+          {
+            name: 'Sam Cole',
+            role: 'Personal Trainer',
+            img: trainerSam,
+          },
+          {
+            name: 'Michael Harris',
+            role: 'Personal Trainer',
+            img: trainerMichael,
+          },
+          {
+            name: 'John Anderson',
+            role: 'Personal Trainer',
+            img: trainerJohn,
+          },
+          {
+            name: 'Tom Blake',
+            role: 'Personal Trainer',
+            img: trainerTom,
+          },
+        ];
+
+        return (
+          <motion.section
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+            className="trainers-section"
+            style={{
+              background: '#0a0606',
+              padding: 'clamp(40px, 6vw, 80px) clamp(16px, 5vw, 80px)',
+              fontFamily: "'Vazirmatn', sans-serif",
+              position: 'relative',
+              overflow: 'hidden',
+              zIndex: 1,
+            }}
+          >
+            <div style={{ position: 'relative', zIndex: 1, maxWidth: '1200px', margin: '0 auto' }}>
+
+              {/* Header row */}
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: '16px',
+                flexWrap: 'wrap',
+                gap: '16px'
+              }} className="trainers-header-row">
+                <div>
+                  <h2 style={{
+                    fontSize: 'clamp(28px, 4vw, 42px)',
+                    fontWeight: 900,
+                    margin: 0,
+                    letterSpacing: '0.02em',
+                    color: '#fff',
+                    textTransform: 'uppercase',
+                  }}>
+                    Meet Our <span style={{ color: '#D90A14' }}>Trainers</span>
+                  </h2>
+                </div>
+
+                {/* Nav buttons & indicators on the right */}
+                <div style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-end',
+                  gap: '10px',
+                }} className="trainers-nav-group">
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <button
+                      onClick={() => setActiveTrainerIndex((prev) => (prev - 1 + 4) % 4)}
+                      style={{
+                        width: '42px',
+                        height: '42px',
+                        borderRadius: '10px',
+                        border: '1.5px solid rgba(255, 255, 255, 0.25)',
+                        background: 'transparent',
+                        color: '#fff',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s',
+                      }}
+                      className="trainer-nav-btn"
+                    >
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                      </svg>
+                    </button>
+                    <button
+                      onClick={() => setActiveTrainerIndex((prev) => (prev + 1) % 4)}
+                      style={{
+                        width: '42px',
+                        height: '42px',
+                        borderRadius: '10px',
+                        border: '1.5px solid rgba(255, 255, 255, 0.25)',
+                        background: 'transparent',
+                        color: '#fff',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s',
+                      }}
+                      className="trainer-nav-btn"
+                    >
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
+                    </button>
+                  </div>
+                  {/* Indicator Dots */}
+                  <div style={{ display: 'flex', gap: '8px', paddingRight: '4px' }}>
+                    {trainers.map((_, idx) => (
+                      <div
+                        key={idx}
+                        onClick={() => setActiveTrainerIndex(idx)}
+                        style={{
+                          width: idx === activeTrainerIndex ? '20px' : '8px',
+                          height: '8px',
+                          borderRadius: '4px',
+                          background: idx === activeTrainerIndex ? '#D90A14' : '#374151',
+                          cursor: 'pointer',
+                          transition: 'all 0.3s ease'
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Centered subtitle below header row */}
+              <p style={{
+                color: '#9ca3af',
+                fontSize: '14px',
+                margin: '0 auto 32px auto',
+                maxWidth: '600px',
+                lineHeight: '1.6',
+                textAlign: 'center',
+              }}>
+                At This Part You Can See Some Of Our Trainers And They're Works.
+              </p>
+
+              {/* Slider / Grid container */}
+              <div className="trainers-grid-container" style={{
+                position: 'relative',
+                width: '100%',
+                overflow: 'hidden'
+              }}>
+                <div className="trainers-slider" style={{
+                  display: 'flex',
+                  gap: '24px',
+                  width: '100%',
+                  transition: 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)',
+                }}>
+                  {trainers.map((trainer, idx) => {
+                    const isActive = idx === activeTrainerIndex;
+                    return (
+                      <div
+                        key={idx}
+                        className={`trainer-card ${isActive ? 'active' : ''}`}
+                        style={{
+                          position: 'relative',
+                          background: 'rgba(25, 25, 25, 0.95)',
+                          border: isActive ? '1.5px solid rgba(217, 10, 20, 0.4)' : '1.5px solid rgba(255, 255, 255, 0.05)',
+                          borderRadius: '20px',
+                          padding: '24px 20px 20px 20px',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          height: '420px',
+                          boxSizing: 'border-box',
+                          overflow: 'hidden',
+                          transition: 'all 0.3s ease',
+                          boxShadow: isActive ? '0 15px 35px rgba(217, 10, 20, 0.12)' : '0 10px 30px rgba(0,0,0,0.5)',
+                        }}
+                      >
+                        {/* Outlined text in background */}
+                        <div style={{
+                          position: 'absolute',
+                          top: '20px',
+                          left: '50%',
+                          transform: 'translateX(-50%)',
+                          fontSize: '28px',
+                          fontWeight: 900,
+                          fontFamily: 'Gagalin, sans-serif',
+                          color: 'transparent',
+                          WebkitTextStroke: '1px rgba(217, 10, 20, 0.08)',
+                          whiteSpace: 'nowrap',
+                          pointerEvents: 'none',
+                          zIndex: 0,
+                          textTransform: 'uppercase',
+                        }}>
+                          Fitmaker Trainer
+                        </div>
+
+                        {/* Image container */}
+                        <div style={{
+                          position: 'relative',
+                          width: '100%',
+                          height: '240px',
+                          zIndex: 2,
+                          overflow: 'hidden',
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'flex-end',
+                        }}>
+                          <img
+                            src={trainer.img}
+                            alt={trainer.name}
+                            style={{
+                              maxWidth: '100%',
+                              maxHeight: '100%',
+                              objectFit: 'contain',
+                              objectPosition: 'bottom center',
+                              filter: isActive ? 'brightness(1) contrast(1.02)' : 'brightness(0.85) contrast(0.95)',
+                              transition: 'all 0.3s ease',
+                            }}
+                            className="trainer-img"
+                          />
+                          {/* Ambient glow behind image for active item */}
+                          {isActive && (
+                            <div style={{
+                              position: 'absolute',
+                              bottom: '-10px',
+                              width: '120px',
+                              height: '120px',
+                              borderRadius: '50%',
+                              background: 'radial-gradient(circle, rgba(217,10,20,0.4) 0%, transparent 70%)',
+                              filter: 'blur(15px)',
+                              zIndex: -1,
+                            }} />
+                          )}
+                          {/* Fade-out gradient at bottom of image */}
+                          <div style={{
+                            position: 'absolute',
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            height: '60px',
+                            background: 'linear-gradient(to top, rgba(25, 25, 25, 0.95) 0%, transparent 100%)',
+                            zIndex: 3,
+                            pointerEvents: 'none',
+                          }} />
+                        </div>
+
+                        {/* Details */}
+                        <div style={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          marginTop: 'auto',
+                          zIndex: 4,
+                          position: 'relative',
+                        }}>
+                          <h3 style={{
+                            fontSize: '22px',
+                            fontWeight: 800,
+                            color: '#fff',
+                            margin: '0 0 2px 0',
+                          }}>
+                            {trainer.name}
+                          </h3>
+                          <p style={{
+                            fontSize: '13px',
+                            color: '#9ca3af',
+                            margin: '0 0 16px 0',
+                          }}>
+                            {trainer.role}
+                          </p>
+                          <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            cursor: 'pointer',
+                          }} className="trainer-learn-more">
+                            <span style={{
+                              fontSize: '13.5px',
+                              fontWeight: 600,
+                              color: '#fff',
+                              transition: 'color 0.2s',
+                            }}>
+                              Learn More
+                            </span>
+                            <svg width="18" height="6" viewBox="0 0 20 6" fill="none" style={{ transition: 'transform 0.2s ease-in-out' }}>
+                              <path d="M0 3h17M14 0.5l3 2.5-3 2.5" stroke="#D90A14" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* View All Button at bottom */}
+              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
+                <button
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    padding: '11px 32px',
+                    borderRadius: '999px',
+                    border: '1.5px solid #CD4E17',
+                    background: 'transparent',
+                    color: '#fff',
+                    fontSize: '14.5px',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                  }}
+                  className="trainers-view-all-btn"
+                >
+                  View All
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#CD4E17" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginTop: '1px' }}>
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </button>
+              </div>
+
+            </div>
+
+            {/* Responsive Styles */}
+            <style>{`
+              .trainer-nav-btn:hover {
+                border-color: #D90A14 !important;
+                background: rgba(217, 10, 20, 0.05) !important;
+              }
+              .trainer-card:hover {
+                transform: translateY(-8px);
+                border-color: rgba(217, 10, 20, 0.4) !important;
+                box-shadow: 0 15px 35px rgba(217, 10, 20, 0.15) !important;
+              }
+              .trainer-card:hover .trainer-img {
+                transform: scale(1.04);
+              }
+              .trainer-learn-more:hover span {
+                color: #D90A14 !important;
+              }
+              .trainer-learn-more:hover svg {
+                transform: translateX(4px);
+              }
+              .trainers-view-all-btn:hover {
+                background: #CD4E17 !important;
+                box-shadow: 0 0 20px rgba(205, 78, 23, 0.4) !important;
+              }
+              .trainers-view-all-btn:hover svg {
+                stroke: #fff !important;
+              }
+              
+              /* Breakpoints for slider behavior */
+              @media (min-width: 601px) {
+                .trainers-slider {
+                  transform: none !important;
+                  flex-wrap: nowrap !important;
+                }
+                .trainer-card {
+                  flex: 1 1 0 !important;
+                  min-width: 0 !important;
+                }
+              }
+              @media (max-width: 900px) and (min-width: 601px) {
+                .trainer-card {
+                  height: 360px !important;
+                }
+                .trainers-header-row {
+                  margin-bottom: 12px !important;
+                }
+              }
+              @media (max-width: 600px) {
+                .trainers-slider {
+                  transform: none !important;
+                  flex-wrap: nowrap !important;
+                }
+                .trainer-card {
+                  flex: 0 0 calc((100% - 16px) / 3) !important;
+                  min-width: 0 !important;
+                  height: 280px !important;
+                  padding: 12px 8px 12px 8px !important;
+                  border-radius: 12px !important;
+                }
+                .trainer-card h3 {
+                  font-size: 13px !important;
+                  margin-bottom: 1px !important;
+                }
+                .trainer-card p {
+                  font-size: 10px !important;
+                  margin-bottom: 6px !important;
+                }
+                .trainer-learn-more span {
+                  font-size: 10px !important;
+                }
+                .trainer-learn-more svg {
+                  width: 14px !important;
+                  height: 4px !important;
+                }
+                .trainers-header-row h2 {
+                  font-size: 18px !important;
+                }
+                .trainers-header-row + p {
+                  font-size: 11px !important;
+                  margin-bottom: 16px !important;
+                }
+                .trainer-nav-btn {
+                  width: 30px !important;
+                  height: 30px !important;
+                  border-radius: 7px !important;
+                }
+                .trainer-nav-btn svg {
+                  width: 13px !important;
+                  height: 13px !important;
+                }
+                .trainers-header-row {
+                  margin-bottom: 8px !important;
+                }
+                .trainers-section {
+                  padding: 32px 12px !important;
+                }
+                .trainers-grid-container {
+                  gap: 8px !important;
+                }
+              }
+            `}</style>
+          </motion.section>
+        );
+      })()}
 
     </div >
   );
