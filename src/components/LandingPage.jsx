@@ -1097,7 +1097,7 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.15 }}
-                className="mx-auto max-w-[620px] text-[clamp(10px,1.1vw,12px)] leading-[1.6] text-gray-400"
+                className=" text-[clamp(10px,1.1vw,12px)] lg:text-[16px] leading-[1.6] text-gray-400"
               >
                 At This Part You Can Easily Access All Of Our Services. Take A Look At Them And Chose Wich Ever You Want.
               </motion.p>
@@ -2153,14 +2153,7 @@ export default function LandingPage() {
               </div>
 
               {/* Subtitle description */}
-              <p style={{
-                fontSize: 'clamp(11px, 1.2vw, 13.5px)',
-                color: '#9ca3af',
-                maxWidth: '650px',
-                margin: '0 auto 32px auto',
-                textAlign: 'center',
-                lineHeight: 1.6,
-              }}>
+              <p className=" mb-8  text-center text-[clamp(11px,1.2vw,13.5px)] lg:text-[16px] leading-[1.6] text-gray-400">
                 Access A Variety Of Tools To Help You Reach Your Fitness Goals More Effectively
               </p>
 
