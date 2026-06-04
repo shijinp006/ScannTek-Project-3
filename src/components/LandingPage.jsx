@@ -4192,7 +4192,7 @@ export default function LandingPage() {
             <p className=' text-[10px]
   sm:text-[10px]
   md:text-[10px]
-  lg:text-[12px]
+  lg:text-[16px]
   text-gray-400
   leading-relaxed
   my-2
@@ -4261,7 +4261,7 @@ export default function LandingPage() {
                       if (section) section.scrollIntoView({ behavior: 'smooth' });
                     }
                   }}
-                  className="w-fit text-[8px] sm:text-[8px] md:text-[8px] lg:text-[12px] text-gray-400 no-underline transition-colors duration-200 hover:text-white"
+                  className="w-fit text-[9px] sm:text-[8px] md:text-[10px] lg:text-[14px] text-gray-400 no-underline transition-colors duration-200 hover:text-white"
                 >
                   {l}
                 </a>
@@ -4292,7 +4292,7 @@ export default function LandingPage() {
                       if (section) section.scrollIntoView({ behavior: 'smooth' });
                     }
                   }}
-                  className="text-[8px] sm:text-[8px] md:text-[8px] lg:text-[12px] text-gray-400 no-underline transition-colors duration-200 w-fit hover:text-white"
+                  className="text-[9px] sm:text-[8px] md:text-[10px] lg:text-[14px] text-gray-400 no-underline transition-colors duration-200 w-fit hover:text-white"
                 >
                   {l}
                 </a>
@@ -4329,11 +4329,11 @@ export default function LandingPage() {
                     }
                   }}
                   className="
-    text-[8px]
-    sm:text-[8px]
-    md:text-[8px]
+    text-[9px]
+    sm:text-[10px]
+    md:text-[10px]
     text-gray-400
-    lg:text-[12px]
+    lg:text-[14px]
     no-underline
     transition-colors
     duration-200
@@ -4369,7 +4369,7 @@ export default function LandingPage() {
               ].map((item, idx) => (
                 <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   {item.icon}
-                  <span className="text-[8px] sm:text-[8px] md:text-[8px] lg:text-[12px] text-gray-400 lg:text-[12px]">
+                  <span className="text-[9px] sm:text-[8px] md:text-[10px] lg:text-[14px] text-gray-400">
                     {item.text}
                   </span>
                 </div>
