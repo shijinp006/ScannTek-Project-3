@@ -1097,13 +1097,7 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.15 }}
-                style={{
-                  fontSize: 'clamp(10px, 1.1vw, 12px)',
-                  color: '#9ca3af',
-                  maxWidth: '620px',
-                  margin: '0 auto',
-                  lineHeight: 1.6,
-                }}
+                className="mx-auto max-w-[620px] text-[clamp(10px,1.1vw,12px)] leading-[1.6] text-gray-400"
               >
                 At This Part You Can Easily Access All Of Our Services. Take A Look At Them And Chose Wich Ever You Want.
               </motion.p>
